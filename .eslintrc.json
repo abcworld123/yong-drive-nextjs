@@ -1,3 +1,59 @@
 {
-  "extends": "next/core-web-vitals"
+  "env": {
+    "node": true
+  },
+  "extends": [
+    "next/core-web-vitals",
+    "eslint:recommended",
+    "plugin:@typescript-eslint/recommended"
+    // "airbnb",
+    // "airbnb/hooks",
+    // "plugin:prettier/recommended"
+  ],
+  "plugins": ["only-warn"],
+  "rules": {
+    "semi": ["warn", "always"],
+    "no-extra-semi": "warn",
+    "no-spaced-func": "warn",
+    "prefer-const": "warn",
+    "space-before-blocks": ["warn", "always"],
+    "space-infix-ops": ["warn", {"int32Hint": false}],
+    "semi-spacing": ["warn", {"before": false, "after": true}],
+    "keyword-spacing": ["warn", {"before": true, "after": true}],
+    "comma-spacing": ["warn", { "before": false, "after": true }],
+    "key-spacing": ["warn", {"beforeColon": false, "afterColon": true}],
+    "space-unary-ops": ["warn", {"words": true, "nonwords": false}],
+    "no-trailing-spaces": ["warn", {"skipBlankLines": true, "ignoreComments": true}],
+    "no-multi-spaces": ["warn", {"ignoreEOLComments": true, "exceptions": {"Property": true}}],
+    "space-before-function-paren": ["warn", {"anonymous": "always", "named": "never", "asyncArrow": "always"}],
+    "prefer-object-spread": "warn",
+    "prefer-spread": "warn",
+    "prefer-exponentiation-operator": "warn",
+    "no-useless-return": "warn",
+    "no-var": "error",
+    "indent": ["warn", 2, { "MemberExpression": "off"}],
+    "comma-dangle": ["warn", "always-multiline"],
+    "arrow-spacing": ["warn", { "before": true, "after": true }],
+    "quotes": ["warn", "single"],
+    "no-unused-vars": "off",
+    "no-undef": "off",
+    
+    "@typescript-eslint/no-explicit-any": "off",
+    "@typescript-eslint/semi": ["warn", "always"],
+    "@typescript-eslint/type-annotation-spacing": "warn",
+    "@typescript-eslint/space-infix-ops": ["warn", {"int32Hint": false}],
+    "@typescript-eslint/ban-ts-comment": ["error", { "ts-ignore": "allow-with-description" }],
+    "@typescript-eslint/no-unused-vars": "off",
+    
+    "react/react-in-jsx-scope": "off",
+    "react/prefer-stateless-function": "off",
+    "react/jsx-filename-extension": "off",
+    "react/jsx-one-expression-per-line": "off",
+    "react/function-component-definition": "off",
+    
+    "no-nested-ternary": "off",
+    "no-console": "off",
+    "import/no-unresolved": "off",
+    "no-use-before-define": "off"
+  }
 }
