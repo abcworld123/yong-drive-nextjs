@@ -2,9 +2,9 @@ import type { NextPage } from 'next';
 import Head from 'next/head';
 import { useEffect, useState } from 'react';
 import axios from 'axios';
-import convert from 'convert-units';
 import File from 'components/Objects/File';
 import Folder from 'components/Objects/Folder';
+import convUnit from 'utils/convUnit';
 import { BucketParams, ResObjectList } from 'types/apis';
 import { FileFC, FolderFC } from 'types/Objects';
 
@@ -16,12 +16,6 @@ async function getObjectList() {
   };
   const { data } = await axios.get<ResObjectList>('api/s3-bucket/getobjectlist', { params });
   return data;
-}
-
-function convUnit(size: number) {
-  const { val, unit } = convert(size).from('B').toBest();
-  const res = `${parseFloat(val.toFixed(val < 10 ? 2 : 1))}${unit}`;
-  return res;
 }
 
 const Home: NextPage = () => {
