@@ -45,11 +45,11 @@
     "@typescript-eslint/ban-ts-comment": ["error", { "ts-ignore": "allow-with-description" }],
     "@typescript-eslint/no-unused-vars": "off",
     
-    "react/react-in-jsx-scope": "off",
-    "react/prefer-stateless-function": "off",
-    "react/jsx-filename-extension": "off",
-    "react/jsx-one-expression-per-line": "off",
-    "react/function-component-definition": "off",
+    // "react/react-in-jsx-scope": "off",
+    // "react/prefer-stateless-function": "off",
+    // "react/jsx-filename-extension": "off",
+    // "react/jsx-one-expression-per-line": "off",
+    // "react/function-component-definition": "off",
     
     "no-nested-ternary": "off",
     "no-console": "off",

@@ -1,6 +1,6 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  reactStrictMode: true,
+  // reactStrictMode: true,
   webpack(config) {
     config.module.rules.push({
       test: /\.svg$/i,
@@ -9,8 +9,6 @@ const nextConfig = {
     });
     config.resolve.alias = {
       ...config.resolve.alias,
-      '@components': `${__dirname}/components`,
-      '@styles': `${__dirname}/styles`,
       '@svg': `${__dirname}/assets/svg`,
       '@interfaces/*': `${__dirname}/types/interfaces`,
     };

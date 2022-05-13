@@ -1,7 +1,7 @@
 import type { NextPage } from 'next';
 import Head from 'next/head';
-import File from '@components/Items/File';
-import Folder from '@components/Items/Folder';
+import File from 'components/Items/File';
+import Folder from 'components/Items/Folder';
 
 const Home: NextPage = () => {
   return (
