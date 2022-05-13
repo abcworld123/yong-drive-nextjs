@@ -1,9 +1,44 @@
 import type { NextPage } from 'next';
 import Head from 'next/head';
-import File from 'components/Items/File';
-import Folder from 'components/Items/Folder';
+import { useEffect, useState } from 'react';
+import axios from 'axios';
+import convert from 'convert-units';
+import File from 'components/Objects/File';
+import Folder from 'components/Objects/Folder';
+import { BucketParams, ResObjectList } from 'types/apis';
+import { FileFC, FolderFC } from 'types/Objects';
+
+async function getObjectList() {
+  const params: BucketParams = {
+    Bucket: process.env.NEXT_PUBLIC_BUCKET_NAME,
+    Prefix: '',
+    Delimiter: '/',
+  };
+  const { data } = await axios.get<ResObjectList>('api/s3-bucket/getobjectlist', { params });
+  return data;
+}
+
+function convUnit(size: number) {
+  const { val, unit } = convert(size).from('B').toBest();
+  const res = `${parseFloat(val.toFixed(val < 10 ? 2 : 1))}${unit}`;
+  return res;
+}
 
 const Home: NextPage = () => {
+  const [objects, setObjects] = useState<(FileFC | FolderFC)[]>([]);
+  useEffect(() => {
+    const arr = [];
+    getObjectList().then(({ files, folders }) => {
+      folders.forEach(({ name }) => {
+        arr.push(<Folder name={name.slice(0, -1)} />);
+      });
+      files.forEach(({ name, size }) => {
+        arr.push(<File name={name} size={convUnit(size)} />);
+      });
+      setObjects(arr);
+    });
+  }, []);
+  
   return (
     <div>
       <Head>
@@ -11,22 +46,7 @@ const Home: NextPage = () => {
       </Head>
       <main>
         <div className="container mx-auto m-24 w-2/3 flex gap-x-8 gap-y-10 flex-wrap">
-          <Folder name="새 폴더" />
-          <File name="새 텍스트 문서.txt" size="1.58KB" />
-          <Folder name="새 폴더" />
-          <File name="새 텍스트 문서.txt" size="1.58KB" />
-          <Folder name="새 폴더" />
-          <File name="새 텍스트 문서.txt" size="1.58KB" />
-          <Folder name="새 폴더" />
-          <File name="새 텍스트 문서.txt" size="1.58KB" />
-          <Folder name="새 폴더" />
-          <File name="새 텍스트 문서.txt" size="1.58KB" />
-          <Folder name="새 폴더" />
-          <File name="새 텍스트 문서.txt" size="1.58KB" />
-          <Folder name="새 폴더" />
-          <File name="새 텍스트 문서.txt" size="1.58KB" />
-          <Folder name="새 폴더" />
-          <File name="새 텍스트 문서.txt" size="1.58KB" />
+          {objects}
         </div>
       </main>
       <footer>
