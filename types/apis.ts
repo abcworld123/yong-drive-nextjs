@@ -11,6 +11,7 @@ export interface ReqBucketParams {
 }
 
 export interface ResObjectList {
-  folders: FolderResObj[];
-  files: FileResObj[];
+  success: boolean;
+  folders?: FolderResObj[];
+  files?: FileResObj[];
 }
