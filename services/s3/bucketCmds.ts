@@ -6,7 +6,7 @@ import { FileResObj, FolderResObj } from 'types/Objects';
 export const getBucketListCmd = async () => {
   try {
     const buckets = (await s3Client.send(new ListBucketsCommand({}))).Buckets;
-    return { success: true, buckets: buckets || []};
+    return { success: true, buckets: buckets || [] };
   } catch (err) {
     console.error('\n---\x1B[34m getBucketListCmd Error \x1B[0m---\n');
     console.error(err);

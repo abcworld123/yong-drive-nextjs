@@ -9,7 +9,7 @@ import { FileFC, FolderFC } from 'types/Objects';
 
 const Home: NextPage = () => {
   const [objects, setObjects] = useState<(FileFC | FolderFC)[]>([]);
-  
+
   useEffect(() => {
     intoBucket();
   }, []);
@@ -29,14 +29,16 @@ const Home: NextPage = () => {
       history.back();
     }
   }
-  
+
   return (
     <div>
       <Head>
         <title>yong-drive</title>
       </Head>
       <main>
-        <div className="container mx-auto m-24 w-2/3 flex gap-x-8 gap-y-10 flex-wrap">{objects}</div>
+        <div className="container mx-auto m-24 w-2/3 flex gap-x-8 gap-y-10 flex-wrap">
+          {objects}
+        </div>
       </main>
       <footer></footer>
     </div>
@@ -44,5 +46,3 @@ const Home: NextPage = () => {
 };
 
 export default Home;
-
-

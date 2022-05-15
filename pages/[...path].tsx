@@ -17,7 +17,7 @@ interface HomeProps {
 const Home: NextPage<HomeProps> = ({ bucket, asPath }) => {
   const [objects, setObjects] = useState<(FileFC | FolderFC)[]>([]);
   const curPath = asPath.slice(bucket.length + 2);
-  
+
   useEffect(() => {
     intoFolder(curPath + (curPath && '/'));
   }, [asPath]);
@@ -47,14 +47,16 @@ const Home: NextPage<HomeProps> = ({ bucket, asPath }) => {
       history.back();
     }
   }
-  
+
   return (
     <div>
       <Head>
         <title>yong-drive</title>
       </Head>
       <main>
-        <div className="container mx-auto m-24 w-2/3 flex gap-x-8 gap-y-10 flex-wrap">{objects}</div>
+        <div className="container mx-auto m-24 w-2/3 flex gap-x-8 gap-y-10 flex-wrap">
+          {objects}
+        </div>
       </main>
       <footer></footer>
     </div>
@@ -69,5 +71,3 @@ Home.getInitialProps = (ctx) => {
 };
 
 export default Home;
-
-
