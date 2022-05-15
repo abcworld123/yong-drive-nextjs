@@ -36,7 +36,7 @@ const Home: NextPage = () => {
         <title>yong-drive</title>
       </Head>
       <main>
-        <div className="container mx-auto m-24 w-2/3 flex gap-x-8 gap-y-10 flex-wrap">
+        <div className="object-container">
           {objects}
         </div>
       </main>

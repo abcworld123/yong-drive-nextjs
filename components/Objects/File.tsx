@@ -4,7 +4,7 @@ import FileIcon from '@svg/FIleIcon';
 export default function File({ name, size }: FileProps): FileFC {
   return (
     <div>
-      <div className="border-[1px] border-gray-300 rounded-lg w-40 h-40 grid place-items-center select-none">
+      <div className="object-icon">
         <FileIcon size={100} fill="#707070" />
       </div>
       <div className="text-sm">

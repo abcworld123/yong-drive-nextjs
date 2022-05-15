@@ -1,0 +1,28 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer components {
+  .object-container {
+    @apply container mx-auto m-24 w-2/3 flex gap-x-8 gap-y-10 flex-wrap;
+  }
+
+  .object-icon {
+    @apply border-[1px] border-gray-300 rounded-lg w-40 h-40 grid place-items-center select-none;
+  }
+}
+
+html,
+body {
+  padding: 0;
+  margin: 0;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+* {
+  box-sizing: border-box;
+}

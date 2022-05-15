@@ -6,7 +6,7 @@ export default function Bucket({ name }: BucketProps): BucketFC {
   const router = useRouter();
   return (
     <div>
-      <div className="border-[1px] border-gray-300 rounded-lg w-40 h-40 grid place-items-center select-none" onDoubleClick={() => router.push(`/${name}`)}>
+      <div className="object-icon" onDoubleClick={() => router.push(`/${name}`)}>
         <BucketIcon size={128} />
       </div>
       <div className="text-sm">
