@@ -25,7 +25,8 @@ const Home: NextPage = () => {
       });
       setObjects(arr);
     } else {
-      alertError('데이터를 가져오는 중 오류가 발생했습니다.');
+      await alertError('데이터를 가져오는 중 오류가 발생했습니다.');
+      history.back();
     }
   }
   
