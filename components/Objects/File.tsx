@@ -1,5 +1,5 @@
 import { FileFC, FileProps } from 'types/Objects';
-import { FileIcon } from '@svg/MaterialIcons';
+import FileIcon from '@svg/FIleIcon';
 
 export default function File({ name, size }: FileProps): FileFC {
   return (

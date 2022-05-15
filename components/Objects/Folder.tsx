@@ -1,5 +1,5 @@
 import { FolderFC, FolderProps } from 'types/Objects';
-import { FolderIcon } from '@svg/MaterialIcons';
+import FolderIcon from '@svg/FolderIcon';
 
 export default function Folder({ name, dblClick }: FolderProps): FolderFC {
   return (
