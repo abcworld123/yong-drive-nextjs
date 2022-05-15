@@ -1,7 +1,18 @@
-import { ListObjectsCommand } from '@aws-sdk/client-s3';
+import { ListObjectsCommand, ListBucketsCommand } from '@aws-sdk/client-s3';
 import { s3Client } from '@s3/s3Client';
 import { BucketParams } from 'types/apis';
 import { FileResObj, FolderResObj } from 'types/Objects';
+
+export const getBucketListCmd = async () => {
+  try {
+    const buckets = (await s3Client.send(new ListBucketsCommand({}))).Buckets;
+    return { success: true, buckets: buckets || []};
+  } catch (err) {
+    console.error('\n---\x1B[34m getBucketListCmd Error \x1B[0m---\n');
+    console.error(err);
+    return { success: false };
+  }
+};
 
 export const getObjectListCmd = async (bucketParams: BucketParams) => {
   try {

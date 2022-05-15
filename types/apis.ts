@@ -1,4 +1,4 @@
-import { ListObjectsCommandInput } from '@aws-sdk/client-s3';
+import { Bucket, ListObjectsCommandInput } from '@aws-sdk/client-s3';
 import { FileResObj, FolderResObj } from './Objects';
 
 export interface BucketParams extends ListObjectsCommandInput {
@@ -8,6 +8,11 @@ export interface BucketParams extends ListObjectsCommandInput {
 
 export interface ReqBucketParams {
   query: BucketParams;
+}
+
+export interface ResBucketList {
+  success: boolean;
+  buckets?: Bucket[];
 }
 
 export interface ResObjectList {
