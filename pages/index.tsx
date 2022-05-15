@@ -7,12 +7,7 @@ import { alertError } from 'utils/alerts';
 import { ResBucketList } from 'types/apis';
 import { FileFC, FolderFC } from 'types/Objects';
 
-interface tempProps {
-  asPath: string;
-  bucket: string;
-}
-
-const Home: NextPage<tempProps> = () => {
+const Home: NextPage = () => {
   const [objects, setObjects] = useState<(FileFC | FolderFC)[]>([]);
   
   useEffect(() => {
