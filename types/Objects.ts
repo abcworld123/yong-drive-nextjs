@@ -9,7 +9,7 @@ export interface FileProps {
 
 export interface FolderProps {
   name: string;
-  dblClick: (path: string) => void;
+  path: string;
 }
 
 export interface FileResObj {

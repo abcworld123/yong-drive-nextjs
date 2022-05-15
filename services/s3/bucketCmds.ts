@@ -16,6 +16,7 @@ export const getBucketListCmd = async () => {
 
 export const getObjectListCmd = async (bucketParams: BucketParams) => {
   try {
+    bucketParams.Prefix = decodeURI(bucketParams.Prefix);
     const prefixLen = bucketParams.Prefix.length;
     const folders: FolderResObj[] = [];
     const files: FileResObj[] = [];
