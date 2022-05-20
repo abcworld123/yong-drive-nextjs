@@ -37,6 +37,8 @@
     "quotes": ["warn", "single"],
     "no-unused-vars": "off",
     "no-undef": "off",
+    "no-multiple-empty-lines": ["error", { "max": 2, "maxEOF": 0 }],
+    "jsx-quotes": ["error", "prefer-double"],
     
     "@typescript-eslint/no-explicit-any": "off",
     "@typescript-eslint/semi": ["warn", "always"],
@@ -50,6 +52,7 @@
     // "react/jsx-filename-extension": "off",
     // "react/jsx-one-expression-per-line": "off",
     // "react/function-component-definition": "off",
+    "react/jsx-tag-spacing": "warn",
     
     "no-nested-ternary": "off",
     "no-console": "off",
