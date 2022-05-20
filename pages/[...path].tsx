@@ -29,6 +29,8 @@ const Home: NextPage<HomeProps> = ({ bucket, asPath }) => {
   }
   
   function dblClick(folder: string) {
+    setChkSet(new Set());
+    setChkAll(false);
     const nxtPath = `/${bucket}/${asPath}${folder}`;
     router.push(nxtPath);
   }
@@ -52,7 +54,7 @@ const Home: NextPage<HomeProps> = ({ bucket, asPath }) => {
     <div>
       <main>
         <div className="text-right mt-20 mr-48">
-          <Checkbox value={chkAll} onClick={() => setChkAll(!chkAll)} />
+          <Checkbox checked={chkAll} onClick={() => setChkAll(!chkAll)} />
         </div>
         <div className="object-container">
           <Objects list={objects} click={checkHandler} chkAll={chkAll} dblClick={dblClick} />
