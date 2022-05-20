@@ -23,7 +23,7 @@
     "comma-spacing": ["warn", { "before": false, "after": true }],
     "key-spacing": ["warn", {"beforeColon": false, "afterColon": true}],
     "space-unary-ops": ["warn", {"words": true, "nonwords": false}],
-    "no-trailing-spaces": ["warn", {"skipBlankLines": true, "ignoreComments": true}],
+    "no-trailing-spaces": ["warn", {"ignoreComments": true}],
     "no-multi-spaces": ["warn", {"ignoreEOLComments": true, "exceptions": {"Property": true}}],
     "space-before-function-paren": ["warn", {"anonymous": "always", "named": "never", "asyncArrow": "always"}],
     "prefer-object-spread": "warn",

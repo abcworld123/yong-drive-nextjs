@@ -22,19 +22,19 @@ const Home: NextPage<HomeProps> = ({ bucket, asPath }) => {
   useEffect(() => {
     intoFolder(asPath);
   }, [asPath]);
-  
+
   function checkHandler(name: string, isChecked: boolean) {
     if (isChecked) chkSet.add(name);
     else if (!isChecked && chkSet.has(name)) chkSet.delete(name);
   }
-  
+
   function dblClick(folder: string) {
     setChkSet(new Set());
     setChkAll(false);
     const nxtPath = `/${bucket}/${asPath}${folder}`;
     router.push(nxtPath);
   }
-  
+
   async function intoFolder(asPath: string) {
     const params: BucketParams = {
       Bucket: bucket,

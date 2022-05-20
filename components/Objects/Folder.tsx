@@ -5,15 +5,15 @@ import { FolderFC, FolderProps } from 'types/Objects';
 
 export default function Folder({ name, dblClick, click, chkAll }: FolderProps): FolderFC {
   const [checked, setChecked] = useState(false);
-  
+
   useEffect(() => {
     click(name, checked);
   }, [checked]);
-  
+
   useEffect(() => {
     setChecked(chkAll);
   }, [chkAll]);
-  
+
   return (
     <div>
       <div className={`object-icon ${checked ? 'object-icon-checked' : ''}`} onDoubleClick={dblClick}>
