@@ -1,3 +1,5 @@
+type checkHandler = (name: string, isChecked: boolean) => void;
+
 export interface BucketProps {
   name: string;
   dblClick: () => void;
@@ -6,20 +8,28 @@ export interface BucketProps {
 export interface FileProps {
   name: string;
   size: string;
+  click: checkHandler;
+  chkAll: boolean;
 }
 
 export interface FolderProps {
   name: string;
+  click: checkHandler;
+  chkAll: boolean;
   dblClick: () => void;
 }
 
-export interface FileResObj {
-  name: string;
-  size: number;
+export interface ObjectProps {
+  list: ObjectInfo[];
+  click: checkHandler;
+  chkAll: boolean;
+  dblClick: (folder: string) => void;
 }
 
-export interface FolderResObj {
+export interface ObjectInfo {
+  type: string;
   name: string;
+  size?: number;
 }
 
 export type BucketFC = React.ReactElement<BucketProps>;

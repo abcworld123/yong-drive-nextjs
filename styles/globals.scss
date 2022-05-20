@@ -4,7 +4,7 @@
 
 @layer components {
   .object-container {
-    @apply container mx-auto m-24 w-2/3 flex gap-x-8 gap-y-10 flex-wrap;
+    @apply container mx-auto mt-10 w-2/3 flex gap-x-8 gap-y-10 flex-wrap;
   }
 
   .object-icon {

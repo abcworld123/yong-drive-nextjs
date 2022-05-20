@@ -1,5 +1,5 @@
 import { Bucket, ListObjectsCommandInput } from '@aws-sdk/client-s3';
-import { FileResObj, FolderResObj } from './Objects';
+import { ObjectInfo } from './Objects';
 
 export interface BucketParams extends ListObjectsCommandInput {
   Prefix: string;
@@ -17,6 +17,5 @@ export interface ResBucketList {
 
 export interface ResObjectList {
   success: boolean;
-  folders?: FolderResObj[];
-  files?: FileResObj[];
+  objects?: ObjectInfo[];
 }
