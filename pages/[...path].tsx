@@ -1,5 +1,4 @@
 import type { NextPage } from 'next';
-import Head from 'next/head';
 import { useEffect, useState } from 'react';
 import axios from 'axios';
 import File from 'components/Objects/File';
@@ -8,6 +7,7 @@ import { alertError } from 'utils/alerts';
 import convUnit from 'utils/convUnit';
 import { BucketParams, ResObjectList } from 'types/apis';
 import { FileFC, FolderFC } from 'types/Objects';
+import { useRouter } from 'next/router';
 
 interface HomeProps {
   bucket: string;
@@ -15,6 +15,7 @@ interface HomeProps {
 }
 
 const Home: NextPage<HomeProps> = ({ bucket, asPath }) => {
+  const router = useRouter();
   const [objects, setObjects] = useState<(FileFC | FolderFC)[]>([]);
   const curPath = asPath.slice(bucket.length + 2);
 
@@ -36,7 +37,7 @@ const Home: NextPage<HomeProps> = ({ bucket, asPath }) => {
       folders.forEach(({ name }) => {
         name = name.slice(0, -1);
         const nxtPath = `/${bucket}/${curPath}${name}`;
-        arr.push(<Folder key={k++} name={name} path={nxtPath} />);
+        arr.push(<Folder key={k++} name={name} dblClick={() => router.push(nxtPath)} />);
       });
       files.forEach(({ name, size }) => {
         arr.push(<File key={k++} name={name} size={convUnit(size)} />);
@@ -50,15 +51,11 @@ const Home: NextPage<HomeProps> = ({ bucket, asPath }) => {
 
   return (
     <div>
-      <Head>
-        <title>yong-drive</title>
-      </Head>
       <main>
         <div className="object-container">
           {objects}
         </div>
       </main>
-      <footer></footer>
     </div>
   );
 };

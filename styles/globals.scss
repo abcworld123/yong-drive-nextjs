@@ -9,6 +9,18 @@
 
   .object-icon {
     @apply border-[1px] border-gray-300 rounded-lg w-40 h-40 grid place-items-center select-none;
+
+    &:hover {
+      @apply bg-[#e5f3ff] border-[#c6e3fd];
+    }
+  }
+
+  .object-icon-checked {
+    @apply bg-[#cce8ff] border-[#94cfff];
+
+    &:hover {
+      @apply bg-[#c0e3ff] border-[#86c8ff];
+    }
   }
 }
 

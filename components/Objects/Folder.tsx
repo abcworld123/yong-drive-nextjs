@@ -1,12 +1,14 @@
 import { FolderFC, FolderProps } from 'types/Objects';
 import FolderIcon from '@svg/FolderIcon';
-import { useRouter } from 'next/router';
+import { Checkbox } from '@mui/material';
+import { useState } from 'react';
 
-export default function Folder({ name, path }: FolderProps): FolderFC {
-  const router = useRouter();
+export default function Folder({ name, dblClick }: FolderProps): FolderFC {
+  const [checked, setChecked] = useState(false);
   return (
     <div>
-      <div className="object-icon" onDoubleClick={() => router.push(path)}>
+      <div className={`object-icon ${checked ? 'object-icon-checked' : ''}`} onDoubleClick={dblClick}>
+        <Checkbox className="-translate-x-14 -translate-y-14" sx={{position: 'absolute'}} value={checked} onClick={() => setChecked(!checked)} />
         <FolderIcon size={100} fill="#f9cd52" />
       </div>
       <div className="text-sm">

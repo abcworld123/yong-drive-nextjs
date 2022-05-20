@@ -1,12 +1,10 @@
 import { BucketFC, BucketProps } from 'types/Objects';
-import { useRouter } from 'next/router';
 import BucketIcon from '@svg/BucketIcon';
 
-export default function Bucket({ name }: BucketProps): BucketFC {
-  const router = useRouter();
+export default function Bucket({ name, dblClick }: BucketProps): BucketFC {
   return (
     <div>
-      <div className="object-icon" onDoubleClick={() => router.push(`/${name}`)}>
+      <div className="object-icon" onDoubleClick={dblClick}>
         <BucketIcon size={128} />
       </div>
       <div className="text-sm">

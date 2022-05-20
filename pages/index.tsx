@@ -1,13 +1,14 @@
 import type { NextPage } from 'next';
-import Head from 'next/head';
 import { useEffect, useState } from 'react';
 import axios from 'axios';
 import Bucket from 'components/Objects/Bucket';
 import { alertError } from 'utils/alerts';
 import { ResBucketList } from 'types/apis';
 import { FileFC, FolderFC } from 'types/Objects';
+import { useRouter } from 'next/router';
 
 const Home: NextPage = () => {
+  const router = useRouter();
   const [objects, setObjects] = useState<(FileFC | FolderFC)[]>([]);
 
   useEffect(() => {
@@ -21,7 +22,7 @@ const Home: NextPage = () => {
       const arr = [];
       const { buckets } = data;
       buckets.forEach(({ Name }) => {
-        arr.push(<Bucket key={k++} name={Name} />);
+        arr.push(<Bucket key={k++} name={Name} dblClick={() => router.push(`/${Name}`)} />);
       });
       setObjects(arr);
     } else {
@@ -32,15 +33,11 @@ const Home: NextPage = () => {
 
   return (
     <div>
-      <Head>
-        <title>yong-drive</title>
-      </Head>
       <main>
         <div className="object-container">
           {objects}
         </div>
       </main>
-      <footer></footer>
     </div>
   );
 };

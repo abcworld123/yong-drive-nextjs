@@ -1,5 +1,6 @@
 export interface BucketProps {
   name: string;
+  dblClick: () => void;
 }
 
 export interface FileProps {
@@ -9,7 +10,7 @@ export interface FileProps {
 
 export interface FolderProps {
   name: string;
-  path: string;
+  dblClick: () => void;
 }
 
 export interface FileResObj {
