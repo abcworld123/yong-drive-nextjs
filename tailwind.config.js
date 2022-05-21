@@ -3,6 +3,9 @@ module.exports = {
     './pages/**/*.{ts,tsx}',
     './components/**/*.{ts,tsx}',
   ],
+  corePlugins: {
+    preflight: false,
+  },
   theme: {
     extend: {},
   },
