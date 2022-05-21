@@ -1,19 +1,18 @@
 import Button, { ButtonProps } from '@mui/material/Button';
-import { styled } from '@mui/material/styles';
 
-const DefaultButton = styled(Button)<ButtonProps>(({ theme }) => ({
+const buttonStyle = {
   backgroundColor: '#e0e0ea',
   fontSize: '1.1em',
   color: '#222',
   '&:hover': {
     backgroundColor: '#c0c0ca',
   },
-})) as typeof MainButton;
+};
 
-export default function MainButton({ children, ...props }: ButtonProps) {
+export default function MainButton<C extends React.ElementType>({ children, ...props }: ButtonProps<C, { component?: C }>) {
   return (
-    <DefaultButton variant="contained" size="small" {...props}>
+    <Button variant="contained" size="small" sx={buttonStyle} {...props}>
       {children}
-    </DefaultButton>
+    </Button>
   );
 }

@@ -61,7 +61,7 @@ const Home: NextPage<HomeProps> = ({ bucket, asPath }) => {
         <div className={isLoading ? 'hidden' : ''}>
           <div className="mt-20 mx-48 flex gap-5">
             <MainButton onClick={() => setChkAll(!chkAll)}>
-              <Checkbox checked={chkAll} disableRipple onClick={() => setChkAll(!chkAll)} disabled={!objects.length} />
+                <Checkbox checked={chkAll} onClick={() => setChkAll(!chkAll)} disabled={!objects.length} disableRipple />
             </MainButton>
             <MainButton>올리기</MainButton>
           </div>
