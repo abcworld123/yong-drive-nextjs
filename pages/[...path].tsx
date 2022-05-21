@@ -4,6 +4,7 @@ import axios from 'axios';
 import { useRouter } from 'next/router';
 import { Checkbox } from '@mui/material';
 import Objects from 'components/Objects/Objects';
+import Loader from 'components/Progresses/Loader';
 import { BucketParams, ResObjectList } from 'types/apis';
 import { ObjectInfo } from 'types/Objects';
 import { alertError } from 'utils/alerts';
@@ -15,6 +16,7 @@ interface HomeProps {
 
 const Home: NextPage<HomeProps> = ({ bucket, asPath }) => {
   const router = useRouter();
+  const [isLoading, setIsLoading] = useState(false);
   const [objects, setObjects] = useState<(ObjectInfo)[]>([]);
   const [chkSet, setChkSet] = useState(new Set<string>());
   const [chkAll, setChkAll] = useState(false);
@@ -29,6 +31,7 @@ const Home: NextPage<HomeProps> = ({ bucket, asPath }) => {
   }
 
   function dblClick(folder: string) {
+    setIsLoading(true);
     setChkSet(new Set());
     setChkAll(false);
     const nxtPath = `/${bucket}/${asPath}${folder}`;
@@ -44,6 +47,7 @@ const Home: NextPage<HomeProps> = ({ bucket, asPath }) => {
     const { data } = await axios.get<ResObjectList>('/api/s3-bucket/getobjectlist', { params });
     if (data.success) {
       setObjects(data.objects);
+      setIsLoading(false);
     } else {
       alertError('데이터를 가져오는 중 오류가 발생했습니다.')
       .then(() => history.back());
@@ -53,12 +57,15 @@ const Home: NextPage<HomeProps> = ({ bucket, asPath }) => {
   return (
     <div>
       <main>
-        <div className="text-right mt-20 mr-48">
-          <Checkbox checked={chkAll} onClick={() => setChkAll(!chkAll)} disabled={!objects.length} />
+        <div className={isLoading ? 'hidden' : ''}>
+          <div className="text-right mt-20 mr-48">
+            <Checkbox checked={chkAll} onClick={() => setChkAll(!chkAll)} disabled={!objects.length} />
+          </div>
+          <div className="object-container">
+            <Objects list={objects} click={checkHandler} chkAll={chkAll} dblClick={dblClick} />
+          </div>
         </div>
-        <div className="object-container">
-          <Objects list={objects} click={checkHandler} chkAll={chkAll} dblClick={dblClick} />
-        </div>
+        <Loader show={isLoading} />
       </main>
     </div>
   );
