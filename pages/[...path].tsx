@@ -2,7 +2,8 @@ import type { NextPage } from 'next';
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { useRouter } from 'next/router';
-import { Checkbox } from '@mui/material';
+import Checkbox from '@mui/material/Checkbox';
+import MainButton from 'components/Buttons/MainButton';
 import Objects from 'components/Objects/Objects';
 import Loader from 'components/Progresses/Loader';
 import { BucketParams, ResObjectList } from 'types/apis';
@@ -17,7 +18,7 @@ interface HomeProps {
 const Home: NextPage<HomeProps> = ({ bucket, asPath }) => {
   const router = useRouter();
   const [isLoading, setIsLoading] = useState(false);
-  const [objects, setObjects] = useState<(ObjectInfo)[]>([]);
+  const [objects, setObjects] = useState<ObjectInfo[]>([]);
   const [chkSet, setChkSet] = useState(new Set<string>());
   const [chkAll, setChkAll] = useState(false);
 
@@ -58,8 +59,11 @@ const Home: NextPage<HomeProps> = ({ bucket, asPath }) => {
     <div>
       <main>
         <div className={isLoading ? 'hidden' : ''}>
-          <div className="text-right mt-20 mr-48">
-            <Checkbox checked={chkAll} onClick={() => setChkAll(!chkAll)} disabled={!objects.length} />
+          <div className="mt-20 mx-48 flex gap-5">
+            <MainButton onClick={() => setChkAll(!chkAll)}>
+              <Checkbox checked={chkAll} disableRipple onClick={() => setChkAll(!chkAll)} disabled={!objects.length} />
+            </MainButton>
+            <MainButton>올리기</MainButton>
           </div>
           <div className="object-container">
             <Objects list={objects} click={checkHandler} chkAll={chkAll} dblClick={dblClick} />
