@@ -54,7 +54,7 @@ const Home: NextPage<HomeProps> = ({ bucket, asPath }) => {
     <div>
       <main>
         <div className="text-right mt-20 mr-48">
-          <Checkbox checked={chkAll} onClick={() => setChkAll(!chkAll)} />
+          <Checkbox checked={chkAll} onClick={() => setChkAll(!chkAll)} disabled={!objects.length} />
         </div>
         <div className="object-container">
           <Objects list={objects} click={checkHandler} chkAll={chkAll} dblClick={dblClick} />
