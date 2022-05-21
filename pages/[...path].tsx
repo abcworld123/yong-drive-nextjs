@@ -3,11 +3,11 @@ import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { useRouter } from 'next/router';
 import Checkbox from '@mui/material/Checkbox';
-import MainButton from 'components/Buttons/MainButton';
-import Objects from 'components/Objects/Objects';
+import MainButton from 'components/buttons/MainButton';
+import Objects from 'components/objects/Objects';
 import Loader from '@svg/Loader';
 import { BucketParams, ResObjectList } from 'types/apis';
-import { ObjectInfo } from 'types/Objects';
+import { ObjectInfo } from 'types/objects';
 import { alertError } from 'utils/alerts';
 
 interface HomeProps {

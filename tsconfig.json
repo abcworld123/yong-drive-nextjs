@@ -16,7 +16,7 @@
     "incremental": true,
     "baseUrl": "./",
     "paths": {
-      "@svg/*": ["./assets/svg/*"],
+      "@svg/*": ["./components/assets/svg/*"],
       "@interfaces/*": ["./types/interfaces/*"],
       "@s3/*": ["./services/s3/*"],
     }

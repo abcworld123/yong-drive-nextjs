@@ -1,10 +1,10 @@
 import type { NextPage } from 'next';
 import { useEffect, useState } from 'react';
 import axios from 'axios';
-import Bucket from 'components/Objects/Bucket';
+import Bucket from 'components/objects/Bucket';
 import { alertError } from 'utils/alerts';
 import { ResBucketList } from 'types/apis';
-import { FileFC, FolderFC } from 'types/Objects';
+import { FileFC, FolderFC } from 'types/objects';
 import { useRouter } from 'next/router';
 
 const Home: NextPage = () => {

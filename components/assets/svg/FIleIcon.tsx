@@ -1,4 +1,4 @@
-import { SvgFC, SvgProps } from 'types/SvgIcon';
+import { SvgFC, SvgProps } from 'types/svgIcon';
 
 export default function FolderIcon({ size, fill }: SvgProps): SvgFC {
   return (

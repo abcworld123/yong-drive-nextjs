@@ -1,5 +1,5 @@
 import { Bucket, ListObjectsCommandInput } from '@aws-sdk/client-s3';
-import { ObjectInfo } from './Objects';
+import { ObjectInfo } from './objects';
 
 export interface BucketParams extends ListObjectsCommandInput {
   Prefix: string;
