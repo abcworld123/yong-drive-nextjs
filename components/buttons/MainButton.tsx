@@ -1,4 +1,5 @@
-import Button, { ButtonProps } from '@mui/material/Button';
+import Button from '@mui/material/Button';
+import type { ButtonProps } from '@mui/material/Button';
 
 const buttonStyle = {
   backgroundColor: '#e0e0ea',

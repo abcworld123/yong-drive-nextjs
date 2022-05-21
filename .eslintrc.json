@@ -57,6 +57,18 @@
     "no-nested-ternary": "off",
     "no-console": "off",
     "import/no-unresolved": "off",
-    "no-use-before-define": "off"
+    "no-use-before-define": "off",
+    
+    "import/order": [
+      "error",
+      {
+        "groups": ["builtin", "external", "internal", "parent", "sibling", "index", "object", "type"],
+        "alphabetize": {
+          "order": "asc",
+          "caseInsensitive": true
+        }
+        // "newlines-between": "always"
+      }
+    ]
   }
 }

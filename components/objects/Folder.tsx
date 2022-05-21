@@ -1,7 +1,7 @@
-import { useEffect, useState } from 'react';
 import { Checkbox } from '@mui/material';
+import { useEffect, useState } from 'react';
 import FolderIcon from '@svg/FolderIcon';
-import { FolderFC, FolderProps } from 'types/objects';
+import type { FolderFC, FolderProps } from 'types/objects';
 
 export default function Folder({ name, dblClick, click, chkAll }: FolderProps): FolderFC {
   const [checked, setChecked] = useState(false);

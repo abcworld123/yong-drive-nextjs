@@ -1,14 +1,14 @@
-import type { NextPage } from 'next';
-import React, { useEffect, useState } from 'react';
+import Checkbox from '@mui/material/Checkbox';
 import axios from 'axios';
 import { useRouter } from 'next/router';
-import Checkbox from '@mui/material/Checkbox';
+import React, { useEffect, useState } from 'react';
+import Loader from '@svg/Loader';
 import MainButton from 'components/buttons/MainButton';
 import Objects from 'components/objects/Objects';
-import Loader from '@svg/Loader';
-import { BucketParams, ResObjectList } from 'types/apis';
-import { ObjectInfo } from 'types/objects';
 import { alertError } from 'utils/alerts';
+import type { NextPage } from 'next';
+import type { BucketParams, ResObjectList } from 'types/apis';
+import type { ObjectInfo } from 'types/objects';
 
 interface HomeProps {
   bucket: string;

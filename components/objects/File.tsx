@@ -1,7 +1,7 @@
-import { useEffect, useState } from 'react';
 import { Checkbox } from '@mui/material';
+import { useEffect, useState } from 'react';
 import FileIcon from '@svg/FIleIcon';
-import { FileFC, FileProps } from 'types/objects';
+import type { FileFC, FileProps } from 'types/objects';
 
 export default function File({ name, size, click, chkAll }: FileProps): FileFC {
   const [checked, setChecked] = useState(false);

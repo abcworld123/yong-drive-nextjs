@@ -1,7 +1,7 @@
 import { ListObjectsCommand, ListBucketsCommand } from '@aws-sdk/client-s3';
 import { s3Client } from '@s3/s3Client';
-import { BucketParams } from 'types/apis';
-import { ObjectInfo } from 'types/objects';
+import type { BucketParams } from 'types/apis';
+import type { ObjectInfo } from 'types/objects';
 
 export const getBucketListCmd = async () => {
   try {

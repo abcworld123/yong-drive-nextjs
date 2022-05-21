@@ -1,5 +1,5 @@
-import { BucketFC, BucketProps } from 'types/objects';
 import BucketIcon from '@svg/BucketIcon';
+import type { BucketFC, BucketProps } from 'types/objects';
 
 export default function Bucket({ name, dblClick }: BucketProps): BucketFC {
   return (
