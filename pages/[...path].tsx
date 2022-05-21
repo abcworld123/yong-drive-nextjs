@@ -5,7 +5,7 @@ import { useRouter } from 'next/router';
 import Checkbox from '@mui/material/Checkbox';
 import MainButton from 'components/Buttons/MainButton';
 import Objects from 'components/Objects/Objects';
-import Loader from 'components/Progresses/Loader';
+import Loader from '@svg/Loader';
 import { BucketParams, ResObjectList } from 'types/apis';
 import { ObjectInfo } from 'types/Objects';
 import { alertError } from 'utils/alerts';
@@ -69,7 +69,7 @@ const Home: NextPage<HomeProps> = ({ bucket, asPath }) => {
             <Objects list={objects} click={checkHandler} chkAll={chkAll} dblClick={dblClick} />
           </div>
         </div>
-        <Loader show={isLoading} />
+        <Loader size={150} show={isLoading} />
       </main>
     </div>
   );
