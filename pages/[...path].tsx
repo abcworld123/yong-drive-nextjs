@@ -56,12 +56,12 @@ const Home: NextPage<HomeProps> = ({ bucket, asPath }) => {
   }
 
   return (
-    <div>
-      <main>
-        <div className={isLoading ? 'hidden' : ''}>
-          <div className="mt-20 mx-48 flex gap-5">
+    <main>
+      <div className={isLoading ? 'hidden' : ''}>
+        <div className="main-container">
+          <div className="flex gap-5">
             <MainButton onClick={() => setChkAll(!chkAll)}>
-                <Checkbox checked={chkAll} onClick={() => setChkAll(!chkAll)} disabled={!objects.length} disableRipple />
+              <Checkbox checked={chkAll} onClick={() => setChkAll(!chkAll)} disabled={!objects.length} disableRipple />
             </MainButton>
             <MainButton>올리기</MainButton>
           </div>
@@ -69,9 +69,9 @@ const Home: NextPage<HomeProps> = ({ bucket, asPath }) => {
             <Objects list={objects} click={checkHandler} chkAll={chkAll} dblClick={dblClick} />
           </div>
         </div>
-        <Loader size={150} show={isLoading} />
-      </main>
-    </div>
+      </div>
+      <Loader size={150} show={isLoading} />
+    </main>
   );
 };
 
