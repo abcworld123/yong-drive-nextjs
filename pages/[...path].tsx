@@ -1,7 +1,7 @@
 import Checkbox from '@mui/material/Checkbox';
 import axios from 'axios';
 import { useRouter } from 'next/router';
-import React, { useEffect, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import Loader from '@svg/Loader';
 import MainButton from 'components/buttons/MainButton';
 import Objects from 'components/objects/Objects';
@@ -22,24 +22,20 @@ const Home: NextPage<HomeProps> = ({ bucket, asPath }) => {
   const [chkSet, setChkSet] = useState(new Set<string>());
   const [chkAll, setChkAll] = useState(false);
 
-  useEffect(() => {
-    intoFolder(asPath);
-  }, [asPath]);
-
-  function checkHandler(name: string, isChecked: boolean) {
+  const checkHandler = useCallback((name: string, isChecked: boolean) => {
     if (isChecked) chkSet.add(name);
     else if (!isChecked && chkSet.has(name)) chkSet.delete(name);
-  }
+  }, [chkSet]);
 
-  function dblClick(folder: string) {
+  const dblClick = useCallback((folder: string) => {
     setIsLoading(true);
     setChkSet(new Set());
     setChkAll(false);
     const nxtPath = `/${bucket}/${asPath}${folder}`;
     router.push(nxtPath);
-  }
+  }, [asPath, bucket, router]);
 
-  async function intoFolder(asPath: string) {
+  const intoFolder = useCallback(async (asPath: string) => {
     const params: BucketParams = {
       Bucket: bucket,
       Prefix: asPath,
@@ -53,7 +49,11 @@ const Home: NextPage<HomeProps> = ({ bucket, asPath }) => {
       alertError('데이터를 가져오는 중 오류가 발생했습니다.')
       .then(() => history.back());
     }
-  }
+  }, [bucket]);
+
+  useEffect(() => {
+    intoFolder(asPath);
+  }, [intoFolder, asPath]);
 
   return (
     <main>

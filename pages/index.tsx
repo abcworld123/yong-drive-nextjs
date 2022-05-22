@@ -1,21 +1,17 @@
 import axios from 'axios';
 import { useRouter } from 'next/router';
-import { useEffect, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import Bucket from 'components/objects/Bucket';
 import { alertError } from 'utils/alerts';
 import type { NextPage } from 'next';
 import type { ResBucketList } from 'types/apis';
-import type { FileFC, FolderFC } from 'types/objects';
+import type { BucketFC } from 'types/objects';
 
 const Home: NextPage = () => {
   const router = useRouter();
-  const [objects, setObjects] = useState<(FileFC | FolderFC)[]>([]);
+  const [objects, setObjects] = useState<BucketFC[]>([]);
 
-  useEffect(() => {
-    intoBucket();
-  }, []);
-
-  async function intoBucket() {
+  const intoBucket = useCallback(async () => {
     const { data } = await axios.get<ResBucketList>('/api/s3-bucket/getbucketlist');
     if (data.success) {
       let k = 1;
@@ -29,7 +25,11 @@ const Home: NextPage = () => {
       await alertError('데이터를 가져오는 중 오류가 발생했습니다.');
       history.back();
     }
-  }
+  }, [router]);
+
+  useEffect(() => {
+    intoBucket();
+  }, [intoBucket]);
 
   return (
     <main>

@@ -8,7 +8,7 @@ export default function Folder({ name, dblClick, click, chkAll }: FolderProps): 
 
   useEffect(() => {
     click(name, checked);
-  }, [checked]);
+  }, [checked, click, name]);
 
   useEffect(() => {
     setChecked(chkAll);

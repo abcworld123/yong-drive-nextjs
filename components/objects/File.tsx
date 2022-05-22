@@ -8,7 +8,7 @@ export default function File({ name, size, click, chkAll }: FileProps): FileFC {
 
   useEffect(() => {
     click(name, checked);
-  }, [checked]);
+  }, [checked, click, name]);
 
   useEffect(() => {
     setChecked(chkAll);
@@ -17,7 +17,7 @@ export default function File({ name, size, click, chkAll }: FileProps): FileFC {
   return (
     <div>
       <div className={`object-icon ${checked ? 'object-icon-checked' : ''}`}>
-        <Checkbox className="-translate-x-14 -translate-y-14" sx={{position: 'absolute'}} checked={checked} onClick={() => setChecked(!checked) } />
+        <Checkbox className="-translate-x-14 -translate-y-14" sx={{position: 'absolute'}} checked={checked} onClick={() => setChecked(!checked)} />
         <FileIcon size={88} fill="#707070" />
       </div>
       <div className="text-sm">
