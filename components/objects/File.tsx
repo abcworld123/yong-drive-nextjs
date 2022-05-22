@@ -1,4 +1,4 @@
-import { Checkbox } from '@mui/material';
+import Checkbox from '@mui/material/Checkbox';
 import { useEffect, useState } from 'react';
 import FileIcon from '@svg/FIleIcon';
 import type { FileFC, FileProps } from 'types/objects';

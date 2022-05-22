@@ -32,13 +32,13 @@ const Home: NextPage = () => {
   }
 
   return (
-    <div>
-      <main>
+    <main>
+      <div className="main-container">
         <div className="object-container">
           {objects}
         </div>
-      </main>
-    </div>
+      </div>
+    </main>
   );
 };
 
