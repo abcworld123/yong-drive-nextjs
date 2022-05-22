@@ -3,7 +3,7 @@ import axios from 'axios';
 import { useRouter } from 'next/router';
 import { useCallback, useEffect, useState } from 'react';
 import Loader from '@svg/Loader';
-import MainButton from 'components/buttons/MainButton';
+import Button from 'components/buttons/MainButton';
 import Objects from 'components/objects/Objects';
 import { alertError } from 'utils/alerts';
 import type { NextPage } from 'next';
@@ -46,8 +46,8 @@ const Home: NextPage<HomeProps> = ({ bucket, asPath }) => {
       setObjects(data.objects);
       setIsLoading(false);
     } else {
-      alertError('데이터를 가져오는 중 오류가 발생했습니다.')
-      .then(() => history.back());
+      await alertError('데이터를 가져오는 중 오류가 발생했습니다.');
+      history.back();
     }
   }, [bucket]);
 
@@ -60,10 +60,10 @@ const Home: NextPage<HomeProps> = ({ bucket, asPath }) => {
       <div className={isLoading ? 'hidden' : ''}>
         <div className="main-container">
           <div className="flex gap-5">
-            <MainButton onClick={() => setChkAll(!chkAll)}>
+            <Button onClick={() => setChkAll(!chkAll)}>
               <Checkbox checked={chkAll} onClick={() => setChkAll(!chkAll)} disabled={!objects.length} disableRipple />
-            </MainButton>
-            <MainButton>올리기</MainButton>
+            </Button>
+            <Button>올리기</Button>
           </div>
           <div className="object-container">
             <Objects list={objects} click={checkHandler} chkAll={chkAll} dblClick={dblClick} />
