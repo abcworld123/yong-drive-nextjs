@@ -1,4 +1,4 @@
-import type { ObjectInfo } from './objects';
+import type { ObjectInfo } from './reactTypes';
 import type { Bucket } from '@aws-sdk/client-s3';
 import type { NextApiRequest } from 'next';
 
@@ -18,6 +18,9 @@ export interface LocalWriteParams {
 export type LocalWritedParams = Omit<LocalWriteParams, 'file'>;
 
 // request types
+
+type OverrideNextApiRequest = Omit<NextApiRequest, 'query'>;
+
 export interface ReqBucket extends OverrideNextApiRequest {
   query: BucketParams;
 }

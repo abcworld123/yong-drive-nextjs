@@ -8,12 +8,7 @@ import Objects from 'components/objects/Objects';
 import { alertError, alertSuccess } from 'utils/alerts';
 import type { NextPage } from 'next';
 import type { BucketParams, LocalWriteParams, ResObjectList } from 'types/apis';
-import type { ObjectInfo } from 'types/objects';
-
-interface HomeProps {
-  bucket: string;
-  asPath: string;
-}
+import type { HomeProps, ObjectInfo } from 'types/reactTypes';
 
 const Home: NextPage<HomeProps> = ({ bucket, asPath }) => {
   const router = useRouter();

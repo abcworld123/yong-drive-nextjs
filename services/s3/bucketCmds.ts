@@ -2,7 +2,7 @@ import fs from 'fs';
 import { ListObjectsCommand, ListBucketsCommand, PutObjectCommand } from '@aws-sdk/client-s3';
 import { s3Client } from '@s3/s3Client';
 import type { BucketParams, LocalWritedParams } from 'types/apis';
-import type { ObjectInfo } from 'types/objects';
+import type { ObjectInfo } from 'types/reactTypes';
 
 // bucket 리스트 가져오기
 export async function getBucketListCmd() {

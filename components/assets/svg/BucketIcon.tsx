@@ -1,4 +1,4 @@
-import type { SvgFC, SvgProps } from 'types/svgIcon';
+import type { SvgFC, SvgProps } from 'types/reactTypes';
 
 export default function BucketIcon({ size }: SvgProps): SvgFC {
   return (

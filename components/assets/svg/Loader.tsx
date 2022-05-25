@@ -1,4 +1,4 @@
-import type { SvgFC, SvgProps } from 'types/svgIcon';
+import type { SvgFC, SvgProps } from 'types/reactTypes';
 
 export default function Loader({ size, fill, show }: SvgProps & { show: boolean }): SvgFC {
   return (

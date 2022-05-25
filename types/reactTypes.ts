@@ -1,5 +1,10 @@
 type checkHandler = (name: string, isChecked: boolean) => void;
 
+export interface HomeProps {
+  bucket: string;
+  asPath: string;
+}
+
 export interface BucketProps {
   name: string;
   dblClick: () => void;
@@ -32,6 +37,12 @@ export interface ObjectInfo {
   size?: number;
 }
 
+export interface SvgProps {
+  size?: number;
+  fill?: string;
+}
+
 export type BucketFC = React.ReactElement<BucketProps>;
 export type FileFC = React.ReactElement<FileProps>;
 export type FolderFC = React.ReactElement<FolderProps>;
+export type SvgFC = React.ReactElement<SvgProps>;

@@ -1,7 +1,7 @@
 import File from 'components/objects/File';
 import Folder from 'components/objects/Folder';
 import convUnit from 'utils/convUnit';
-import type { ObjectProps } from 'types/objects';
+import type { ObjectProps } from 'types/reactTypes';
 
 export default function Objects({ list, click, chkAll, dblClick }: ObjectProps) {
   const arr = [];

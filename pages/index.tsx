@@ -5,7 +5,7 @@ import Bucket from 'components/objects/Bucket';
 import { alertError } from 'utils/alerts';
 import type { NextPage } from 'next';
 import type { ResBucketList } from 'types/apis';
-import type { BucketFC } from 'types/objects';
+import type { BucketFC } from 'types/reactTypes';
 
 const Home: NextPage = () => {
   const router = useRouter();
