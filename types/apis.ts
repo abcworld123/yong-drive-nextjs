@@ -1,15 +1,33 @@
-import { Bucket, ListObjectsCommandInput } from '@aws-sdk/client-s3';
-import { ObjectInfo } from './objects';
+import type { ObjectInfo } from './objects';
+import type { Bucket } from '@aws-sdk/client-s3';
+import type { NextApiRequest } from 'next';
 
-export interface BucketParams extends ListObjectsCommandInput {
+// param types
+export interface BucketParams {
+  Bucket: string;
   Prefix: string;
   Delimiter: string;
 }
 
-export interface ReqBucketParams {
+export interface LocalWriteParams {
+  Bucket: string;
+  Key: string;
+  file: File;
+}
+
+export type LocalWritedParams = Omit<LocalWriteParams, 'file'>;
+
+// request types
+export interface ReqBucket extends OverrideNextApiRequest {
   query: BucketParams;
 }
 
+export interface ReqLocalWrite extends NextApiRequest {
+  body: LocalWritedParams;
+  file: MulterFile;
+}
+
+// response types
 export interface ResBucketList {
   success: boolean;
   buckets?: Bucket[];

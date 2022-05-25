@@ -1,13 +1,13 @@
 import Checkbox from '@mui/material/Checkbox';
 import axios from 'axios';
 import { useRouter } from 'next/router';
-import { useCallback, useEffect, useState } from 'react';
+import { useCallback, useEffect, useRef, useState } from 'react';
 import Loader from '@svg/Loader';
 import Button from 'components/buttons/MainButton';
 import Objects from 'components/objects/Objects';
-import { alertError } from 'utils/alerts';
+import { alertError, alertSuccess } from 'utils/alerts';
 import type { NextPage } from 'next';
-import type { BucketParams, ResObjectList } from 'types/apis';
+import type { BucketParams, LocalWriteParams, ResObjectList } from 'types/apis';
 import type { ObjectInfo } from 'types/objects';
 
 interface HomeProps {
@@ -21,6 +21,8 @@ const Home: NextPage<HomeProps> = ({ bucket, asPath }) => {
   const [objects, setObjects] = useState<ObjectInfo[]>([]);
   const [chkSet, setChkSet] = useState(new Set<string>());
   const [chkAll, setChkAll] = useState(false);
+  const [pValue, setpValue] = useState(0);
+  const inputFile = useRef<HTMLInputElement>(null);
 
   const checkHandler = useCallback((name: string, isChecked: boolean) => {
     if (isChecked) chkSet.add(name);
@@ -51,9 +53,38 @@ const Home: NextPage<HomeProps> = ({ bucket, asPath }) => {
     }
   }, [bucket]);
 
-  useEffect(() => {
+  const reload = useCallback(() => {
     intoFolder(asPath);
   }, [intoFolder, asPath]);
+
+  const upload = useCallback(async (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.currentTarget.files[0];
+    const params: LocalWriteParams = {
+      Bucket: bucket,
+      Key: file.name,
+      file,
+    };
+    try {
+      const { data } = await axios.post('/api/s3-bucket/uploadobject', params, {
+        headers: { 'Content-Type': 'multipart/form-data' },
+        onUploadProgress: (progressEvent: any) => {
+          setpValue(progressEvent.loaded / progressEvent.total);
+        },
+      });
+      if (!data.success) throw new Error('업로드 오류 발생');
+      alertSuccess('업로드 성공!');
+      reload();
+    } catch (err) {
+      alertError(err.message);
+      console.error(err);
+    } finally {
+      inputFile.current.value = inputFile.current.defaultValue;
+    }
+  }, [bucket, reload]);
+
+  useEffect(() => {
+    reload();
+  }, [reload]);
 
   return (
     <main>
@@ -63,7 +94,9 @@ const Home: NextPage<HomeProps> = ({ bucket, asPath }) => {
             <Button onClick={() => setChkAll(!chkAll)}>
               <Checkbox checked={chkAll} onClick={() => setChkAll(!chkAll)} disabled={!objects.length} disableRipple />
             </Button>
-            <Button>올리기</Button>
+            <Button onClick={() => inputFile.current.click()}>올리기</Button>
+            <input type="file" className="hidden" ref={inputFile} onChange={upload} />
+            <progress value={pValue} />
           </div>
           <div className="object-container">
             <Objects list={objects} click={checkHandler} chkAll={chkAll} dblClick={dblClick} />
