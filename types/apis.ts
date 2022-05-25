@@ -9,25 +9,20 @@ export interface BucketParams {
   Delimiter: string;
 }
 
-export interface LocalWriteParams {
+export interface UploadParams {
   Bucket: string;
   Key: string;
-  file: File;
 }
 
-export type LocalWritedParams = Omit<LocalWriteParams, 'file'>;
-
 // request types
-
 type OverrideNextApiRequest = Omit<NextApiRequest, 'query'>;
 
 export interface ReqBucket extends OverrideNextApiRequest {
   query: BucketParams;
 }
 
-export interface ReqLocalWrite extends NextApiRequest {
-  body: LocalWritedParams;
-  file: MulterFile;
+export interface ReqUpload extends OverrideNextApiRequest {
+  query: UploadParams;
 }
 
 // response types

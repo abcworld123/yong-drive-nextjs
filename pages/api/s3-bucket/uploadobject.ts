@@ -1,22 +1,14 @@
-import nc from 'next-connect';
-import { putObjectCmd } from '@s3/bucketCmds';
-import { writeFileToLocal } from 'services/local/fileIo';
-import { ReqLocalWrite } from 'types/apis';
-import type { NextApiRequest, NextApiResponse } from 'next';
+import { PassThrough } from 'stream';
+import { uploadCmd } from '@s3/bucketCmds';
+import type { NextApiResponse } from 'next';
+import type { ReqUpload } from 'types/apis';
 
-const handler = nc();
-handler.use(writeFileToLocal);
-
-handler.get((req: NextApiRequest, res: NextApiResponse) => {
-  res.status(200).send('abc');
-});
-
-handler.post(async (req: ReqLocalWrite, res: NextApiResponse) => {
-  const data = await putObjectCmd({ ...req.body, ...req.file });
+export default async function handler(req: ReqUpload, res: NextApiResponse) {
+  const params = req.query;
+  const fileStream = new PassThrough();
+  req.pipe(fileStream);
+  const data = await uploadCmd(params, fileStream);
   res.status(200).json(data);
 }
-);
 
 export const config = { api: { bodyParser: false } };
-
-export default handler;

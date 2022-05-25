@@ -1,7 +1,8 @@
-import fs from 'fs';
-import { ListObjectsCommand, ListBucketsCommand, PutObjectCommand } from '@aws-sdk/client-s3';
+import { PassThrough } from 'stream';
+import { ListObjectsCommand, ListBucketsCommand } from '@aws-sdk/client-s3';
+import { Upload } from '@aws-sdk/lib-storage';
 import { s3Client } from '@s3/s3Client';
-import type { BucketParams, LocalWritedParams } from 'types/apis';
+import type { BucketParams, UploadParams } from 'types/apis';
 import type { ObjectInfo } from 'types/reactTypes';
 
 // bucket 리스트 가져오기
@@ -40,26 +41,16 @@ export async function getObjectListCmd(params: BucketParams) {
   }
 }
 
-
 // object 업로드
-export async function putObjectCmd(params: LocalWritedParams & MulterFile) {
-  const { Bucket, Key, path } = params;
-  const newParams = {
-    Bucket,
-    Key,
-    Body: fs.createReadStream(path),
-  };
+export async function uploadCmd({ Bucket, Key }: UploadParams, fileStream: PassThrough) {
+  const params = { Bucket, Key, Body: fileStream };
   try {
-    const data = await s3Client.send(new PutObjectCommand(newParams));
-    if (!data.ETag) throw new Error();
+    const upload = new Upload({ client: s3Client, params });
+    await upload.done();
     return { success: true };
   } catch (err) {
-    console.error('\n---\x1B[34m putObjectCmd Error \x1B[0m---\n');
+    console.error('\n---\x1B[34m uploadCmd Error \x1B[0m---\n');
     console.error(err);
     return { success: false };
-  } finally {
-    fs.unlink(path, (err) => {
-      if (err) console.error(err);
-    });
   }
 }

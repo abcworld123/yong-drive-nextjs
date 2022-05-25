@@ -7,7 +7,7 @@ import Button from 'components/buttons/MainButton';
 import Objects from 'components/objects/Objects';
 import { alertError, alertSuccess } from 'utils/alerts';
 import type { NextPage } from 'next';
-import type { BucketParams, LocalWriteParams, ResObjectList } from 'types/apis';
+import type { BucketParams, ResObjectList, UploadParams } from 'types/apis';
 import type { HomeProps, ObjectInfo } from 'types/reactTypes';
 
 const Home: NextPage<HomeProps> = ({ bucket, asPath }) => {
@@ -54,13 +54,13 @@ const Home: NextPage<HomeProps> = ({ bucket, asPath }) => {
 
   const upload = useCallback(async (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.currentTarget.files[0];
-    const params: LocalWriteParams = {
+    const params: UploadParams = {
       Bucket: bucket,
       Key: file.name,
-      file,
     };
     try {
-      const { data } = await axios.post('/api/s3-bucket/uploadobject', params, {
+      const { data } = await axios.post('/api/s3-bucket/uploadobject', file, {
+        params,
         headers: { 'Content-Type': 'multipart/form-data' },
         onUploadProgress: (progressEvent: any) => {
           setpValue(progressEvent.loaded / progressEvent.total);
