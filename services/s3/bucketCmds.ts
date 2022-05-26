@@ -51,10 +51,10 @@ export async function getObjectListCmd({ bucket, path }: BucketParams) {
 }
 
 // object 업로드
-export async function uploadObjectCmd({ bucket, filename }: UploadParams, fileStream: PassThrough) {
+export async function uploadObjectCmd({ bucket, path, filename }: UploadParams, fileStream: PassThrough) {
   const params: PutObjectCommandInput = {
     Bucket: bucket,
-    Key: filename,
+    Key: `${path}${filename}`,
     Body: fileStream,
   };
   try {

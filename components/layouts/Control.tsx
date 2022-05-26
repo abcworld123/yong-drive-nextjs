@@ -19,6 +19,7 @@ export default function Control({ chkSet }: ControlProps): ControlFC {
     const file = e.currentTarget.files[0];
     const params: UploadParams = {
       bucket: bucket,
+      path: asPath,
       filename: file.name,
     };
     try {

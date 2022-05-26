@@ -9,6 +9,7 @@ export interface BucketParams {
 
 export interface UploadParams {
   bucket: string;
+  path: string;
   filename: string;
 }
 
