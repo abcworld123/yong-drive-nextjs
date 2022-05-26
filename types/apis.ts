@@ -1,4 +1,3 @@
-import type { ObjectInfo } from './reactTypes';
 import type { Bucket } from '@aws-sdk/client-s3';
 import type { NextApiRequest } from 'next';
 
@@ -34,4 +33,11 @@ export interface ResBucketList {
 export interface ResObjectList {
   success: boolean;
   objects?: ObjectInfo[];
+}
+
+// etc
+export interface ObjectInfo {
+  type: string;
+  name: string;
+  size?: number;
 }

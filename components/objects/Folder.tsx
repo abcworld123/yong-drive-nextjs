@@ -1,14 +1,16 @@
 import Checkbox from '@mui/material/Checkbox';
-import { useEffect, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import FolderIcon from '@svg/FolderIcon';
+import { HomeContext } from 'pages/[...path]';
 import type { FolderFC, FolderProps } from 'types/reactTypes';
 
-export default function Folder({ name, dblClick, click, chkAll }: FolderProps): FolderFC {
+export default function Folder({ name, click, dblClick }: FolderProps): FolderFC {
+  const { chkAll } = useContext(HomeContext);
   const [checked, setChecked] = useState(false);
 
   useEffect(() => {
     click(name, checked);
-  }, [checked, click, name]);
+  }, [name, checked]);
 
   useEffect(() => {
     setChecked(chkAll);
@@ -16,7 +18,7 @@ export default function Folder({ name, dblClick, click, chkAll }: FolderProps): 
 
   return (
     <div>
-      <div className={`object-icon ${checked ? 'object-icon-checked' : ''}`} onDoubleClick={dblClick}>
+      <div className={`object-icon ${checked ? 'object-icon-checked' : ''}`} onDoubleClick={() => dblClick(name)}>
         <Checkbox className="-translate-x-14 -translate-y-14" sx={{position: 'absolute'}} checked={checked} onClick={() => setChecked(!checked)} />
         <FolderIcon size={88} fill="#f9cd52" />
       </div>
