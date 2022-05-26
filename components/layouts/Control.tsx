@@ -38,7 +38,7 @@ export default function Control({ chkSet }: ControlProps): ControlFC {
     } finally {
       inputFile.current.value = inputFile.current.defaultValue;
     }
-  }, [bucket, reload]);
+  }, [bucket, reload, asPath]);
 
   return (
     <div className="flex gap-5">

@@ -26,9 +26,6 @@ const Home: NextPage<HomeProps> = ({ bucket, asPath }) => {
   const [chkAll, setChkAll] = useState(false);
 
   const dblClick = useCallback((folder: string) => {
-    setIsLoading(true);
-    setChkSet(new Set());
-    setChkAll(false);
     const nxtPath = `/${bucket}/${asPath}${folder}`;
     router.push(nxtPath);
   }, [asPath, bucket, router]);
@@ -48,6 +45,9 @@ const Home: NextPage<HomeProps> = ({ bucket, asPath }) => {
   }, []);
 
   const reload = useCallback(async (asPath: string) => {
+    setIsLoading(true);
+    setChkSet(new Set());
+    setChkAll(false);
     const params: BucketParams = {
       Bucket: bucket,
       Prefix: asPath,
@@ -65,7 +65,7 @@ const Home: NextPage<HomeProps> = ({ bucket, asPath }) => {
 
   useEffect(() => {
     reload(asPath);
-  }, []);
+  }, [asPath]);
 
   return (
     <HomeContext.Provider value={{ bucket, asPath, objects, chkAll, reload, toggleChkAll }}>
