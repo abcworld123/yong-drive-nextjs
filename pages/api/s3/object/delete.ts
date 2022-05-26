@@ -1,8 +1,8 @@
 import { deleteObjectCmd } from '@s3/bucketCmds';
 import type { NextApiResponse } from 'next';
-import type { ReqDeleteObjects, ResBucketList } from 'types/apis';
+import type { ReqDeleteObjects, ResDefault } from 'types/apis';
 
-export default async function handler(req: ReqDeleteObjects, res: NextApiResponse<ResBucketList>) {
+export default async function handler(req: ReqDeleteObjects, res: NextApiResponse<ResDefault>) {
   const formdata = req.body;
   const data = await deleteObjectCmd(formdata);
   res.status(200).json(data);

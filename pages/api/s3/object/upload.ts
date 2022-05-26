@@ -1,9 +1,9 @@
 import { PassThrough } from 'stream';
 import { uploadObjectCmd } from '@s3/bucketCmds';
 import type { NextApiResponse } from 'next';
-import type { ReqUploadObject } from 'types/apis';
+import type { ReqUploadObject, ResDefault } from 'types/apis';
 
-export default async function handler(req: ReqUploadObject, res: NextApiResponse) {
+export default async function handler(req: ReqUploadObject, res: NextApiResponse<ResDefault>) {
   const params = req.query;
   const fileStream = new PassThrough();
   req.pipe(fileStream);
