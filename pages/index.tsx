@@ -12,7 +12,7 @@ const Home: NextPage = () => {
   const [objects, setObjects] = useState<BucketFC[]>([]);
 
   const intoBucket = useCallback(async () => {
-    const { data } = await axios.get<ResBucketList>('/api/s3-bucket/getbucketlist');
+    const { data } = await axios.get<ResBucketList>('/api/s3/bucket/get');
     if (data.success) {
       let k = 1;
       const arr = [];

@@ -23,7 +23,7 @@ export default function Control({ chkSet }: ControlProps): ControlFC {
       filename: file.name,
     };
     try {
-      const { data } = await axios.post<ResDefault>('/api/s3-bucket/uploadobject', file, {
+      const { data } = await axios.post<ResDefault>('/api/s3/object/upload', file, {
         params,
         headers: { 'Content-Type': 'multipart/form-data' },
         onUploadProgress: (progressEvent: ProgressEvent) => {
@@ -53,7 +53,7 @@ export default function Control({ chkSet }: ControlProps): ControlFC {
       objects: [...chkSet],
     };
     try {
-      const { data } = await axios.post<ResDefault>('/api/s3-bucket/deleteobject', formdata);
+      const { data } = await axios.post<ResDefault>('/api/s3/object/delete', formdata);
       if (!data.success) throw new Error('삭제 오류');
       alertSuccess('삭제 성공!');
       reload();
