@@ -13,7 +13,7 @@ export interface ControlProps {
 
 export interface BucketProps {
   name: string;
-  dblClick: () => void;
+  dblClick: (bucket: string) => void;
 }
 
 export interface ObjectProps {
