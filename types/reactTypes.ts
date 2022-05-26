@@ -4,7 +4,7 @@ type checkHandler = (name: string, isChecked: boolean) => void;
 
 export interface HomeProps {
   bucket: string;
-  asPath: string;
+  path: string;
 }
 
 export interface ControlProps {
@@ -40,11 +40,11 @@ export interface SvgProps {
 
 export interface HomeContextProps {
   bucket: string;
-  asPath: string;
+  path: string;
   objects: ObjectInfo[];
   chkAll: boolean;
   toggleChkAll: () => void;
-  reload: (asPath: string) => void;
+  reload: () => void;
 }
 
 export type ControlFC = React.ReactElement<ControlProps>;

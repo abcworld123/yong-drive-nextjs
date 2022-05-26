@@ -5,13 +5,13 @@ import DeleteIcon from '@svg/DeleteIcon';
 import DownloadIcon from '@svg/DownloadIcon';
 import UploadIcon from '@svg/UploadIcon';
 import Button from 'components/buttons/MainButton';
-import { HomeContext } from 'pages/[...path]';
+import { HomeContext } from 'pages/[bucket]/[[...path]]';
 import { DeleteFormdata, ResDefault, UploadParams } from 'types/apis';
 import { alertError, alertSuccess, alertWarn } from 'utils/alerts';
 import type { ControlFC, ControlProps } from 'types/reactTypes';
 
 export default function Control({ chkSet }: ControlProps): ControlFC {
-  const { bucket, asPath, objects, chkAll, reload, toggleChkAll } = useContext(HomeContext);
+  const { bucket, path, objects, chkAll, reload, toggleChkAll } = useContext(HomeContext);
   const [progVal, setProgVal] = useState(0);
   const inputFile = useRef<HTMLInputElement>(null);
 
@@ -19,7 +19,7 @@ export default function Control({ chkSet }: ControlProps): ControlFC {
     const file = e.currentTarget.files[0];
     const params: UploadParams = {
       bucket: bucket,
-      path: asPath,
+      path: path,
       filename: file.name,
     };
     try {
@@ -32,14 +32,14 @@ export default function Control({ chkSet }: ControlProps): ControlFC {
       });
       if (!data.success) throw new Error('업로드 오류');
       alertSuccess('업로드 성공!');
-      reload(asPath);
+      reload();
     } catch (err) {
       alertError(err.message);
       console.error(err);
     } finally {
       inputFile.current.value = inputFile.current.defaultValue;
     }
-  }, [bucket, reload, asPath]);
+  }, [bucket, reload, path]);
 
   const deleteObject = useCallback(async () => {
     const isConfirmed = (await alertWarn(
@@ -49,19 +49,19 @@ export default function Control({ chkSet }: ControlProps): ControlFC {
     if (!isConfirmed) return;
     const formdata: DeleteFormdata = {
       bucket: bucket,
-      path: asPath,
+      path: path,
       objects: [...chkSet],
     };
     try {
       const { data } = await axios.post<ResDefault>('/api/s3-bucket/deleteobject', formdata);
       if (!data.success) throw new Error('삭제 오류');
       alertSuccess('삭제 성공!');
-      reload(asPath);
+      reload();
     } catch (err) {
       alertError(err.message);
       console.error(err);
     }
-  }, [bucket, asPath, chkSet]);
+  }, [bucket, chkSet, path, reload]);
 
   return (
     <div className="flex gap-5">

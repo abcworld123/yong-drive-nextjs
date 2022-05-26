@@ -1,7 +1,7 @@
 import { useContext } from 'react';
 import File from 'components/objects/File';
 import Folder from 'components/objects/Folder';
-import { HomeContext } from 'pages/[...path]';
+import { HomeContext } from 'pages/[bucket]/[[...path]]';
 import convUnit from 'utils/convUnit';
 import type { ObjectProps } from 'types/reactTypes';
 

@@ -1,7 +1,7 @@
 import Checkbox from '@mui/material/Checkbox';
 import { useContext, useEffect, useState } from 'react';
 import FileIcon from '@svg/FIleIcon';
-import { HomeContext } from 'pages/[...path]';
+import { HomeContext } from 'pages/[bucket]/[[...path]]';
 import type { FileFC, FileProps } from 'types/reactTypes';
 
 export default function File({ name, size, click }: FileProps): FileFC {

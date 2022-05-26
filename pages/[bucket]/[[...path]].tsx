@@ -11,14 +11,14 @@ import type { HomeContextProps, HomeProps } from 'types/reactTypes';
 
 export const HomeContext = createContext<HomeContextProps>({
   bucket: '',
-  asPath: '',
+  path: '',
   objects: [],
   chkAll: false,
   toggleChkAll: null,
   reload: null,
 });
 
-const Home: NextPage<HomeProps> = ({ bucket, asPath }) => {
+const Home: NextPage<HomeProps> = ({ bucket, path }) => {
   const router = useRouter();
   const [isLoading, setIsLoading] = useState(false);
   const [objects, setObjects] = useState<ObjectInfo[]>([]);
@@ -26,9 +26,9 @@ const Home: NextPage<HomeProps> = ({ bucket, asPath }) => {
   const [chkAll, setChkAll] = useState(false);
 
   const dblClick = useCallback((folder: string) => {
-    const nxtPath = `/${bucket}/${asPath}${folder}`;
+    const nxtPath = `/${bucket}/${path}${folder}`;
     router.push(nxtPath);
-  }, [asPath, bucket, router]);
+  }, [path, bucket, router]);
 
   const checkHandler = useCallback((name: string, isChecked: boolean) => {
     const has = chkSet.has(name);
@@ -44,14 +44,11 @@ const Home: NextPage<HomeProps> = ({ bucket, asPath }) => {
     setChkAll(chkAll => !chkAll);
   }, []);
 
-  const reload = useCallback(async (asPath: string) => {
+  const reload = useCallback(async () => {
     setIsLoading(true);
     setChkSet(new Set());
     setChkAll(false);
-    const params: BucketParams = {
-      bucket: bucket,
-      path: asPath,
-    };
+    const params: BucketParams = { bucket, path };
     const { data } = await axios.get<ResObjectList>('/api/s3-bucket/getobjectlist', { params });
     if (data.success) {
       setObjects(data.objects);
@@ -60,14 +57,14 @@ const Home: NextPage<HomeProps> = ({ bucket, asPath }) => {
       await alertError('데이터를 가져오는 중 오류가 발생했습니다.');
       history.back();
     }
-  }, [bucket]);
+  }, [bucket, path]);
 
   useEffect(() => {
-    reload(asPath);
-  }, [asPath]);
+    reload();
+  }, [reload]);
 
   return (
-    <HomeContext.Provider value={{ bucket, asPath, objects, chkAll, reload, toggleChkAll }}>
+    <HomeContext.Provider value={{ bucket, path, objects, chkAll, reload, toggleChkAll }}>
       <main>
         {
           isLoading
@@ -85,10 +82,10 @@ const Home: NextPage<HomeProps> = ({ bucket, asPath }) => {
 };
 
 Home.getInitialProps = (ctx) => {
-  const bucket = ctx.query.path[0];
-  let asPath = decodeURIComponent(ctx.asPath.slice(bucket.length + 1));
-  asPath = asPath ? asPath.slice(1) + '/' : '';
-  return { bucket, asPath };
+  const bucket = ctx.query.bucket as string;
+  const paths = ctx.query.path as string[];
+  const path = paths ? paths.map((path) => `${path}/`).join('') : '';
+  return { bucket, path };
 };
 
 export default Home;

@@ -1,7 +1,7 @@
 import Checkbox from '@mui/material/Checkbox';
 import { useContext, useEffect, useState } from 'react';
 import FolderIcon from '@svg/FolderIcon';
-import { HomeContext } from 'pages/[...path]';
+import { HomeContext } from 'pages/[bucket]/[[...path]]';
 import type { FolderFC, FolderProps } from 'types/reactTypes';
 
 export default function Folder({ name, click, dblClick }: FolderProps): FolderFC {
