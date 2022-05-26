@@ -1,5 +1,11 @@
 import { PassThrough } from 'stream';
-import { ListObjectsCommand, ListBucketsCommand, DeleteObjectsCommand, DeleteObjectsCommandInput } from '@aws-sdk/client-s3';
+import { ListObjectsCommand,
+  ListBucketsCommand,
+  DeleteObjectsCommand,
+  DeleteObjectsCommandInput,
+  PutObjectCommandInput,
+  ListObjectsCommandInput,
+} from '@aws-sdk/client-s3';
 import { Upload } from '@aws-sdk/lib-storage';
 import { s3Client } from '@s3/s3Client';
 import type { BucketParams, DeleteFormdata, ObjectInfo, UploadParams } from 'types/apis';
@@ -7,7 +13,8 @@ import type { BucketParams, DeleteFormdata, ObjectInfo, UploadParams } from 'typ
 // bucket 리스트 가져오기
 export async function getBucketListCmd() {
   try {
-    const buckets = (await s3Client.send(new ListBucketsCommand({}))).Buckets;
+    const data = (await s3Client.send(new ListBucketsCommand({})));
+    const buckets = data.Buckets;
     return { success: true, buckets: buckets || [] };
   } catch (err) {
     console.error('\n---\x1B[34m getBucketListCmd Error \x1B[0m---\n');
@@ -17,13 +24,16 @@ export async function getBucketListCmd() {
 }
 
 // object 리스트 가져오기 (현재 폴더)
-export async function getObjectListCmd(params: BucketParams) {
+export async function getObjectListCmd({ bucket, path }: BucketParams) {
   try {
-    params.Prefix = decodeURI(params.Prefix);
-    const prefixLen = params.Prefix.length;
+    const prefixLen = path.length;
     const objects: ObjectInfo[] = [];
+    const params: ListObjectsCommandInput = {
+      Bucket: bucket,
+      Prefix: decodeURI(path),
+      Delimiter: '/',
+    };
     const data = await s3Client.send(new ListObjectsCommand(params));
-
     data.CommonPrefixes?.forEach((x) => {
       const name = x.Prefix.slice(prefixLen);
       if (name) objects.push({ type: 'folder', name });
@@ -41,8 +51,12 @@ export async function getObjectListCmd(params: BucketParams) {
 }
 
 // object 업로드
-export async function uploadCmd({ Bucket, Key }: UploadParams, fileStream: PassThrough) {
-  const params = { Bucket, Key, Body: fileStream };
+export async function uploadObjectCmd({ bucket, filename }: UploadParams, fileStream: PassThrough) {
+  const params: PutObjectCommandInput = {
+    Bucket: bucket,
+    Key: filename,
+    Body: fileStream,
+  };
   try {
     const upload = new Upload({ client: s3Client, params });
     await upload.done();
@@ -55,14 +69,13 @@ export async function uploadCmd({ Bucket, Key }: UploadParams, fileStream: PassT
 }
 
 // object 삭제
-export async function deleteObjectCmd({ Bucket, asPath, objects }: DeleteFormdata) {
-  const data: DeleteObjectsCommandInput = {
-    Bucket: Bucket,
-    Delete: { Objects: objects.map((name) => ({ Key: `${asPath}${name}` })) },
+export async function deleteObjectCmd({ bucket, path, objects }: DeleteFormdata) {
+  const params: DeleteObjectsCommandInput = {
+    Bucket: bucket,
+    Delete: { Objects: objects.map((name) => ({ Key: `${path}${name}` })) },
   };
   try {
-    const res = await s3Client.send(new DeleteObjectsCommand(data));
-    console.log(res);
+    const data = await s3Client.send(new DeleteObjectsCommand(params));
     return { success: true };
   } catch (err) {
     console.error('\n---\x1B[34m deleteObjectCmd Error \x1B[0m---\n');

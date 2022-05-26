@@ -49,9 +49,8 @@ const Home: NextPage<HomeProps> = ({ bucket, asPath }) => {
     setChkSet(new Set());
     setChkAll(false);
     const params: BucketParams = {
-      Bucket: bucket,
-      Prefix: asPath,
-      Delimiter: '/',
+      bucket: bucket,
+      path: asPath,
     };
     const { data } = await axios.get<ResObjectList>('/api/s3-bucket/getobjectlist', { params });
     if (data.success) {

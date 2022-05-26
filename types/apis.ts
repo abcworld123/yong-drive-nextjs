@@ -1,21 +1,20 @@
 import type { Bucket } from '@aws-sdk/client-s3';
 import type { NextApiRequest } from 'next';
 
-// param types
+// param, formdata types
 export interface BucketParams {
-  Bucket: string;
-  Prefix: string;
-  Delimiter: string;
+  bucket: string;
+  path: string;
 }
 
 export interface UploadParams {
-  Bucket: string;
-  Key: string;
+  bucket: string;
+  filename: string;
 }
 
 export interface DeleteFormdata {
-  Bucket: string;
-  asPath: string;
+  bucket: string;
+  path: string;
   objects: string[];
 }
 
@@ -26,7 +25,7 @@ export interface ReqBucket extends OverrideNextApiRequest {
   query: BucketParams;
 }
 
-export interface ReqUpload extends OverrideNextApiRequest {
+export interface ReqUploadObject extends OverrideNextApiRequest {
   query: UploadParams;
 }
 

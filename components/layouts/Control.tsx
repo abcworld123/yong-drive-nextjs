@@ -18,8 +18,8 @@ export default function Control({ chkSet }: ControlProps): ControlFC {
   const uploadObject = useCallback(async (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.currentTarget.files[0];
     const params: UploadParams = {
-      Bucket: bucket,
-      Key: file.name,
+      bucket: bucket,
+      filename: file.name,
     };
     try {
       const { data } = await axios.post<ResDefault>('/api/s3-bucket/uploadobject', file, {
@@ -47,8 +47,8 @@ export default function Control({ chkSet }: ControlProps): ControlFC {
     )).isConfirmed;
     if (!isConfirmed) return;
     const formdata: DeleteFormdata = {
-      Bucket: bucket,
-      asPath: asPath,
+      bucket: bucket,
+      path: asPath,
       objects: [...chkSet],
     };
     try {
