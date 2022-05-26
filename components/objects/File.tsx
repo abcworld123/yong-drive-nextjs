@@ -1,5 +1,5 @@
 import Checkbox from '@mui/material/Checkbox';
-import { useContext, useEffect, useRef, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import FileIcon from '@svg/FIleIcon';
 import { HomeContext } from 'pages/[...path]';
 import type { FileFC, FileProps } from 'types/reactTypes';

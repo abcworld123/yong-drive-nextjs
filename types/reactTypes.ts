@@ -1,3 +1,5 @@
+import { ObjectInfo } from './apis';
+
 type checkHandler = (name: string, isChecked: boolean) => void;
 
 export interface HomeProps {
@@ -34,6 +36,15 @@ export interface FileProps {
 export interface SvgProps {
   size?: number;
   fill?: string;
+}
+
+export interface HomeContextProps {
+  bucket: string;
+  asPath: string;
+  objects: ObjectInfo[];
+  chkAll: boolean;
+  toggleChkAll: () => void;
+  reload: (asPath: string) => void;
 }
 
 export type ControlFC = React.ReactElement<ControlProps>;

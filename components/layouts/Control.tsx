@@ -6,7 +6,7 @@ import DownloadIcon from '@svg/DownloadIcon';
 import UploadIcon from '@svg/UploadIcon';
 import Button from 'components/buttons/MainButton';
 import { HomeContext } from 'pages/[...path]';
-import { UploadParams } from 'types/apis';
+import { ResDefault, UploadParams } from 'types/apis';
 import { alertError, alertSuccess } from 'utils/alerts';
 import type { ControlFC, ControlProps } from 'types/reactTypes';
 
@@ -22,10 +22,10 @@ export default function Control({ chkSet }: ControlProps): ControlFC {
       Key: file.name,
     };
     try {
-      const { data } = await axios.post('/api/s3-bucket/uploadobject', file, {
+      const { data } = await axios.post<ResDefault>('/api/s3-bucket/uploadobject', file, {
         params,
         headers: { 'Content-Type': 'multipart/form-data' },
-        onUploadProgress: (progressEvent: any) => {
+        onUploadProgress: (progressEvent: ProgressEvent) => {
           setProgVal(progressEvent.loaded / progressEvent.total);
         },
       });

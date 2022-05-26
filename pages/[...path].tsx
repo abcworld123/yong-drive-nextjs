@@ -7,15 +7,15 @@ import Objects from 'components/objects/Objects';
 import { alertError } from 'utils/alerts';
 import type { NextPage } from 'next';
 import type { BucketParams, ObjectInfo, ResObjectList } from 'types/apis';
-import type { HomeProps } from 'types/reactTypes';
+import type { HomeContextProps, HomeProps } from 'types/reactTypes';
 
-export const HomeContext = createContext({
+export const HomeContext = createContext<HomeContextProps>({
   bucket: '',
   asPath: '',
-  objects: [] as ObjectInfo[],
+  objects: [],
   chkAll: false,
-  toggleChkAll: null as () => void,
-  reload: null as (asPath: string) => void,
+  toggleChkAll: null,
+  reload: null,
 });
 
 const Home: NextPage<HomeProps> = ({ bucket, asPath }) => {

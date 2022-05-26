@@ -25,13 +25,15 @@ export interface ReqUpload extends OverrideNextApiRequest {
 }
 
 // response types
-export interface ResBucketList {
+export interface ResDefault {
   success: boolean;
+}
+
+export interface ResBucketList extends ResDefault {
   buckets?: Bucket[];
 }
 
-export interface ResObjectList {
-  success: boolean;
+export interface ResObjectList extends ResDefault {
   objects?: ObjectInfo[];
 }
 
