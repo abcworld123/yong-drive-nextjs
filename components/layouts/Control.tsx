@@ -6,8 +6,8 @@ import DownloadIcon from '@svg/DownloadIcon';
 import UploadIcon from '@svg/UploadIcon';
 import Button from 'components/buttons/MainButton';
 import { HomeContext } from 'pages/[...path]';
-import { ResDefault, UploadParams } from 'types/apis';
-import { alertError, alertSuccess } from 'utils/alerts';
+import { DeleteFormdata, ResDefault, UploadParams } from 'types/apis';
+import { alertError, alertSuccess, alertWarn } from 'utils/alerts';
 import type { ControlFC, ControlProps } from 'types/reactTypes';
 
 export default function Control({ chkSet }: ControlProps): ControlFC {
@@ -15,7 +15,7 @@ export default function Control({ chkSet }: ControlProps): ControlFC {
   const [progVal, setProgVal] = useState(0);
   const inputFile = useRef<HTMLInputElement>(null);
 
-  const upload = useCallback(async (e: React.ChangeEvent<HTMLInputElement>) => {
+  const uploadObject = useCallback(async (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.currentTarget.files[0];
     const params: UploadParams = {
       Bucket: bucket,
@@ -40,6 +40,28 @@ export default function Control({ chkSet }: ControlProps): ControlFC {
     }
   }, [bucket, reload, asPath]);
 
+  const deleteObject = useCallback(async () => {
+    const isConfirmed = (await alertWarn(
+      '정말 삭제하시겠습니까?',
+      '삭제된 항목은 복구할 수 없습니다.',
+    )).isConfirmed;
+    if (!isConfirmed) return;
+    const formdata: DeleteFormdata = {
+      Bucket: bucket,
+      asPath: asPath,
+      objects: [...chkSet],
+    };
+    try {
+      const { data } = await axios.post<ResDefault>('/api/s3-bucket/deleteobject', formdata);
+      if (!data.success) throw new Error('삭제 오류');
+      alertSuccess('삭제 성공!');
+      reload(asPath);
+    } catch (err) {
+      alertError(err.message);
+      console.error(err);
+    }
+  }, [bucket, asPath, chkSet]);
+
   return (
     <div className="flex gap-5">
       <Button onClick={toggleChkAll}>
@@ -60,7 +82,7 @@ export default function Control({ chkSet }: ControlProps): ControlFC {
       <Button
         className={chkSet.size ? '' : 'hidden'}
         startIcon={<DownloadIcon size={24} fill="#444" />}
-        onClick={() => inputFile.current.click()}
+        onClick={() => {}}
       >
         다운로드
       </Button>
@@ -68,7 +90,7 @@ export default function Control({ chkSet }: ControlProps): ControlFC {
       <Button
         className={chkSet.size ? '' : 'hidden'}
         startIcon={<DeleteIcon size={24} fill="#444" />}
-        onClick={() => inputFile.current.click()}
+        onClick={deleteObject}
       >
         삭제
       </Button>
@@ -77,7 +99,7 @@ export default function Control({ chkSet }: ControlProps): ControlFC {
         type="file"
         className="hidden"
         ref={inputFile}
-        onChange={upload}
+        onChange={uploadObject}
       />
       <progress value={progVal} />
     </div>

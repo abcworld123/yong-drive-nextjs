@@ -1,8 +1,8 @@
 import { PassThrough } from 'stream';
-import { ListObjectsCommand, ListBucketsCommand } from '@aws-sdk/client-s3';
+import { ListObjectsCommand, ListBucketsCommand, DeleteObjectsCommand, DeleteObjectsCommandInput } from '@aws-sdk/client-s3';
 import { Upload } from '@aws-sdk/lib-storage';
 import { s3Client } from '@s3/s3Client';
-import type { BucketParams, ObjectInfo, UploadParams } from 'types/apis';
+import type { BucketParams, DeleteFormdata, ObjectInfo, UploadParams } from 'types/apis';
 
 // bucket 리스트 가져오기
 export async function getBucketListCmd() {
@@ -49,6 +49,23 @@ export async function uploadCmd({ Bucket, Key }: UploadParams, fileStream: PassT
     return { success: true };
   } catch (err) {
     console.error('\n---\x1B[34m uploadCmd Error \x1B[0m---\n');
+    console.error(err);
+    return { success: false };
+  }
+}
+
+// object 삭제
+export async function deleteObjectCmd({ Bucket, asPath, objects }: DeleteFormdata) {
+  const data: DeleteObjectsCommandInput = {
+    Bucket: Bucket,
+    Delete: { Objects: objects.map((name) => ({ Key: `${asPath}${name}` })) },
+  };
+  try {
+    const res = await s3Client.send(new DeleteObjectsCommand(data));
+    console.log(res);
+    return { success: true };
+  } catch (err) {
+    console.error('\n---\x1B[34m deleteObjectCmd Error \x1B[0m---\n');
     console.error(err);
     return { success: false };
   }

@@ -13,6 +13,12 @@ export interface UploadParams {
   Key: string;
 }
 
+export interface DeleteFormdata {
+  Bucket: string;
+  asPath: string;
+  objects: string[];
+}
+
 // request types
 type OverrideNextApiRequest = Omit<NextApiRequest, 'query'>;
 
@@ -22,6 +28,10 @@ export interface ReqBucket extends OverrideNextApiRequest {
 
 export interface ReqUpload extends OverrideNextApiRequest {
   query: UploadParams;
+}
+
+export interface ReqDeleteObjects extends OverrideNextApiRequest {
+  body: DeleteFormdata;
 }
 
 // response types
