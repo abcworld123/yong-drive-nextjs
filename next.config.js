@@ -4,7 +4,7 @@ const nextConfig = {
   webpack: (config, { buildId, dev, isServer, defaultLoaders, webpack }) => {
     config.resolve.alias = {
       ...config.resolve.alias,
-      '@svg': `${__dirname}/components/assets/svg`,
+      'svg': `${__dirname}/components/assets/svg`,
     };
     return config;
   },

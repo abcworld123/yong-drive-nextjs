@@ -1,9 +1,9 @@
 import axios from 'axios';
 import { useRouter } from 'next/router';
 import { createContext, useCallback, useEffect, useState } from 'react';
-import Loader from '@svg/Loader';
 import Control from 'components/layouts/Control';
 import Objects from 'components/objects/Objects';
+import Loader from 'svg/Loader';
 import { alertError } from 'utils/alerts';
 import type { NextPage } from 'next';
 import type { BucketParams, ObjectInfo, ResObjectList } from 'types/apis';

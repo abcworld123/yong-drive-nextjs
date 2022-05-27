@@ -1,4 +1,4 @@
-import { deleteObjectCmd } from '@s3/bucketCmds';
+import { deleteObjectCmd } from 's3/bucketCmds';
 import type { NextApiResponse } from 'next';
 import type { ReqDeleteObjects, ResDefault } from 'types/apis';
 

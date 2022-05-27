@@ -1,13 +1,13 @@
 import { Checkbox } from '@mui/material';
 import axios from 'axios';
 import { useCallback, useContext, useRef, useState } from 'react';
-import DeleteIcon from '@svg/DeleteIcon';
-import DownloadIcon from '@svg/DownloadIcon';
-import UploadIcon from '@svg/UploadIcon';
 import Button from 'components/buttons/MainButton';
 import { HomeContext } from 'pages/[bucket]/[[...path]]';
-import { DeleteFormdata, ResDefault, UploadParams } from 'types/apis';
+import DeleteIcon from 'svg/DeleteIcon';
+import DownloadIcon from 'svg/DownloadIcon';
+import UploadIcon from 'svg/UploadIcon';
 import { alertError, alertSuccess, alertWarn } from 'utils/alerts';
+import type { DeleteFormdata, ResDefault, UploadParams } from 'types/apis';
 import type { ControlFC, ControlProps } from 'types/reactTypes';
 
 export default function Control({ chkSet }: ControlProps): ControlFC {

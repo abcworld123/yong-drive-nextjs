@@ -1,4 +1,4 @@
-import { getBucketListCmd } from '@s3/bucketCmds';
+import { getBucketListCmd } from 's3/bucketCmds';
 import type { NextApiRequest, NextApiResponse } from 'next';
 import type { ResBucketList } from 'types/apis';
 
