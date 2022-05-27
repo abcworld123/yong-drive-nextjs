@@ -2,9 +2,9 @@ import Checkbox from '@mui/material/Checkbox';
 import { useContext, useEffect, useState } from 'react';
 import { HomeContext } from 'pages/[bucket]/[[...path]]';
 import FileIcon from 'svg/FIleIcon';
-import type { FileFC, FileProps } from 'types/reactTypes';
+import type { FileProps } from 'types/props';
 
-export default function File({ name, size, click }: FileProps): FileFC {
+export default function File({ name, size, click }: FileProps) {
   const { chkAll } = useContext(HomeContext);
   const [checked, setChecked] = useState(false);
 

@@ -1,5 +1,6 @@
 import type { Bucket } from '@aws-sdk/client-s3';
 import type { NextApiRequest } from 'next';
+import { ObjectInfo } from './services';
 
 // param, formdata types
 export interface BucketParams {
@@ -45,11 +46,4 @@ export interface ResBucketList extends ResDefault {
 
 export interface ResObjectList extends ResDefault {
   objects?: ObjectInfo[];
-}
-
-// etc
-export interface ObjectInfo {
-  type: string;
-  name: string;
-  size?: number;
 }

@@ -9,7 +9,8 @@ import {
 } from '@aws-sdk/client-s3';
 import { Upload } from '@aws-sdk/lib-storage';
 import { s3Client } from 's3/s3Client';
-import type { BucketParams, DeleteFormdata, ObjectInfo, UploadParams } from 'types/apis';
+import type { BucketParams, DeleteFormdata, UploadParams } from 'types/apis';
+import { ObjectInfo } from 'types/services';
 
 // bucket 리스트 가져오기
 export async function getBucketListCmd() {

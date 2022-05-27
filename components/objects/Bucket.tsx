@@ -1,7 +1,7 @@
 import BucketIcon from 'svg/BucketIcon';
-import type { BucketFC, BucketProps } from 'types/reactTypes';
+import type { BucketProps } from 'types/props';
 
-export default function Bucket({ name, dblClick }: BucketProps): BucketFC {
+export default function Bucket({ name, dblClick }: BucketProps) {
   return (
     <div>
       <div className="object-icon" onDoubleClick={() => dblClick(name)}>

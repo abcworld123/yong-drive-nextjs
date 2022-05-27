@@ -1,4 +1,4 @@
-import { ObjectInfo } from './apis';
+import { ObjectInfo } from './services';
 
 type checkHandler = (name: string, isChecked: boolean) => void;
 
@@ -13,7 +13,7 @@ export interface ControlProps {
 
 export interface BucketProps {
   name: string;
-  dblClick: (bucket: string) => void;
+  dblClick: (bucketName: string) => void;
 }
 
 export interface ObjectProps {
@@ -46,9 +46,3 @@ export interface HomeContextProps {
   toggleChkAll: () => void;
   reload: () => void;
 }
-
-export type ControlFC = React.ReactElement<ControlProps>;
-export type BucketFC = React.ReactElement<BucketProps>;
-export type FolderFC = React.ReactElement<FolderProps>;
-export type FileFC = React.ReactElement<FileProps>;
-export type SvgFC = React.ReactElement<SvgProps>;

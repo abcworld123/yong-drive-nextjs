@@ -5,11 +5,10 @@ import Bucket from 'components/objects/Bucket';
 import { alertError } from 'utils/alerts';
 import type { NextPage } from 'next';
 import type { ResBucketList } from 'types/apis';
-import type { BucketFC } from 'types/reactTypes';
 
 const BucketSelectPage: NextPage = () => {
   const router = useRouter();
-  const [objects, setObjects] = useState<BucketFC[]>([]);
+  const [objects, setObjects] = useState<React.ReactElement[]>([]);
 
   const dblClick = useCallback((bucket: string) => {
     router.push(`/${bucket}`);
@@ -18,7 +17,7 @@ const BucketSelectPage: NextPage = () => {
   const reload = useCallback(async () => {
     const { data } = await axios.get<ResBucketList>('/api/s3/bucket/get');
     if (data.success) {
-      const arr = [];
+      const arr: React.ReactElement[] = [];
       data.buckets.forEach(({ Name: name }) => {
         arr.push(<Bucket key={name} name={name} dblClick={dblClick} />);
       });

@@ -6,9 +6,9 @@ import Objects from 'components/objects/Objects';
 import Loader from 'svg/Loader';
 import { alertError } from 'utils/alerts';
 import type { NextPage } from 'next';
-import type { BucketParams, ObjectInfo, ResObjectList } from 'types/apis';
-import type { HomeServerSideContext } from 'types/nextTypes';
-import type { HomeContextProps, HomeProps } from 'types/reactTypes';
+import type { BucketParams, ResObjectList } from 'types/apis';
+import type { HomeContextProps, HomeProps } from 'types/props';
+import type { HomeServerSideContext, ObjectInfo } from 'types/services';
 
 export const HomeContext = createContext<HomeContextProps>({
   bucket: '',

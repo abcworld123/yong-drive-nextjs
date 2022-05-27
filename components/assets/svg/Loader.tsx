@@ -1,6 +1,6 @@
-import type { SvgFC, SvgProps } from 'types/reactTypes';
+import type { SvgProps } from 'types/props';
 
-export default function Loader({ size, fill }: SvgProps): SvgFC {
+export default function Loader({ size, fill }: SvgProps) {
   return (
     <svg xmlns="http://www.w3.org/2000/svg" className={'absolute top-1/2 left-1/2 -ml-[75px] -mt-[75px]'} width={size} height={size} viewBox="0 0 100 100" fill={fill} preserveAspectRatio="xMidYMid">
       <g transform="translate(20 50)">

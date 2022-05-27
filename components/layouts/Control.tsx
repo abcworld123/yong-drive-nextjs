@@ -8,9 +8,9 @@ import DownloadIcon from 'svg/DownloadIcon';
 import UploadIcon from 'svg/UploadIcon';
 import { alertError, alertSuccess, alertWarn } from 'utils/alerts';
 import type { DeleteFormdata, ResDefault, UploadParams } from 'types/apis';
-import type { ControlFC, ControlProps } from 'types/reactTypes';
+import type { ControlProps } from 'types/props';
 
-export default function Control({ chkSet }: ControlProps): ControlFC {
+export default function Control({ chkSet }: ControlProps) {
   const { bucket, path, objects, chkAll, reload, toggleChkAll } = useContext(HomeContext);
   const [progVal, setProgVal] = useState(0);
   const inputFile = useRef<HTMLInputElement>(null);
