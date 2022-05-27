@@ -10,7 +10,7 @@ export default function Folder({ name, click, dblClick }: FolderProps): FolderFC
 
   useEffect(() => {
     click(name, checked);
-  }, [name, checked]);
+  }, [name, checked]);  // eslint-disable-line react-hooks/exhaustive-deps
 
   useEffect(() => {
     setChecked(chkAll);
@@ -19,7 +19,7 @@ export default function Folder({ name, click, dblClick }: FolderProps): FolderFC
   return (
     <div>
       <div className={`object-icon ${checked ? 'object-icon-checked' : ''}`} onDoubleClick={() => dblClick(name)}>
-        <Checkbox className="-translate-x-14 -translate-y-14" sx={{position: 'absolute'}} checked={checked} onClick={() => setChecked(!checked)} />
+        <Checkbox className="-translate-x-14 -translate-y-14" sx={{ position: 'absolute' }} checked={checked} onClick={() => setChecked(!checked)} />
         <FolderIcon size={88} fill="#f9cd52" />
       </div>
       <div className="text-sm">
