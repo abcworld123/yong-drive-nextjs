@@ -7,6 +7,7 @@ import Loader from 'svg/Loader';
 import { alertError } from 'utils/alerts';
 import type { NextPage } from 'next';
 import type { BucketParams, ObjectInfo, ResObjectList } from 'types/apis';
+import type { HomeServerSideContext } from 'types/nextTypes';
 import type { HomeContextProps, HomeProps } from 'types/reactTypes';
 
 export const HomeContext = createContext<HomeContextProps>({
@@ -34,10 +35,11 @@ const Home: NextPage<HomeProps> = ({ bucket, path }) => {
     const has = chkSet.has(name);
     if (!has && isChecked) {
       chkSet.add(name);
+      setChkSet(new Set(chkSet));
     } else if (has && !isChecked) {
       chkSet.delete(name);
+      setChkSet(new Set(chkSet));
     }
-    setChkSet(new Set(chkSet));
   }, [chkSet]);
 
   const toggleChkAll = useCallback(() => {
@@ -64,7 +66,7 @@ const Home: NextPage<HomeProps> = ({ bucket, path }) => {
   }, [reload]);
 
   return (
-    <HomeContext.Provider value={{ bucket, path, objects, chkAll, reload, toggleChkAll }}>
+    <HomeContext.Provider value={{ bucket, path, objects, chkAll, toggleChkAll, reload }}>
       <main>
         {
           isLoading
@@ -81,11 +83,11 @@ const Home: NextPage<HomeProps> = ({ bucket, path }) => {
   );
 };
 
-Home.getInitialProps = (ctx) => {
-  const bucket = ctx.query.bucket as string;
-  const paths = ctx.query.path as string[];
+export function getServerSideProps(context: HomeServerSideContext) {
+  const bucket = context.query.bucket;
+  const paths = context.query.path;
   const path = paths ? paths.map((path) => `${path}/`).join('') : '';
-  return { bucket, path };
-};
+  return { props: { bucket, path } };
+}
 
 export default Home;
