@@ -1,6 +1,6 @@
 import { PassThrough } from 'stream';
 import { uploadObjectCmd } from 's3/bucketCmds';
-import type { NextApiResponse } from 'next';
+import type { NextApiResponse, PageConfig } from 'next';
 import type { ReqUploadObject, ResDefault } from 'types/apis';
 
 export default async function handler(req: ReqUploadObject, res: NextApiResponse<ResDefault>) {
@@ -11,4 +11,8 @@ export default async function handler(req: ReqUploadObject, res: NextApiResponse
   res.status(200).json(data);
 }
 
-export const config = { api: { bodyParser: false } };
+export const config: PageConfig = {
+  api: {
+    bodyParser: false,
+  },
+};

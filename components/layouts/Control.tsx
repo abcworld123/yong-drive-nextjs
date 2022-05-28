@@ -2,16 +2,18 @@ import { Checkbox } from '@mui/material';
 import axios from 'axios';
 import { useCallback, useContext, useRef, useState } from 'react';
 import Button from 'components/buttons/MainButton';
+import Downloader from 'components/utils/Downloader';
 import { HomeContext } from 'pages/[bucket]/[[...path]]';
 import DeleteIcon from 'svg/DeleteIcon';
 import DownloadIcon from 'svg/DownloadIcon';
 import UploadIcon from 'svg/UploadIcon';
 import { alertError, alertSuccess, alertWarn } from 'utils/alerts';
-import type { DeleteFormdata, ResDefault, UploadParams } from 'types/apis';
+import type { DeleteFormdata, DownloadFormdata, ResDefault, UploadParams } from 'types/apis';
 import type { ControlProps } from 'types/props';
 
 export default function Control({ chkSet }: ControlProps) {
   const { bucket, path, objects, chkAll, reload, toggleChkAll } = useContext(HomeContext);
+  const [downloadFormdata, setDownloadFormdata] = useState<DownloadFormdata>(null);
   const [progVal, setProgVal] = useState(0);
   const inputFile = useRef<HTMLInputElement>(null);
 
@@ -40,6 +42,21 @@ export default function Control({ chkSet }: ControlProps) {
       inputFile.current.value = inputFile.current.defaultValue;
     }
   }, [bucket, reload, path]);
+
+  const downloadObject = useCallback(async () => {
+    const filenames = [...chkSet];
+    const formdata: DownloadFormdata = {
+      bucket: bucket,
+      path: path,
+      filenames: filenames,
+    };
+    try {
+      setDownloadFormdata(formdata);
+      // todo iframe post 500 error?
+    } catch (err) {
+      console.error(err);
+    }
+  }, [bucket, chkSet, path]);
 
   const deleteObject = useCallback(async () => {
     const isConfirmed = (await alertWarn(
@@ -83,10 +100,11 @@ export default function Control({ chkSet }: ControlProps) {
       <Button
         className={chkSet.size ? '' : 'hidden'}
         startIcon={<DownloadIcon size={24} fill="#444" />}
-        onClick={() => {}}
+        onClick={downloadObject}
       >
         다운로드
       </Button>
+      <Downloader formdata={downloadFormdata} />
 
       <Button
         className={chkSet.size ? '' : 'hidden'}

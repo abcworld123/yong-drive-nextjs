@@ -6,16 +6,17 @@ import {
   DeleteObjectsCommandInput,
   PutObjectCommandInput,
   ListObjectsCommandInput,
+  GetObjectCommand,
 } from '@aws-sdk/client-s3';
 import { Upload } from '@aws-sdk/lib-storage';
 import { s3Client } from 's3/s3Client';
-import type { BucketParams, DeleteFormdata, UploadParams } from 'types/apis';
 import { ObjectInfo } from 'types/services';
+import type { BucketParams, DeleteFormdata, UploadParams } from 'types/apis';
 
 // bucket 리스트 가져오기
 export async function getBucketListCmd() {
   try {
-    const data = (await s3Client.send(new ListBucketsCommand({})));
+    const data = await s3Client.send(new ListBucketsCommand({}));
     const buckets = data.Buckets;
     return { success: true, buckets: buckets || [] };
   } catch (err) {
@@ -66,6 +67,21 @@ export async function uploadObjectCmd({ bucket, path, filename }: UploadParams, 
   } catch (err) {
     console.error('\n---\x1B[34m uploadCmd Error \x1B[0m---\n');
     console.error(err);
+    return { success: false };
+  }
+}
+
+// object 다운로드
+export async function downloadObjectCmd({ bucket, path, filename }: UploadParams) {  // todo filename -> object
+  const params: PutObjectCommandInput = {
+    Bucket: bucket,
+    Key: `${path}${filename}`,
+  };
+  try {
+    const data = await s3Client.send(new GetObjectCommand(params));
+    return { success: true, body: data.Body, size: data.ContentLength };
+  } catch (err) {
+    console.log('Error', err);
     return { success: false };
   }
 }
