@@ -12,7 +12,13 @@ import {
 import { Upload } from '@aws-sdk/lib-storage';
 import { s3Client } from 's3/s3Client';
 import { ObjectInfo } from 'types/services';
-import type { BucketParams, DeleteFormdata, DownloadServiceFormdata, DownloadsServiceFormdata, UploadParams } from 'types/apis';
+import type {
+  DeleteFormdata,
+  UploadParams,
+  BucketParams,
+  DownloadSingleFormdata,
+  DownloadRecursiveParams,
+} from 'types/apis';
 
 // bucket 리스트 가져오기
 export async function getBucketListCmd() {
@@ -72,8 +78,8 @@ export async function uploadObjectCmd({ bucket, path, filename }: UploadParams, 
   }
 }
 
-// object 다운로드
-export async function downloadObjectCmd({ bucket, path, filename }: DownloadServiceFormdata) {  // todo filename -> object
+// single file 다운로드
+export async function downloadFileCmd({ bucket, path, filename }: DownloadSingleFormdata) {
   const params: PutObjectCommandInput = {
     Bucket: bucket,
     Key: `${path}${filename}`,
@@ -91,19 +97,20 @@ export async function downloadObjectCmd({ bucket, path, filename }: DownloadServ
 }
 
 // multiple objects 다운로드
-export async function* downloadRecursiveCmd({ bucket, basePath, curPath, filenames }: DownloadsServiceFormdata & { basePath: string }) {
-  for (const filename of filenames) {
-    const folderPath = curPath + filename;
+export async function* downloadRecursiveCmd({ bucket, baseSrc, path, filenames }: DownloadRecursiveParams) {
+  for (let filename of filenames) {
+    filename = path + filename;
     try {
       if (filename.at(-1) === '/') {  // 폴더
-        const { success, objects } = await getObjectListCmd({ bucket, path: basePath + folderPath });
+        const foldername = filename;
+        const { success, objects } = await getObjectListCmd({ bucket, path: baseSrc + foldername });
         if (!success) throw new Error();
         const filenamesInFoler = objects.map((object) => object.name);
-        yield* downloadRecursiveCmd({ bucket, basePath: basePath, curPath: folderPath, filenames: filenamesInFoler });
+        yield* downloadRecursiveCmd({ bucket, baseSrc, path: foldername, filenames: filenamesInFoler });
       } else {  // 파일
-        const { success, body } = await downloadObjectCmd({ bucket, path: basePath, filename: folderPath });
+        const { success, body } = await downloadFileCmd({ bucket, path: baseSrc, filename });
         if (!success) throw new Error();
-        yield { success: true, body, filename: curPath + filename };
+        yield { success: true, body, filename };
       }
     } catch (err) {
       yield { success: false };

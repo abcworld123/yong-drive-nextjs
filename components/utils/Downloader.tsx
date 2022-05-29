@@ -12,13 +12,14 @@ export default function Downloader({ formdata }: { formdata: DownloadFormdata })
   return (
     <>{
       formdata ? (
-        <iframe className="hidden" name="iframe">
-          <form ref={downloader} action="/api/s3/object/download" method="POST" target="iframe">
+        <>
+          <iframe className="hidden" name="iframe" />
+          <form className="hidden" ref={downloader} action="/api/s3/object/download" method="POST" target="iframe">
             <input type="hidden" name="bucket" value={bucket} />
             <input type="hidden" name="path" value={path} />
-            {filenames.map((filename) => <input type="hidden" name="filenames" value={filename} />)}
+            <input type="hidden" name="filenames" value={JSON.stringify(filenames)} />
           </form>
-        </iframe>
+        </>
       ) : <></>
     }</>
   );

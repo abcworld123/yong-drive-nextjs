@@ -1,5 +1,5 @@
 export {};
 
 declare global {
-  type MulterFile = Express.Multer.file;
+  type Override<T, U> = Pick<T, Exclude<keyof T, keyof U>> & U;
 }

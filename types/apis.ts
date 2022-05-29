@@ -17,20 +17,20 @@ export interface UploadParams {
 export interface DownloadFormdata {
   bucket: string;
   path: string;
-  filenames: string | string[];
+  filenames: string[];
 }
 
-export interface DownloadServiceFormdata {
+export interface DownloadSingleFormdata {
   bucket: string;
   path: string;
   filename: string;
 }
 
-export interface DownloadsServiceFormdata {
+export interface DownloadRecursiveParams {
   bucket: string;
-  basePath: string;
-  curPath: string;
-  filenames: string | string[];
+  baseSrc: string;
+  path: string;
+  filenames: string[];
 }
 
 export interface DeleteFormdata {
@@ -51,7 +51,7 @@ export interface ReqUploadObject extends OverrideNextApiRequest {
 }
 
 export interface ReqDownloadObjects extends OverrideNextApiRequest {
-  body: DownloadFormdata;
+  body: Override<DownloadFormdata, { filenames: string }>;
 }
 
 export interface ReqDeleteObjects extends OverrideNextApiRequest {
