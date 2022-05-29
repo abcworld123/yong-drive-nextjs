@@ -17,7 +17,20 @@ export interface UploadParams {
 export interface DownloadFormdata {
   bucket: string;
   path: string;
-  filenames: string[];
+  filenames: string | string[];
+}
+
+export interface DownloadServiceFormdata {
+  bucket: string;
+  path: string;
+  filename: string;
+}
+
+export interface DownloadsServiceFormdata {
+  bucket: string;
+  basePath: string;
+  curPath: string;
+  filenames: string | string[];
 }
 
 export interface DeleteFormdata {

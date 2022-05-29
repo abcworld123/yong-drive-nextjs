@@ -24,7 +24,7 @@ export default function Folder({ name, click, dblClick }: FolderProps) {
       </div>
       <div className="text-sm">
         <div className="text-center mt-5">
-          {name}
+          {name.slice(0, -1)}
         </div>
       </div>
     </div>

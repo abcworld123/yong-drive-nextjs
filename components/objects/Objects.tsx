@@ -11,7 +11,7 @@ export default function Objects({ click, dblClick }: ObjectProps) {
 
   objects.forEach(({ type, name, size }) => {
     if (type === 'folder') {
-      arr.push(<Folder key={name} name={name.slice(0, -1)} click={click} dblClick={dblClick} />);
+      arr.push(<Folder key={name} name={name} click={click} dblClick={dblClick} />);
     } else {
       arr.push(<File key={name} name={name} click={click} size={convUnit(size)} />);
     }
