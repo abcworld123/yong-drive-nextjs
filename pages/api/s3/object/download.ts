@@ -47,15 +47,16 @@ export default async function handler(req: ReqDownloadObjects, res: NextApiRespo
   if (filenames.length === 1) {
     const filename = filenames[0];
     if (filename.at(-1) !== '/') {  // single file
-      sendSingleFile(res, { bucket, path, filename });
+      await sendSingleFile(res, { bucket, path, filename });
     } else {  // single folder
       const zipName = encodeURI(filename.slice(0, -1));
-      sendSingleFolder(res, { bucket, path, filename }, zipName);
+      await sendSingleFolder(res, { bucket, path, filename }, zipName);
     }
   } else {  // multiple
     const zipName = path ? encodeURI(path.split('/').at(-2)) : 'index';
-    sendZip(res, { bucket, path, filenames }, zipName);
+    await sendZip(res, { bucket, path, filenames }, zipName);
   }
+  res.on('finish', res.end);
 }
 
 export const config: PageConfig = {
