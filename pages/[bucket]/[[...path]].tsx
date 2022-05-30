@@ -53,16 +53,14 @@ const Home: NextPage<HomeProps> = ({ bucket, path }) => {
 
   return (
     <main>
-      {
-        isLoading
-          ? <Loader size={150} />
-          : (
-            <div className="main-container">
-              <Control chkSet={chkSet} />
-              <Objects click={checkHandler} dblClick={dblClick} />
-            </div>
-          )
-      }
+      <div className="main-container">
+        <Control chkSet={chkSet} />
+        {
+          isLoading
+            ? <Loader size={150} />
+            : <Objects click={checkHandler} dblClick={dblClick} />
+        }
+      </div>
     </main>
   );
 };
