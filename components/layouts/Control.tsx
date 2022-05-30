@@ -1,9 +1,9 @@
 import { Checkbox } from '@mui/material';
 import axios from 'axios';
-import { useCallback, useContext, useRef, useState } from 'react';
+import { useCallback, useRef, useState } from 'react';
 import Button from 'components/buttons/MainButton';
 import Downloader from 'components/utils/Downloader';
-import { HomeContext } from 'pages/[bucket]/[[...path]]';
+import useHomeStore from 'hooks/store/useHomeStore';
 import DeleteIcon from 'svg/DeleteIcon';
 import DownloadIcon from 'svg/DownloadIcon';
 import UploadIcon from 'svg/UploadIcon';
@@ -12,7 +12,7 @@ import type { DeleteFormdata, DownloadFormdata, ResDefault, UploadParams } from 
 import type { ControlProps } from 'types/props';
 
 export default function Control({ chkSet }: ControlProps) {
-  const { bucket, path, objects, chkAll, reload, toggleChkAll } = useContext(HomeContext);
+  const { bucket, path, chkAll, toggleChkAll, reload, objects } = useHomeStore();
   const [downloadFormdata, setDownloadFormdata] = useState<DownloadFormdata>(null);
   const [progVal, setProgVal] = useState(0);
   const inputFile = useRef<HTMLInputElement>(null);
@@ -79,7 +79,6 @@ export default function Control({ chkSet }: ControlProps) {
       console.error(err);
     }
   }, [bucket, chkSet, path, reload]);
-
   return (
     <div className="flex gap-5">
       <Button onClick={toggleChkAll}>

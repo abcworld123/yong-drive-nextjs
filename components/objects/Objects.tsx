@@ -1,12 +1,11 @@
-import { useContext } from 'react';
 import File from 'components/objects/File';
 import Folder from 'components/objects/Folder';
-import { HomeContext } from 'pages/[bucket]/[[...path]]';
+import useHomeStore from 'hooks/store/useHomeStore';
 import convUnit from 'utils/convUnit';
 import type { ObjectProps } from 'types/props';
 
 export default function Objects({ click, dblClick }: ObjectProps) {
-  const { objects } = useContext(HomeContext);
+  const { objects } = useHomeStore();
   const arr: React.ReactElement[] = [];
 
   objects.forEach(({ type, name, size }) => {
