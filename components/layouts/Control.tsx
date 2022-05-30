@@ -7,7 +7,8 @@ import useHomeStore from 'hooks/store/useHomeStore';
 import DeleteIcon from 'svg/DeleteIcon';
 import DownloadIcon from 'svg/DownloadIcon';
 import UploadIcon from 'svg/UploadIcon';
-import { alertError, alertSuccess, alertWarn } from 'utils/alerts';
+import { alertError, alertWarn } from 'utils/alerts';
+import { toastSuccess } from 'utils/toasts';
 import type { DeleteFormdata, DownloadFormdata, ResDefault, UploadParams } from 'types/apis';
 import type { ControlProps } from 'types/props';
 
@@ -33,7 +34,7 @@ export default function Control({ chkSet }: ControlProps) {
         },
       });
       if (!data.success) throw new Error('업로드 오류');
-      alertSuccess('업로드 성공!');
+      toastSuccess('업로드 완료!');
       reload();
     } catch (err) {
       alertError(err.message);
@@ -72,7 +73,7 @@ export default function Control({ chkSet }: ControlProps) {
     try {
       const { data } = await axios.post<ResDefault>('/api/s3/object/delete', formdata);
       if (!data.success) throw new Error('삭제 오류');
-      alertSuccess('삭제 성공!');
+      toastSuccess('삭제 완료!');
       reload();
     } catch (err) {
       alertError(err.message);
