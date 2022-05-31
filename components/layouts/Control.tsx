@@ -52,7 +52,7 @@ export default function Control({ chkSet }: ControlProps) {
     } finally {
       inputFile.current.value = inputFile.current.defaultValue;
     }
-  }, [bucket, reload, path, objects]);
+  }, [bucket, reload, path]);
 
   // download
   const downloadObject = useCallback(async () => {
