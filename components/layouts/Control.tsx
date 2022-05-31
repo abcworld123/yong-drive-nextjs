@@ -1,5 +1,6 @@
 import { Checkbox } from '@mui/material';
 import axios from 'axios';
+import { Circle } from 'rc-progress';
 import { useCallback, useRef, useState } from 'react';
 import Button from 'components/buttons/MainButton';
 import Downloader from 'components/utils/Downloader';
@@ -15,26 +16,35 @@ import type { ControlProps } from 'types/props';
 export default function Control({ chkSet }: ControlProps) {
   const { bucket, path, chkAll, toggleChkAll, reload, objects } = useHomeStore();
   const [downloadFormdata, setDownloadFormdata] = useState<DownloadFormdata>(null);
+  const [isUploading, setIsUploading] = useState(false);
   const [progVal, setProgVal] = useState(0);
   const inputFile = useRef<HTMLInputElement>(null);
 
+  // upload
   const uploadObject = useCallback(async (e: React.ChangeEvent<HTMLInputElement>) => {
-    const file = e.currentTarget.files[0];
-    const params: UploadParams = {
-      bucket: bucket,
-      path: path,
-      filename: file.name,
-    };
+    setIsUploading(true);
+    const files = [...e.currentTarget.files];
+    const totalSize = files.reduce((a, b) => a + b.size, 0);
+    let curSize = 0;
     try {
-      const { data } = await axios.post<ResDefault>('/api/s3/object/upload', file, {
-        params,
-        headers: { 'Content-Type': 'multipart/form-data' },
-        onUploadProgress: (progressEvent: ProgressEvent) => {
-          setProgVal(progressEvent.loaded / progressEvent.total);
-        },
-      });
-      if (!data.success) throw new Error('업로드 오류');
+      for (const file of files) {
+        const params: UploadParams = {
+          bucket: bucket,
+          path: path,
+          filename: file.name,
+        };
+        const { data } = await axios.post<ResDefault>('/api/s3/object/upload', file, {
+          params,
+          headers: { 'Content-Type': 'multipart/form-data' },
+          onUploadProgress: (progressEvent: ProgressEvent) => {
+            setProgVal(Math.ceil(((curSize + progressEvent.loaded) * 100 / totalSize)));
+          },
+        });
+        if (!data.success) throw new Error('업로드 오류');
+        curSize += file.size;
+      }
       toastSuccess('업로드 완료!');
+      setIsUploading(false);
       reload();
     } catch (err) {
       alertError(err.message);
@@ -42,8 +52,9 @@ export default function Control({ chkSet }: ControlProps) {
     } finally {
       inputFile.current.value = inputFile.current.defaultValue;
     }
-  }, [bucket, reload, path]);
+  }, [bucket, reload, path, objects]);
 
+  // download
   const downloadObject = useCallback(async () => {
     const filenames = [...chkSet];
     const formdata: DownloadFormdata = {
@@ -59,6 +70,7 @@ export default function Control({ chkSet }: ControlProps) {
     }
   }, [bucket, chkSet, path]);
 
+  // delete
   const deleteObject = useCallback(async () => {
     const isConfirmed = (await alertWarn(
       '정말 삭제하시겠습니까?',
@@ -80,6 +92,7 @@ export default function Control({ chkSet }: ControlProps) {
       console.error(err);
     }
   }, [bucket, chkSet, path, reload]);
+
   return (
     <div className="flex gap-5">
       <Button onClick={toggleChkAll}>
@@ -119,8 +132,17 @@ export default function Control({ chkSet }: ControlProps) {
         className="hidden"
         ref={inputFile}
         onChange={uploadObject}
+        multiple
       />
-      <progress value={progVal} />
+
+      <Circle
+        className={`w-12 ${isUploading ? '' : 'hidden'}`}
+        percent={progVal}
+        strokeWidth={8}
+        trailWidth={2}
+        strokeColor="#3fc3ee"
+        trailColor="#ccc"
+      />
     </div>
   );
 }
