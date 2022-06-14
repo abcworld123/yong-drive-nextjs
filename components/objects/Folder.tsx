@@ -1,7 +1,7 @@
 import Checkbox from '@mui/material/Checkbox';
 import { useEffect, useState } from 'react';
 import useHomeStore from 'hooks/store/useHomeStore';
-import FolderIcon from 'svg/icons/FIleIcon';
+import { FolderIcon } from 'svg/icons';
 import type { FolderProps } from 'types/props';
 
 export default function Folder({ name, click, dblClick }: FolderProps) {
