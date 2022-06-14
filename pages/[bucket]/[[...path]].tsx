@@ -1,7 +1,7 @@
 import axios from 'axios';
 import { useRouter } from 'next/router';
 import { useCallback, useEffect, useState } from 'react';
-import Control from 'components/layouts/Control';
+import { Control } from 'components/controls';
 import Objects from 'components/objects/Objects';
 import useHomeStore from 'hooks/store/useHomeStore';
 import Loader from 'svg/Loader';

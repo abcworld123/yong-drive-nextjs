@@ -10,7 +10,7 @@ import {
   GetObjectCommand,
 } from '@aws-sdk/client-s3';
 import { Upload } from '@aws-sdk/lib-storage';
-import { s3Client } from 's3/s3Client';
+import { s3Client } from 'libs/s3Client';
 import { ObjectInfo } from 'types/services';
 import type {
   DeleteFormdata,

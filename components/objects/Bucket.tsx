@@ -1,4 +1,4 @@
-import BucketIcon from 'svg/BucketIcon';
+import { BucketIcon } from 'svg/icons';
 import type { BucketProps } from 'types/props';
 
 export default function Bucket({ name, dblClick }: BucketProps) {

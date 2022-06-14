@@ -1,7 +1,6 @@
-import File from 'components/objects/File';
-import Folder from 'components/objects/Folder';
 import useHomeStore from 'hooks/store/useHomeStore';
 import { convUnit } from 'utils/tools';
+import { File, Folder } from '.';
 import type { ObjectProps } from 'types/props';
 
 export default function Objects({ click, dblClick }: ObjectProps) {
