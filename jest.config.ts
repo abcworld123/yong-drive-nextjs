@@ -8,6 +8,7 @@ const config: Config.InitialOptions = {
     'json',
   ],
   rootDir: '.',
+  modulePaths: ['<rootDir>'],
   moduleNameMapper: {
     's3/(.*)$': '<rootDir>/services/s3/$1.ts',
   },
