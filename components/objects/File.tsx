@@ -1,11 +1,11 @@
 import Checkbox from '@mui/material/Checkbox';
 import { useEffect, useState } from 'react';
-import useHomeStore from 'hooks/store/useHomeStore';
+import { useHomeStore } from 'hooks/stores';
 import { FIleIcon } from 'svg/icons';
 import type { FileProps } from 'types/props';
 
 export default function File({ name, size, click }: FileProps) {
-  const { chkAll } = useHomeStore();
+  const chkAll = useHomeStore(state => state.chkAll);
   const [checked, setChecked] = useState(false);
 
   useEffect(() => {

@@ -1,10 +1,10 @@
-import useHomeStore from 'hooks/store/useHomeStore';
+import { useHomeStore } from 'hooks/stores';
 import { convUnit } from 'utils/tools';
 import { File, Folder } from '.';
 import type { ObjectProps } from 'types/props';
 
 export default function Objects({ click, dblClick }: ObjectProps) {
-  const { objects } = useHomeStore();
+  const objects = useHomeStore(state => state.objects);
   const arr: React.ReactElement[] = [];
 
   objects.forEach(({ type, name, size }) => {

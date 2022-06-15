@@ -3,7 +3,7 @@ import { useRouter } from 'next/router';
 import { useCallback, useEffect, useState } from 'react';
 import { Control } from 'components/controls';
 import Objects from 'components/objects/Objects';
-import useHomeStore from 'hooks/store/useHomeStore';
+import { useHomeStore } from 'hooks/stores';
 import Loader from 'svg/Loader';
 import { alertError } from 'utils/alerts';
 import type { NextPage } from 'next';
@@ -14,7 +14,7 @@ import type { HomeServerSideContext } from 'types/services';
 const Home: NextPage<HomeProps> = ({ bucket, path }) => {
   const router = useRouter();
   const [isLoading, setIsLoading] = useState(false);
-  const [chkSet, setChkSet] = useState(new Set<string>());
+  const setChkSet = useHomeStore(state => state.setChkSet);
 
   const dblClick = useCallback((folder: string) => {
     const nxtPath = `/${bucket}/${path}${folder}`;
@@ -22,15 +22,16 @@ const Home: NextPage<HomeProps> = ({ bucket, path }) => {
   }, [path, bucket, router]);
 
   const checkHandler = useCallback((name: string, isChecked: boolean) => {
-    const has = chkSet.has(name);
+    const curChkSet = useHomeStore.getState().chkSet;
+    const has = curChkSet.has(name);
     if (!has && isChecked) {
-      chkSet.add(name);
-      setChkSet(new Set(chkSet));
+      curChkSet.add(name);
+      setChkSet(new Set(curChkSet));
     } else if (has && !isChecked) {
-      chkSet.delete(name);
-      setChkSet(new Set(chkSet));
+      curChkSet.delete(name);
+      setChkSet(new Set(curChkSet));
     }
-  }, [chkSet]);
+  }, []);
 
   const reload = useCallback(async () => {
     setIsLoading(true);
@@ -54,7 +55,7 @@ const Home: NextPage<HomeProps> = ({ bucket, path }) => {
   return (
     <main>
       <div className="main-container">
-        <Control chkSet={chkSet} />
+        <Control />
         {
           isLoading
             ? <Loader size={150} />

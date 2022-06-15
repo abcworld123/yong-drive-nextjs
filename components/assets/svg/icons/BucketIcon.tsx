@@ -1,6 +1,7 @@
+import { memo } from 'react';
 import type { SvgProps } from 'types/props';
 
-export default function BucketIcon({ size }: SvgProps) {
+function BucketIcon({ size }: SvgProps) {
   return (
     <svg xmlns="http://www.w3.org/2000/svg" width={size} height={size} viewBox="0 0 100 100">
       <path
@@ -39,3 +40,5 @@ export default function BucketIcon({ size }: SvgProps) {
     </svg>
   );
 }
+
+export default memo(BucketIcon);

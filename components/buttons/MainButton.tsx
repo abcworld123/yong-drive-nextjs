@@ -1,4 +1,5 @@
 import Button from '@mui/material/Button';
+import { memo } from 'react';
 import type { ButtonProps } from '@mui/material/Button';
 
 const buttonStyle = {
@@ -10,10 +11,12 @@ const buttonStyle = {
   },
 };
 
-export default function MainButton<C extends React.ElementType>({ children, ...props }: ButtonProps<C, { component?: C }>) {
+function MainButton<C extends React.ElementType>({ children, ...props }: ButtonProps<C, { component?: C }>) {
   return (
     <Button variant="contained" size="small" sx={buttonStyle} {...props}>
       {children}
     </Button>
   );
 }
+
+export default memo(MainButton);

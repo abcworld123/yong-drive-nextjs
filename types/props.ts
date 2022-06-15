@@ -7,10 +7,6 @@ export interface HomeProps {
   path: string;
 }
 
-export interface ControlProps {
-  chkSet: Set<string>;
-}
-
 export interface BucketProps {
   name: string;
   dblClick: (bucketName: string) => void;
