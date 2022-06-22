@@ -1,4 +1,4 @@
-import { ObjectInfo } from './services';
+import type { ObjectInfo } from './services';
 
 type checkHandler = (name: string, isChecked: boolean) => void;
 

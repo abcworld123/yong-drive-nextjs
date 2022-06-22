@@ -1,4 +1,4 @@
-import { ObjectInfo } from './services';
+import type { ObjectInfo } from './services';
 import type { Bucket } from '@aws-sdk/client-s3';
 import type { NextApiRequest } from 'next';
 

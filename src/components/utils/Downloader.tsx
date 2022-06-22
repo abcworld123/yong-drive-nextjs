@@ -1,5 +1,5 @@
 import { useEffect, useRef } from 'react';
-import { DownloadFormdata } from 'types/apis';
+import type { DownloadFormdata } from 'types/apis';
 
 export default function Downloader({ formdata }: { formdata: DownloadFormdata }) {
   const downloader = useRef<HTMLFormElement>();

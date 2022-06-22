@@ -4,7 +4,7 @@ import { MainButton as Button } from 'components/buttons';
 import Downloader from 'components/utils/Downloader';
 import { useHomeStore } from 'hooks/stores';
 import { DownloadIcon } from 'svg/icons';
-import { DownloadFormdata } from 'types/apis';
+import type { DownloadFormdata } from 'types/apis';
 
 export default function DownloadButton() {
   const [bucket, chkSet, path] = useHomeStore(state => [state.bucket, state.chkSet, state.path], shallow);

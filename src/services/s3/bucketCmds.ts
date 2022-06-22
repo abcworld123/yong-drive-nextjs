@@ -1,5 +1,3 @@
-import { IncomingMessage } from 'http';
-import { PassThrough } from 'stream';
 import {
   ListObjectsCommand,
   ListBucketsCommand,
@@ -11,7 +9,8 @@ import {
 } from '@aws-sdk/client-s3';
 import { Upload } from '@aws-sdk/lib-storage';
 import { s3Client } from 'libs/s3Client';
-import { ObjectInfo } from 'types/services';
+import type { IncomingMessage } from 'http';
+import type { PassThrough } from 'stream';
 import type {
   DeleteFormdata,
   UploadParams,
@@ -19,6 +18,7 @@ import type {
   DownloadSingleFormdata,
   DownloadRecursiveParams,
 } from 'types/apis';
+import type { ObjectInfo } from 'types/services';
 
 // bucket 리스트 가져오기
 export async function getBucketListCmd() {
