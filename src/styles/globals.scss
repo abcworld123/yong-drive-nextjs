@@ -9,7 +9,7 @@
 }
 
 .main-container {
-  @apply mt-20 w-2/3 mx-auto flex flex-col gap-y-10;
+  @apply flex flex-col gap-y-10 mx-auto py-20 w-2/3;
 }
 
 .object-container {
@@ -22,10 +22,10 @@
   &:hover {
     @apply bg-[#e5f3ff] border-[#c6e3fd];
   }
-  
+
   &-checked {
     @apply bg-[#cce8ff] border-[#94cfff];
-  
+
     &:hover {
       @apply bg-[#c0e3ff] border-[#86c8ff];
     }
@@ -33,16 +33,12 @@
 }
 
 .dnd {
-  @apply fixed h-screen w-screen left-0 top-0;
-  
-  &-overlay {
-    &-outer {
-      @apply p-5 bg-black opacity-50 transition-opacity duration-300 pointer-events-none;     
-    }
-    
-    &-inner {
-      @apply flex flex-col justify-center items-center gap-10 h-full border-4 border-separate border-stone-300 border-dashed rounded-3xl text-white text-2xl;
-    }
+  &-outer {
+    @apply fixed h-screen w-screen left-0 top-0 p-5 bg-[#0008] transition-opacity duration-300 pointer-events-none;     
+  }
+
+  &-inner {
+    @apply flex flex-col justify-center items-center gap-10 h-full border-4 border-separate border-stone-300 border-dashed rounded-3xl text-white text-2xl;
   }
 }
 

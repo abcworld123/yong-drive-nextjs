@@ -1,7 +1,7 @@
 import { useCallback, useState } from 'react';
 import shallow from 'zustand/shallow';
 import { MainButton as Button } from 'components/buttons';
-import Downloader from 'components/utils/Downloader';
+import { Downloader } from 'components/utils';
 import { useHomeStore } from 'hooks/stores';
 import { DownloadIcon } from 'svg/icons';
 import type { DownloadFormdata } from 'types/apis';

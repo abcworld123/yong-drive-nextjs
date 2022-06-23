@@ -22,3 +22,14 @@ export function alertWarn(title: string) {
     title: title,
   });
 }
+
+export function alertConfirm(title: string, msg: string) {
+  return Swal.fire({
+    icon: 'warning',
+    title: title,
+    text: msg,
+    showCancelButton: true,
+    confirmButtonText: '확인',
+    cancelButtonText: '취소',
+  });
+}

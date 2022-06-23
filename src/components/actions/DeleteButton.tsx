@@ -4,7 +4,7 @@ import shallow from 'zustand/shallow';
 import { MainButton as Button } from 'components/buttons';
 import { useHomeStore } from 'hooks/stores';
 import { DeleteIcon } from 'svg/icons';
-import { alertError, alertWarn } from 'utils/alerts';
+import { alertConfirm, alertError } from 'utils/alerts';
 import { toastSuccess } from 'utils/toasts';
 import type { DeleteFormdata, ResDefault } from 'types/apis';
 
@@ -13,7 +13,7 @@ export default function DeleteButton() {
 
   // delete
   const deleteObject = useCallback(async () => {
-    const isConfirmed = (await alertWarn(
+    const isConfirmed = (await alertConfirm(
       '정말 삭제하시겠습니까?',
       '삭제된 항목은 복구할 수 없습니다.',
     )).isConfirmed;
