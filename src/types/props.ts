@@ -1,4 +1,4 @@
-import type { ObjectInfo } from './services';
+import type { DropzoneOptions } from 'react-dropzone';
 
 type checkHandler = (name: string, isChecked: boolean) => void;
 
@@ -44,15 +44,11 @@ export interface DropdownProps {
   items: DropdownItem[];
 }
 
-export interface HomeContextProps {
-  bucket: string;
-  path: string;
-  objects: ObjectInfo[];
-  chkAll: boolean;
-  toggleChkAll: () => void;
-  reload: () => void;
+export interface DndWrapperProps {
+  onDrop: DropzoneOptions['onDrop'];
+  children: React.ReactElement;
 }
 
 export interface DndOverlayProps {
-  isDragAccept: boolean;
+  show: boolean;
 }

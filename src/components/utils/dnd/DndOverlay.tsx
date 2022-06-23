@@ -1,7 +1,8 @@
 import Image from 'next/image';
 import { memo } from 'react';
+import type { DndOverlayProps } from 'types/props';
 
-function DndOverlay({ show }) {
+function DndOverlay({ show }: DndOverlayProps) {
   return (
     <div className={`dnd-outer ${show ? '' : 'opacity-0'}`}>
       <div className="dnd-inner">
