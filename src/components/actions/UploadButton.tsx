@@ -1,6 +1,6 @@
 import axios from 'axios';
 import { Circle } from 'rc-progress';
-import { useCallback, useRef, useState } from 'react';
+import { useCallback, useEffect, useRef, useState } from 'react';
 import shallow from 'zustand/shallow';
 import { MainButton as Button } from 'components/buttons';
 import { useHomeStore } from 'hooks/stores';
@@ -16,9 +16,8 @@ export default function UploadButton() {
   const inputFile = useRef<HTMLInputElement>(null);
 
   // upload
-  const uploadObject = useCallback(async (e: React.ChangeEvent<HTMLInputElement>) => {
+  const upload = useCallback(async (files: File[]) => {
     setIsUploading(true);
-    const files = [...e.currentTarget.files];
     const totalSize = files.reduce((a, b) => a + b.size, 0);
     let curSize = 0;
     try {
@@ -49,6 +48,10 @@ export default function UploadButton() {
     }
   }, [bucket, reload, path]);
 
+  useEffect(() => {
+    useHomeStore.setState({ uploadObject: upload });
+  }, [upload]);
+
   return (
     <>
       <Button
@@ -61,7 +64,7 @@ export default function UploadButton() {
         type="file"
         className="hidden"
         ref={inputFile}
-        onChange={uploadObject}
+        onChange={(e) => upload([...e.target.files])}
         multiple
       />
       <Circle

@@ -6,9 +6,10 @@ interface HomeStoreState {
   path: string;
   objects: ObjectInfo[];
   chkSet: Set<string>;
-  setChkSet: (newSet: Set<string>) => void;
   chkAll: boolean;
+  setChkSet: (newSet: Set<string>) => void;
   toggleChkAll: () => void;
+  uploadObject: (files: File[]) => void;
   reload: () => void;
 }
 
@@ -17,9 +18,10 @@ const useHomeStore = create<HomeStoreState>((set) => ({
   path: '',
   objects: [],
   chkSet: new Set<string>(),
-  setChkSet: (newSet) => set((state) => ({ chkSet: newSet })),
   chkAll: false,
+  setChkSet: (newSet) => set((state) => ({ chkSet: newSet })),
   toggleChkAll: () => set((state) => ({ chkAll: !state.chkAll })),
+  uploadObject: null,
   reload: null,
 }));
 

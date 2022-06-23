@@ -1,7 +1,10 @@
 import axios from 'axios';
 import { useRouter } from 'next/router';
 import { useCallback, useEffect, useState } from 'react';
+import { useDropzone } from 'react-dropzone';
+import shallow from 'zustand/shallow';
 import { Control } from 'components/controls';
+import DndOverlay from 'components/layouts/DndOverlay';
 import Objects from 'components/objects/Objects';
 import { useHomeStore } from 'hooks/stores';
 import Loader from 'svg/Loader';
@@ -14,7 +17,8 @@ import type { HomeServerSideContext } from 'types/services';
 const Home: NextPage<HomeProps> = ({ bucket, path }) => {
   const router = useRouter();
   const [isLoading, setIsLoading] = useState(false);
-  const setChkSet = useHomeStore(state => state.setChkSet);
+  const [setChkSet, uploadObject] = useHomeStore(state => [state.setChkSet, state.uploadObject], shallow);
+  const { getRootProps, isDragAccept } = useDropzone({ onDrop: uploadObject, noClick: true, noKeyboard: true });
 
   const dblClick = useCallback((folder: string) => {
     const nxtPath = `/${bucket}/${path}${folder}`;
@@ -54,14 +58,15 @@ const Home: NextPage<HomeProps> = ({ bucket, path }) => {
 
   return (
     <main>
-      <div className="main-container">
-        <Control />
-        {
-          isLoading
+      <div className="dnd" {...getRootProps()}>
+        <div className="main-container">
+          <Control />
+          { isLoading
             ? <Loader size={150} />
-            : <Objects click={checkHandler} dblClick={dblClick} />
-        }
+            : <Objects click={checkHandler} dblClick={dblClick} /> }
+        </div>
       </div>
+      <DndOverlay isDragAccept={isDragAccept} />
     </main>
   );
 };

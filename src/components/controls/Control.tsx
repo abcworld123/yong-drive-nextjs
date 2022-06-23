@@ -1,6 +1,7 @@
+import { memo } from 'react';
 import { AllCheckBox, DeleteButton, DownloadButton, UploadButton } from 'components/actions';
 
-export default function Control() {
+function Control() {
   return (
     <div className="flex gap-5">
       <AllCheckBox />
@@ -10,3 +11,5 @@ export default function Control() {
     </div>
   );
 }
+
+export default memo(Control);

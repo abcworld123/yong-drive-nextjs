@@ -1,9 +1,10 @@
+import { memo } from 'react';
 import { useHomeStore } from 'hooks/stores';
 import { convUnit } from 'utils/tools';
 import { File, Folder } from '.';
 import type { ObjectProps } from 'types/props';
 
-export default function Objects({ click, dblClick }: ObjectProps) {
+function Objects({ click, dblClick }: ObjectProps) {
   const objects = useHomeStore(state => state.objects);
   const arr: React.ReactElement[] = [];
 
@@ -20,3 +21,5 @@ export default function Objects({ click, dblClick }: ObjectProps) {
     </div>
   );
 }
+
+export default memo(Objects);

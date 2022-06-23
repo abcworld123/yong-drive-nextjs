@@ -32,6 +32,20 @@
   }
 }
 
+.dnd {
+  @apply fixed h-screen w-screen left-0 top-0;
+  
+  &-overlay {
+    &-outer {
+      @apply p-5 bg-black opacity-50 transition-opacity duration-300 pointer-events-none;     
+    }
+    
+    &-inner {
+      @apply flex flex-col justify-center items-center gap-10 h-full border-4 border-separate border-stone-300 border-dashed rounded-3xl text-white text-2xl;
+    }
+  }
+}
+
 // swal toast
 .swal2-toast {
   &.swal2-icon-success {

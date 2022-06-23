@@ -42,3 +42,7 @@ export interface HomeContextProps {
   toggleChkAll: () => void;
   reload: () => void;
 }
+
+export interface DndOverlayProps {
+  isDragAccept: boolean;
+}
