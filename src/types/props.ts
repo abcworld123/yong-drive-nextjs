@@ -34,6 +34,16 @@ export interface SvgProps {
   fill?: string;
 }
 
+export interface DropdownItem {
+  name: string;
+  action: () => void;
+}
+
+export interface DropdownProps {
+  buttonName: string;
+  items: DropdownItem[];
+}
+
 export interface HomeContextProps {
   bucket: string;
   path: string;

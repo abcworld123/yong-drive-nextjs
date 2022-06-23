@@ -1,13 +1,14 @@
 import axios from 'axios';
 import { Circle } from 'rc-progress';
-import { useCallback, useEffect, useRef, useState } from 'react';
+import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import shallow from 'zustand/shallow';
-import { MainButton as Button } from 'components/buttons';
+import { Dropdown } from 'components/buttons';
 import { useHomeStore } from 'hooks/stores';
 import { UploadIcon } from 'svg/icons';
-import { alertError } from 'utils/alerts';
+import { alertError, alertWarn } from 'utils/alerts';
 import { toastSuccess } from 'utils/toasts';
 import type { ResDefault, UploadParams } from 'types/apis';
+import type { DropdownItem } from 'types/props';
 
 export default function UploadButton() {
   const [bucket, path, reload] = useHomeStore(state => [state.bucket, state.path, state.reload], shallow);
@@ -48,18 +49,22 @@ export default function UploadButton() {
     }
   }, [bucket, reload, path]);
 
+  const menuItems: DropdownItem[] = useMemo(() => [
+    { name: '파일 업로드', action: () => inputFile.current.click() },
+    { name: '폴더 업로드', action: () => alertWarn('폴더 업로드 구현 중...') },
+  ], []);
+
   useEffect(() => {
     useHomeStore.setState({ uploadObject: upload });
   }, [upload]);
 
   return (
     <>
-      <Button
+      <Dropdown
         startIcon={<UploadIcon size={24} fill="#444" />}
-        onClick={() => inputFile.current.click()}
-      >
-        올리기
-      </Button>
+        buttonName="올리기"
+        items={menuItems}
+      />
       <input
         type="file"
         className="hidden"
