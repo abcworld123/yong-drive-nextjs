@@ -15,6 +15,7 @@ export default function UploadButton() {
   const [isUploading, setIsUploading] = useState(false);
   const [progVal, setProgVal] = useState(0);
   const inputFile = useRef<HTMLInputElement>(null);
+  const inputFolder = useRef<HTMLInputElement>(null);
 
   // upload
   const upload = useCallback(async (files: File[]) => {
@@ -23,10 +24,12 @@ export default function UploadButton() {
     let curSize = 0;
     try {
       for (const file of files) {
+        let filepath: string = file['path'] || file.webkitRelativePath || file.name;
+        if (filepath[0] === '/') filepath = filepath.slice(1);
         const params: UploadParams = {
           bucket: bucket,
           path: path,
-          filename: file.name,
+          filename: filepath,
         };
         const { data } = await axios.post<ResDefault>('/api/s3/object/upload', file, {
           params,
@@ -51,7 +54,7 @@ export default function UploadButton() {
 
   const menuItems: DropdownItem[] = useMemo(() => [
     { name: '파일 업로드', action: () => inputFile.current.click() },
-    { name: '폴더 업로드', action: () => alertWarn('폴더 업로드 구현 중...') },
+    { name: '폴더 업로드', action: () => inputFolder.current.click() },
   ], []);
 
   useEffect(() => {
@@ -71,6 +74,13 @@ export default function UploadButton() {
         ref={inputFile}
         onChange={(e) => upload([...e.target.files])}
         multiple
+      />
+      <input
+        type="file"
+        className="hidden"
+        ref={inputFolder}
+        onChange={(e) => upload([...e.target.files])}
+        {...{ 'webkitdirectory': '' }}
       />
       <Circle
         className={`w-12 ${isUploading ? '' : 'hidden'}`}
