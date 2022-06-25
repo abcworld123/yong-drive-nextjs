@@ -35,14 +35,18 @@
     "comma-dangle": ["warn", "always-multiline"],
     "arrow-spacing": ["warn", { "before": true, "after": true }],
     "quotes": ["warn", "single"],
-    "no-unused-vars": "off",
-    // "no-unused-vars": "error",
     "no-undef": "off",
     "no-multiple-empty-lines": ["error", { "max": 2, "maxEOF": 0 }],
     "jsx-quotes": ["error", "prefer-double"],
     "object-curly-spacing": ["error", "always", { "objectsInObjects": true }],
-    "linebreak-style": ["error", "windows"],
+    // "linebreak-style": ["error", "windows"],
     "no-constant-condition": "off",
+    
+    // toggle
+    "no-unused-vars": "off",
+    // "no-unused-vars": "error",
+    "react-hooks/exhaustive-deps": "off",
+    // "react-hooks/exhaustive-deps": "warn",
 
     "@typescript-eslint/no-explicit-any": "off",
     "@typescript-eslint/semi": ["warn", "always"],
@@ -83,7 +87,6 @@
           "order": "asc",
           "caseInsensitive": true
         }
-        // "newlines-between": "always"
       }
     ]
   }
