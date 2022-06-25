@@ -33,3 +33,24 @@ export function alertConfirm(title: string, msg: string) {
     cancelButtonText: '취소',
   });
 }
+
+export function alertWait(title: string) {
+  return Swal.fire({
+    title: title,
+    imageUrl: '/img/loading.svg',
+    showConfirmButton: false,
+    allowOutsideClick: shakeOutsideClick,
+  });
+}
+
+function shakeOutsideClick() {
+  const popup = Swal.getPopup();
+  popup.classList.remove('swal2-show');
+  setTimeout(() => {
+    popup.classList.add('animate__animated', 'animate__headShake');
+  });
+  setTimeout(() => {
+    popup.classList.remove('animate__animated', 'animate__headShake');
+  }, 500);
+  return false;
+}

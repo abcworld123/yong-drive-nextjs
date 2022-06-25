@@ -159,3 +159,19 @@ export async function deleteObjectCmd({ bucket, path, objects }: DeleteFormdata)
     return { success: false };
   }
 }
+
+// 폴더 삭제
+export async function deleteRecursiveCmd({ bucket, path, objects }: DeleteFormdata) {
+  for (const name of objects) {
+    if (name.at(-1) === '/') {
+      const innerPath = `${path}${name}`;
+      console.log('innerPath', innerPath);
+      const innerObjects = (await getObjectListCmd({ bucket, path: innerPath })).objects.map(x => x.name);
+      console.log('innerObjects', innerObjects);
+      const { success } = await deleteRecursiveCmd({ bucket, path: innerPath, objects: innerObjects });
+      if (!success) return { success: false };
+    }
+  }
+  const data = await deleteObjectCmd({ bucket, path, objects });
+  return data;
+}
