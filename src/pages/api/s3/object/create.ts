@@ -1,4 +1,4 @@
-import { createFolderCmd } from 's3/bucketCmds';
+import { createFolderCmd } from 'services/s3';
 import type { NextApiResponse } from 'next';
 import type { ReqCreateFolderObjects, ResDefault } from 'types/apis';
 

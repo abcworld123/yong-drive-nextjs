@@ -1,4 +1,4 @@
-import { deleteRecursiveCmd } from 's3/bucketCmds';
+import { deleteRecursiveCmd } from 'services/s3';
 import type { NextApiResponse } from 'next';
 import type { ReqDeleteObjects, ResDefault } from 'types/apis';
 

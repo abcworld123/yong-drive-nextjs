@@ -1,5 +1,5 @@
 import { PassThrough } from 'stream';
-import { uploadObjectCmd } from 's3/bucketCmds';
+import { uploadObjectCmd } from 'services/s3';
 import type { NextApiResponse, PageConfig } from 'next';
 import type { ReqUploadObject, ResDefault } from 'types/apis';
 

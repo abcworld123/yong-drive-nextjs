@@ -1,4 +1,4 @@
-import { getBucketListCmd, getObjectListCmd } from 's3/bucketCmds';
+import { getBucketListCmd, getObjectListCmd } from 'services/s3';
 
 async function testGetList() {
   const data1 = await getBucketListCmd();

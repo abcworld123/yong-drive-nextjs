@@ -1,4 +1,4 @@
-import { getObjectListCmd } from 's3/bucketCmds';
+import { getObjectListCmd } from 'services/s3';
 import type { NextApiResponse } from 'next';
 import type { ReqBucket, ResObjectList } from 'types/apis';
 

@@ -1,5 +1,5 @@
 import archiver from 'archiver';
-import { downloadFileCmd, downloadRecursiveCmd, getObjectListCmd } from 's3/bucketCmds';
+import { downloadFileCmd, downloadRecursiveCmd, getObjectListCmd } from 'services/s3';
 import type { NextApiResponse, PageConfig } from 'next';
 import type { DownloadFormdata, DownloadSingleFormdata, ReqDownloadObjects } from 'types/apis';
 
