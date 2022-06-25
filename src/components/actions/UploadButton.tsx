@@ -5,7 +5,7 @@ import shallow from 'zustand/shallow';
 import { Dropdown } from 'components/buttons';
 import { useHomeStore } from 'hooks/stores';
 import { UploadIcon } from 'svg/icons';
-import { alertError, alertWarn } from 'utils/alerts';
+import { alertError } from 'utils/alerts';
 import { toastSuccess } from 'utils/toasts';
 import type { ResDefault, UploadParams } from 'types/apis';
 import type { DropdownItem } from 'types/props';

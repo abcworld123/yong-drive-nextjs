@@ -14,6 +14,12 @@ export interface UploadParams {
   filename: string;
 }
 
+export interface CreateFolderFormdata {
+  bucket: string;
+  path: string;
+  foldername: string;
+}
+
 export interface DownloadFormdata {
   bucket: string;
   path: string;
@@ -50,6 +56,10 @@ export interface ReqUploadObject extends OverrideNextApiRequest {
   query: UploadParams;
 }
 
+export interface ReqCreateFolderObjects extends OverrideNextApiRequest {
+  body: CreateFolderFormdata;
+}
+
 export interface ReqDownloadObjects extends OverrideNextApiRequest {
   body: Override<DownloadFormdata, { filenames: string }>;
 }
@@ -61,6 +71,11 @@ export interface ReqDeleteObjects extends OverrideNextApiRequest {
 // response types
 export interface ResDefault {
   success: boolean;
+}
+
+// response types
+export interface ResWithErrMsg extends ResDefault {
+  errMsg?: string;
 }
 
 export interface ResBucketList extends ResDefault {
