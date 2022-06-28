@@ -6,6 +6,7 @@ import {
   DownloadButton,
   UploadButton,
 } from 'components/actions';
+import { ProgressCircle } from 'components/layouts';
 
 function Control() {
   return (
@@ -15,6 +16,7 @@ function Control() {
       <CreateFolderButton />
       <DownloadButton />
       <DeleteButton />
+      <ProgressCircle />
     </div>
   );
 }

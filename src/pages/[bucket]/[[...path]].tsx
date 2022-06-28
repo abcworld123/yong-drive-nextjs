@@ -2,11 +2,10 @@ import 'animate.css';
 import axios from 'axios';
 import { useRouter } from 'next/router';
 import { useCallback, useEffect, useState } from 'react';
-import shallow from 'zustand/shallow';
 import { Control } from 'components/controls';
 import Objects from 'components/objects/Objects';
 import { Dnd } from 'components/utils';
-import { useHomeStore } from 'hooks/stores';
+import { useCheckBoxStore, useHomeStore, useUploadStore } from 'hooks/stores';
 import Loader from 'svg/Loader';
 import { alertError } from 'utils/alerts';
 import type { NextPage } from 'next';
@@ -17,7 +16,8 @@ import type { HomeServerSideContext } from 'types/services';
 const Home: NextPage<HomeProps> = ({ bucket, path }) => {
   const router = useRouter();
   const [isLoading, setIsLoading] = useState(false);
-  const [setChkSet, uploadObject] = useHomeStore(state => [state.setChkSet, state.uploadObject], shallow);
+  const setChkSet = useCheckBoxStore(state => state.setChkSet);
+  const uploadObject = useUploadStore(state => state.uploadObject);
 
   const dblClick = useCallback((folder: string) => {
     const nxtPath = `/${bucket}/${path}${folder}`;
@@ -25,7 +25,7 @@ const Home: NextPage<HomeProps> = ({ bucket, path }) => {
   }, [path, bucket, router]);
 
   const checkHandler = useCallback((name: string, isChecked: boolean) => {
-    const curChkSet = useHomeStore.getState().chkSet;
+    const curChkSet = useCheckBoxStore.getState().chkSet;
     const has = curChkSet.has(name);
     if (!has && isChecked) {
       curChkSet.add(name);
@@ -42,7 +42,8 @@ const Home: NextPage<HomeProps> = ({ bucket, path }) => {
     const params: BucketParams = { bucket, path };
     const { data } = await axios.get<ResObjectList>('/api/s3/object/get', { params });
     if (data.success) {
-      useHomeStore.setState({ bucket, path, objects: data.objects, chkAll: false });
+      useHomeStore.setState({ bucket, path, objects: data.objects });
+      useCheckBoxStore.setState({ chkAll: false });
       setIsLoading(false);
     } else {
       await alertError('데이터를 가져오는 중 오류가 발생했습니다.');

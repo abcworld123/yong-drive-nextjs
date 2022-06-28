@@ -2,14 +2,15 @@ import axios from 'axios';
 import { useCallback } from 'react';
 import shallow from 'zustand/shallow';
 import { MainButton as Button } from 'components/buttons';
-import { useHomeStore } from 'hooks/stores';
+import { useCheckBoxStore, useHomeStore } from 'hooks/stores';
 import { DeleteIcon } from 'svg/icons';
 import { alertConfirm, alertError, alertWait } from 'utils/alerts';
 import { toastSuccess } from 'utils/toasts';
 import type { DeleteFormdata, ResDefault } from 'types/apis';
 
 export default function DeleteButton() {
-  const [bucket, chkSet, path, reload] = useHomeStore(state => [state.bucket, state.chkSet, state.path, state.reload], shallow);
+  const [bucket, path, reload] = useHomeStore(state => [state.bucket, state.path, state.reload], shallow);
+  const chkSet = useCheckBoxStore(state => state.chkSet);
 
   // delete
   const deleteObject = useCallback(async () => {

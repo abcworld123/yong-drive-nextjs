@@ -1,9 +1,8 @@
 import axios from 'axios';
-import { Circle } from 'rc-progress';
-import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
+import { useCallback, useEffect, useMemo, useRef } from 'react';
 import shallow from 'zustand/shallow';
 import { Dropdown } from 'components/buttons';
-import { useHomeStore } from 'hooks/stores';
+import { useHomeStore, useUploadStore } from 'hooks/stores';
 import { UploadIcon } from 'svg/icons';
 import { alertError } from 'utils/alerts';
 import { toastSuccess } from 'utils/toasts';
@@ -12,8 +11,7 @@ import type { DropdownItem } from 'types/props';
 
 export default function UploadButton() {
   const [bucket, path, reload] = useHomeStore(state => [state.bucket, state.path, state.reload], shallow);
-  const [isUploading, setIsUploading] = useState(false);
-  const [progVal, setProgVal] = useState(0);
+  const [setIsUploading, setProgVal] = useUploadStore(state => [state.setIsUploading, state.setProgVal], shallow);
   const inputFile = useRef<HTMLInputElement>(null);
   const inputFolder = useRef<HTMLInputElement>(null);
 
@@ -58,7 +56,7 @@ export default function UploadButton() {
   ], []);
 
   useEffect(() => {
-    useHomeStore.setState({ uploadObject: upload });
+    useUploadStore.setState({ uploadObject: upload });
   }, [upload]);
 
   return (
@@ -81,14 +79,6 @@ export default function UploadButton() {
         ref={inputFolder}
         onChange={(e) => upload([...e.target.files])}
         {...{ 'webkitdirectory': '' }}
-      />
-      <Circle
-        className={`w-12 ${isUploading ? '' : 'hidden'}`}
-        percent={progVal}
-        strokeWidth={8}
-        trailWidth={2}
-        strokeColor="#3fc3ee"
-        trailColor="#ccc"
       />
     </>
   );

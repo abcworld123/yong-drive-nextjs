@@ -34,7 +34,7 @@ export async function createFolderCmd({ bucket, path, foldername }: CreateFolder
   const params: PutObjectCommandInput = {
     Bucket: bucket,
     Key: `${path}${foldername}/`,
-    Body: foldername,
+    Body: null,
   };
   try {
     const data = await s3Client.send(new PutObjectCommand(params));

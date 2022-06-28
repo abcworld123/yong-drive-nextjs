@@ -1,10 +1,11 @@
 import { Checkbox } from '@mui/material';
 import shallow from 'zustand/shallow';
 import { MainButton as Button } from 'components/buttons';
-import { useHomeStore } from 'hooks/stores';
+import { useCheckBoxStore, useHomeStore } from 'hooks/stores';
 
 export default function AllCheckBox() {
-  const [chkAll, toggleChkAll, objects] = useHomeStore(state => [state.chkAll, state.toggleChkAll, state.objects], shallow);
+  const objects = useHomeStore(state => state.objects);
+  const [chkAll, toggleChkAll] = useCheckBoxStore(state => [state.chkAll, state.toggleChkAll], shallow);
 
   return (
     <Button onClick={toggleChkAll}>

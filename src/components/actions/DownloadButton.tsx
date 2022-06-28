@@ -2,12 +2,14 @@ import { useCallback, useState } from 'react';
 import shallow from 'zustand/shallow';
 import { MainButton as Button } from 'components/buttons';
 import { Downloader } from 'components/utils';
-import { useHomeStore } from 'hooks/stores';
+import { useCheckBoxStore, useHomeStore } from 'hooks/stores';
 import { DownloadIcon } from 'svg/icons';
 import type { DownloadFormdata } from 'types/apis';
 
 export default function DownloadButton() {
-  const [bucket, chkSet, path] = useHomeStore(state => [state.bucket, state.chkSet, state.path], shallow);
+  const [bucket, path] = useHomeStore(state => [state.bucket, state.path], shallow);
+  const chkSet = useCheckBoxStore(state => state.chkSet);
+
   const [downloadFormdata, setDownloadFormdata] = useState<DownloadFormdata>(null);
 
   // download
