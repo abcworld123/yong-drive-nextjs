@@ -1,0 +1,14 @@
+{
+  "apps": [
+      {
+          "name": "yong-drive-nextjs",
+          "script": "ts-node -r tsconfig-paths/register src/app.ts",
+          "env": {
+              "NODE_ENV": "production"
+          },
+          "env_development": {
+              "NODE_ENV": "development"
+          }
+      }
+  ]
+}
