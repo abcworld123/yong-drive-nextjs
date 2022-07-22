@@ -1,5 +1,5 @@
-import { getController } from 'controllers/s3/bucket';
 import express from 'express';
+import { getController } from 'controllers/s3/bucket';
 
 const router = express.Router();
 

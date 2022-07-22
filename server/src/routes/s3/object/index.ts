@@ -1,5 +1,5 @@
-import { createController, deleteController, downloadController, getController, uploadController } from 'controllers/s3/object';
 import express from 'express';
+import { createController, deleteController, downloadController, getController, uploadController } from 'controllers/s3/object';
 
 const router = express.Router();
 
