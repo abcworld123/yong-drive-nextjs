@@ -3,7 +3,8 @@
   "ext": "ts json",
   "restartable": "npm run dev",
   "ignore": [
-    "test",
+    "src/test",
+    "src/types",
     "jest.config.ts",
     ".eslintrc.json",
     "nodemon.json",
