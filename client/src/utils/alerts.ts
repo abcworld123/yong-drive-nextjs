@@ -1,3 +1,4 @@
+import 'animate.css';
 import Swal from 'sweetalert2';
 
 export function alertSuccess(msg: string) {
@@ -40,10 +41,12 @@ export function alertWait(title: string) {
     imageUrl: '/img/loading.svg',
     showConfirmButton: false,
     allowOutsideClick: shakeOutsideClick,
+    allowEscapeKey: false,
+    backdrop: true,
   });
 }
 
-function shakeOutsideClick() {
+export function shakeOutsideClick() {
   const popup = Swal.getPopup();
   popup.classList.remove('swal2-show');
   setTimeout(() => {

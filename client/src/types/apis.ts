@@ -6,6 +6,7 @@ export type {
   ObjectInfo,
   ResBucketList,
   ResDefault,
+  ResLogin,
   ResObjectList,
   ResWithErrMsg,
   UploadParams,

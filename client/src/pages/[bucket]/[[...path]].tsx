@@ -1,5 +1,5 @@
 import 'animate.css';
-import axios from 'axios';
+import axios, { AxiosError } from 'axios';
 import { useRouter } from 'next/router';
 import { useCallback, useEffect, useState } from 'react';
 import { Control } from 'components/controls';
@@ -13,10 +13,10 @@ import type { GetParams, ResObjectList } from 'types/apis';
 import type { HomeProps, HomeServerSideContext } from 'types/props';
 
 const Home: NextPage<HomeProps> = ({ bucket, path }) => {
-  const router = useRouter();
-  const [isLoading, setIsLoading] = useState(false);
   const setChkSet = useCheckBoxStore(state => state.setChkSet);
   const uploadObject = useUploadStore(state => state.uploadObject);
+  const [isLoading, setIsLoading] = useState(false);
+  const router = useRouter();
 
   const dblClick = useCallback((folder: string) => {
     const nxtPath = `/${bucket}/${path}${folder}`;
@@ -38,15 +38,22 @@ const Home: NextPage<HomeProps> = ({ bucket, path }) => {
   const reload = useCallback(async () => {
     setIsLoading(true);
     setChkSet(new Set());
-    const params: BucketParams = { bucket, path };
-    const { data } = await axios.get<ResObjectList>('/api/s3/object/get', { params });
-    if (data.success) {
+    const params: GetParams = { bucket, path };
+    try {
+      const { data } = await axios.get<ResObjectList>('/api/s3/object/get', { params });
+      if (!data.success) throw new Error('서버 오류가 발생했습니다.');
       useHomeStore.setState({ bucket, path, objects: data.objects });
       useCheckBoxStore.setState({ chkAll: false });
       setIsLoading(false);
-    } else {
-      await alertError('데이터를 가져오는 중 오류가 발생했습니다.');
-      history.back();
+    } catch (err) {
+      if (err instanceof AxiosError) {
+        if (err.response.status === 401) {
+          router.push('/login');
+        }
+      } else {
+        await alertError(err.message);
+        history.back();
+      }
     }
   }, [bucket, path]);
 

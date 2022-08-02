@@ -6,6 +6,12 @@ const config = {
     accessKeyId: process.env.AWS_ACCESS_KEY_ID,
     secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY,
   },
+  session: {
+    secret: process.env.SESSION_SECRET,
+  },
+  auth: {
+    pw: process.env.AUTH_PASSWORD,
+  },
   // database: {
   //   host: process.env.DB_HOST,
   //   port: process.env.DB_PORT,

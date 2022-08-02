@@ -1,6 +1,9 @@
 import http from 'http';
 import compression from 'compression';
 import express from 'express';
+import session from 'express-session';
+// import redis from 'redis';
+import config from 'config';
 import router from 'routes';
 
 const app = express();
@@ -9,6 +12,11 @@ const server = http.createServer(app);
 app.use(compression());
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
+app.use(session({
+  secret: config.session.secret,
+  resave: false,
+  saveUninitialized: true,
+}));
 
 app.use('/', router);
 

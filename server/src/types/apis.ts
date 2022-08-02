@@ -1,6 +1,10 @@
 import type { Bucket } from '@aws-sdk/client-s3';
 
 // get params, post body types
+export interface LoginBody {
+  pw: string;
+}
+
 export interface GetParams {
   bucket: string;
   path: string;
@@ -50,6 +54,10 @@ export interface DownloadRecursiveParams {
 }
 
 // request types
+export interface ReqLogin {
+  body: LoginBody;
+}
+
 export interface ReqCreate {
   body: CreateFolderBody;
 }
@@ -74,6 +82,10 @@ export interface ReqUpload {
 export interface ResDefault {
   success: boolean;
   data?: any;
+}
+
+export interface ResLogin {
+  success: boolean;
 }
 
 export interface ResWithErrMsg extends ResDefault {
