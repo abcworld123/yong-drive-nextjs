@@ -6,7 +6,11 @@ const config: Config.InitialOptions = {
     'js',
     'json',
   ],
-  rootDir: '.',
+  rootDir: './src',
+  modulePaths: ['<rootDir>'],
+  moduleNameMapper: {
+    'config': '<rootDir>/config/config.ts',
+  },
   testRegex: '.*\\.test\\.ts$',
   transform: {
     '^.+\\.(t|j)s$': 'ts-jest',
