@@ -18,6 +18,7 @@
     "baseUrl": "./src",
     "paths": {
       "svg/*": ["./components/assets/svg/*"],
+      "@backend/types/*": ["../../server/src/types/*"],
     }
   },
   "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx"],

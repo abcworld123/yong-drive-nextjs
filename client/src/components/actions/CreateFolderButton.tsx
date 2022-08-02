@@ -7,7 +7,7 @@ import { useHomeStore } from 'hooks/stores';
 import { CreateFolderIcon } from 'svg/icons';
 import { alertError } from 'utils/alerts';
 import { toastSuccess } from 'utils/toasts';
-import type { CreateFolderFormdata, ResWithErrMsg } from 'types/apis';
+import type { CreateFolderBody, ResWithErrMsg } from 'types/apis';
 
 export default function CreateFolderButton() {
   const [bucket, path, reload] = useHomeStore(state => [state.bucket, state.path, state.reload], shallow);
@@ -16,13 +16,13 @@ export default function CreateFolderButton() {
   const createFolder = useCallback(async () => {
     const { value, isConfirmed } = await alertCreateFolder();
     if (!isConfirmed) return;
-    const formdata: CreateFolderFormdata = {
+    const body: CreateFolderBody = {
       bucket: bucket,
       path: path,
       foldername: value,
     };
     try {
-      const { data } = await axios.post<ResWithErrMsg>('/api/s3/object/create', formdata);
+      const { data } = await axios.post<ResWithErrMsg>('/api/s3/object/create', body);
       if (!data.success) {
         if (data.errMsg) throw new Error(data.errMsg);
         else throw new Error('폴더 생성 오류');

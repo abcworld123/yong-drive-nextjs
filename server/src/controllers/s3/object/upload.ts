@@ -1,9 +1,8 @@
 import { PassThrough } from 'stream';
 import { uploadObjectCmd } from 'services/s3';
-import type { NextFunction } from 'express';
-import type { ReqUploadObject, ResDefault } from 'types/apis';
+import type { ReqUpload, ResDefault } from 'types/apis';
 
-export default async function controller(req: ReqUploadObject, res: ResDefault, next: NextFunction) {
+export default async function controller(req: Request<ReqUpload>, res: Response<ResDefault>, next: NextFunction) {
   const params = req.query;
   const fileStream = new PassThrough();
   req.pipe(fileStream);

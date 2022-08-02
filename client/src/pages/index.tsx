@@ -1,7 +1,7 @@
 import axios from 'axios';
 import { useRouter } from 'next/router';
 import { useCallback, useEffect, useState } from 'react';
-import Bucket from 'components/objects/Bucket';
+import { Bucket } from 'components/objects';
 import { alertError } from 'utils/alerts';
 import type { NextPage } from 'next';
 import type { ResBucketList } from 'types/apis';

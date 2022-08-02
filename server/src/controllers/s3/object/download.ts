@@ -1,19 +1,18 @@
 import archiver from 'archiver';
 import { downloadFileCmd, downloadRecursiveCmd, getObjectListCmd } from 'services/s3';
-import type { NextFunction, Response } from 'express';
-import type { DownloadFormdata, DownloadSingleFormdata, ReqDownloadObjects } from 'types/apis';
+import type { DownloadBody, DownloadSingleParams, ReqDownload } from 'types/apis';
 
 // download single file
-async function sendSingleFile(res: Response, formdata: DownloadSingleFormdata) {
-  const { body, size } = await downloadFileCmd(formdata);
-  res.setHeader('Content-Disposition', `attachment; filename="${encodeURI(formdata.filename)}"`);
+async function sendSingleFile(res: Response, params: DownloadSingleParams) {
+  const { body, size } = await downloadFileCmd(params);
+  res.setHeader('Content-Disposition', `attachment; filename="${encodeURI(params.filename)}"`);
   res.setHeader('Content-Length', size);
   body.pipe(res);
 }
 
 // download single folder as zip
-async function sendSingleFolder(res: Response, formdata: DownloadSingleFormdata, zipName: string) {
-  const { bucket, path, filename } = formdata;
+async function sendSingleFolder(res: Response, params: DownloadSingleParams, zipName: string) {
+  const { bucket, path, filename } = params;
   const { success, objects } = await getObjectListCmd({ bucket, path: path + filename });
   if (!success) res.status(500).send(null);
   else {
@@ -23,8 +22,8 @@ async function sendSingleFolder(res: Response, formdata: DownloadSingleFormdata,
 }
 
 // download multiple objects as zip
-async function sendZip(res: Response, formdata: DownloadFormdata, zipName: string) {
-  const { bucket, path, filenames } = formdata;
+async function sendZip(res: Response, params: DownloadBody, zipName: string) {
+  const { bucket, path, filenames } = params;
   const zip = archiver('zip', { zlib: { level: 1 } });
   res.setHeader('Content-Disposition', `attachment; filename="${zipName}.zip"`);
   res.setHeader('Content-Type', 'application/zip');
@@ -40,7 +39,7 @@ async function sendZip(res: Response, formdata: DownloadFormdata, zipName: strin
   zip.finalize();
 }
 
-export default async function controller(req: ReqDownloadObjects, res: Response, next: NextFunction) {
+export default async function controller(req: Request<ReqDownload>, res: Response, next: NextFunction) {
   const { bucket, path } = req.body;
   const filenames: string[] = JSON.parse(req.body.filenames);
 

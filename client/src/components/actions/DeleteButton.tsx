@@ -6,7 +6,7 @@ import { useCheckBoxStore, useHomeStore } from 'hooks/stores';
 import { DeleteIcon } from 'svg/icons';
 import { alertConfirm, alertError, alertWait } from 'utils/alerts';
 import { toastSuccess } from 'utils/toasts';
-import type { DeleteFormdata, ResDefault } from 'types/apis';
+import type { DeleteBody, ResDefault } from 'types/apis';
 
 export default function DeleteButton() {
   const [bucket, path, reload] = useHomeStore(state => [state.bucket, state.path, state.reload], shallow);
@@ -20,13 +20,13 @@ export default function DeleteButton() {
     )).isConfirmed;
     if (!isConfirmed) return;
     alertWait('삭제 중...');
-    const formdata: DeleteFormdata = {
+    const body: DeleteBody = {
       bucket: bucket,
       path: path,
       objects: [...chkSet],
     };
     try {
-      const { data } = await axios.post<ResDefault>('/api/s3/object/delete', formdata);
+      const { data } = await axios.post<ResDefault>('/api/s3/object/delete', body);
       if (!data.success) throw new Error('삭제 오류');
       toastSuccess('삭제 완료!');
       reload();

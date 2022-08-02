@@ -2,6 +2,7 @@
   "rules": {
     "no-spaced-func": "warn",
     "prefer-const": "warn",
+    "no-constant-condition": "off",
     "semi-spacing": ["warn", { "before": false, "after": true }],
     "key-spacing": ["warn", { "beforeColon": false, "afterColon": true }],
     "space-unary-ops": ["warn", { "words": true, "nonwords": false }],
@@ -28,6 +29,7 @@
     "@typescript-eslint/object-curly-spacing": ["error", "always", { "objectsInObjects": true }],
     "@typescript-eslint/no-constant-condition": "off",
     "@typescript-eslint/type-annotation-spacing": "warn",
+    "@typescript-eslint/no-empty-interface": "off",
     "@typescript-eslint/no-unused-vars": ["error", { "args": "none" }],
     "@typescript-eslint/space-infix-ops": ["warn", { "int32Hint": false }],
     "@typescript-eslint/no-explicit-any": "off",

@@ -4,24 +4,24 @@ import { MainButton as Button } from 'components/buttons';
 import { Downloader } from 'components/utils';
 import { useCheckBoxStore, useHomeStore } from 'hooks/stores';
 import { DownloadIcon } from 'svg/icons';
-import type { DownloadFormdata } from 'types/apis';
+import type { DownloadBody } from 'types/apis';
 
 export default function DownloadButton() {
   const [bucket, path] = useHomeStore(state => [state.bucket, state.path], shallow);
   const chkSet = useCheckBoxStore(state => state.chkSet);
 
-  const [downloadFormdata, setDownloadFormdata] = useState<DownloadFormdata>(null);
+  const [downloadBody, setDownloadBody] = useState<DownloadBody>(null);
 
   // download
   const downloadObject = useCallback(async () => {
     const filenames = [...chkSet];
-    const formdata: DownloadFormdata = {
+    const body: DownloadBody = {
       bucket: bucket,
       path: path,
       filenames: filenames,
     };
     try {
-      setDownloadFormdata(formdata);
+      setDownloadBody(body);
       // todo iframe post 500 error?
     } catch (err) {
       console.error(err);
@@ -37,7 +37,7 @@ export default function DownloadButton() {
       >
       다운로드
       </Button>
-      <Downloader formdata={downloadFormdata} />
+      <Downloader body={downloadBody} />
     </>
   );
 }

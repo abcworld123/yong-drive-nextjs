@@ -1,10 +1,10 @@
 import { DeleteObjectsCommand, DeleteObjectsCommandInput } from '@aws-sdk/client-s3';
-import { s3Client } from 'libs/s3Client';
+import { s3Client } from 'libs';
 import { getObjectListCmd } from './get';
-import type { DeleteFormdata } from 'types/apis';
+import type { DeleteBody } from 'types/apis';
 
 // object 삭제
-export async function deleteObjectCmd({ bucket, path, objects }: DeleteFormdata) {
+async function deleteObjectCmd({ bucket, path, objects }: DeleteBody) {
   const params: DeleteObjectsCommandInput = {
     Bucket: bucket,
     Delete: { Objects: objects.map((name) => ({ Key: `${path}${name}` })) },
@@ -20,7 +20,7 @@ export async function deleteObjectCmd({ bucket, path, objects }: DeleteFormdata)
 }
 
 // 폴더 삭제
-export async function deleteRecursiveCmd({ bucket, path, objects }: DeleteFormdata) {
+export async function deleteRecursiveCmd({ bucket, path, objects }: DeleteBody) {
   for (const name of objects) {
     if (name.at(-1) === '/') {
       const innerPath = `${path}${name}`;

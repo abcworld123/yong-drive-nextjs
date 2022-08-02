@@ -1,17 +1,17 @@
 import { useEffect, useRef } from 'react';
-import type { DownloadFormdata } from 'types/apis';
+import type { DownloaderProps } from 'types/props';
 
-export default function Downloader({ formdata }: { formdata: DownloadFormdata }) {
+export default function Downloader({ body }: DownloaderProps) {
   const downloader = useRef<HTMLFormElement>();
-  const { bucket, path, filenames } = formdata || {};
+  const { bucket, path, filenames } = body || {};
 
   useEffect(() => {
-    if (formdata) downloader.current.submit();
-  }, [formdata]);
+    if (body) downloader.current.submit();
+  }, [body]);
 
   return (
     <>{
-      formdata ? (
+      body ? (
         <>
           <iframe className="hidden" name="iframe" />
           <form className="hidden" ref={downloader} action="/api/s3/object/download" method="POST" target="iframe">

@@ -1,8 +1,7 @@
 import type { Bucket } from '@aws-sdk/client-s3';
-import type { Request, Response } from 'express';
 
-// param, formdata types
-export interface BucketParams {
+// get params, post body types
+export interface GetParams {
   bucket: string;
   path: string;
 }
@@ -13,19 +12,31 @@ export interface UploadParams {
   filename: string;
 }
 
-export interface CreateFolderFormdata {
+export interface CreateFolderBody {
   bucket: string;
   path: string;
   foldername: string;
 }
 
-export interface DownloadFormdata {
+export interface DeleteBody {
+  bucket: string;
+  path: string;
+  objects: string[];
+}
+
+export interface DownloadBody {
   bucket: string;
   path: string;
   filenames: string[];
 }
 
-export interface DownloadSingleFormdata {
+export interface DownloadFormdata {
+  bucket: string;
+  path: string;
+  filenames: string;
+}
+
+export interface DownloadSingleParams {
   bucket: string;
   path: string;
   filename: string;
@@ -38,40 +49,55 @@ export interface DownloadRecursiveParams {
   filenames: string[];
 }
 
-export interface DeleteFormdata {
-  bucket: string;
-  path: string;
-  objects: string[];
+// request types
+export interface ReqCreate {
+  body: CreateFolderBody;
 }
 
-// request types
-export type ReqBucket = Request<null, null, null, BucketParams>;
-export type ReqUploadObject = Request<null, null, null, UploadParams>;
-export type ReqCreateFolderObjects = Request<null, null, CreateFolderFormdata, null>;
-export type ReqDownloadObjects = Request<null, null, Override<DownloadFormdata, { filenames: string }>, null>;
-export type ReqDeleteObjects = Request<null, null, DeleteFormdata, null>;
+export interface ReqDelete {
+  body: DeleteBody;
+}
+
+export interface ReqDownload {
+  body: DownloadFormdata;
+}
+
+export interface ReqGet {
+  query: GetParams;
+}
+
+export interface ReqUpload {
+  query: UploadParams;
+}
 
 // response types
-interface DefaultResponse {
+export interface ResDefault {
   success: boolean;
+  data?: any;
 }
 
-interface WithErrMsg {
+export interface ResWithErrMsg extends ResDefault {
   errMsg?: string;
 }
 
-interface BucketList {
+export interface ResBucketList extends ResDefault {
   buckets?: Bucket[];
 }
 
-interface ObjectList {
+export interface ResObjectList extends ResDefault {
   objects?: ObjectInfo[];
 }
 
-export type ResDefault = Response<DefaultResponse>;
-export type ResWithErrMsg = Response<WithErrMsg>;
-export type ResBucketList = Response<BucketList>;
-export type ResObjectList = Response<ObjectList>;
+// express default
+export interface RequestData {
+  params?: any;
+  body?: any;
+  query?: any;
+}
+
+export interface ResponseData {
+  // data?: any;
+}
 
 // etc
 export interface ObjectInfo {

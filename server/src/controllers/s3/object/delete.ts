@@ -1,9 +1,8 @@
 import { deleteRecursiveCmd } from 'services/s3';
-import type { NextFunction } from 'express';
-import type { ReqDeleteObjects, ResDefault } from 'types/apis';
+import type { ReqDelete, ResDefault } from 'types/apis';
 
-export default async function controller(req: ReqDeleteObjects, res: ResDefault, next: NextFunction) {
-  const formdata = req.body;
-  const data = await deleteRecursiveCmd(formdata);
+export default async function controller(req: Request<ReqDelete>, res: Response<ResDefault>, next: NextFunction) {
+  const body = req.body;
+  const data = await deleteRecursiveCmd(body);
   res.json(data);
 }

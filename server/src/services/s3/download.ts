@@ -1,11 +1,11 @@
 import { GetObjectCommand, PutObjectCommandInput } from '@aws-sdk/client-s3';
-import { s3Client } from 'libs/s3Client';
+import { s3Client } from 'libs';
 import { getObjectListCmd } from './get';
 import type { IncomingMessage } from 'http';
-import type { DownloadRecursiveParams, DownloadSingleFormdata } from 'types/apis';
+import type { DownloadRecursiveParams, DownloadSingleParams } from 'types/apis';
 
-// single file 다운로드 
-export async function downloadFileCmd({ bucket, path, filename }: DownloadSingleFormdata) {
+// single file 다운로드
+export async function downloadFileCmd({ bucket, path, filename }: DownloadSingleParams) {
   const params: PutObjectCommandInput = {
     Bucket: bucket,
     Key: `${path}${filename}`,

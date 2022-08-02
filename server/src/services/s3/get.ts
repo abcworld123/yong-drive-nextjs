@@ -1,6 +1,6 @@
 import { ListBucketsCommand, ListObjectsCommand, ListObjectsCommandInput } from '@aws-sdk/client-s3';
-import { s3Client } from 'libs/s3Client';
-import type { BucketParams, ObjectInfo } from 'types/apis';
+import { s3Client } from 'libs';
+import type { GetParams, ObjectInfo } from 'types/apis';
 
 // bucket 리스트 가져오기
 export async function getBucketListCmd() {
@@ -16,7 +16,7 @@ export async function getBucketListCmd() {
 }
 
 // object 리스트 가져오기 (현재 폴더)
-export async function getObjectListCmd({ bucket, path }: BucketParams) {
+export async function getObjectListCmd({ bucket, path }: GetParams) {
   try {
     const prefixLen = path.length;
     const objects: ObjectInfo[] = [];

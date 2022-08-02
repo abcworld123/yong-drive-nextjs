@@ -1,3 +1,5 @@
+import type { DownloadBody } from './apis';
+import type { GetServerSidePropsContext } from 'next';
 import type { DropzoneOptions } from 'react-dropzone';
 
 type checkHandler = (name: string, isChecked: boolean) => void;
@@ -29,6 +31,10 @@ export interface FileProps {
   click: checkHandler;
 }
 
+export interface DownloaderProps {
+  body: DownloadBody;
+}
+
 export interface SvgProps {
   size?: number;
   fill?: string;
@@ -51,4 +57,12 @@ export interface DndWrapperProps {
 
 export interface DndOverlayProps {
   show: boolean;
+}
+
+// ssr
+export interface HomeServerSideContext extends GetServerSidePropsContext {
+  query: {
+    bucket: string;
+    path?: string[];
+  };
 }

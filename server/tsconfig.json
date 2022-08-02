@@ -7,6 +7,7 @@
     "strict": false,
     "moduleResolution": "node",
     "noEmit": true,
+    "skipLibCheck": true,
     "lib": ["esnext"],
     "esModuleInterop": true,
     "downlevelIteration": true,
@@ -16,6 +17,7 @@
     "baseUrl": "./src",
     "paths": {
       "config": ["./config/config.ts"],
+      "@frontend/types/*": ["../../client/src/types/*"],
     },
   },
 }

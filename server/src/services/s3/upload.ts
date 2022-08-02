@@ -1,8 +1,8 @@
 import { ListObjectsCommand, PutObjectCommand, PutObjectCommandInput } from '@aws-sdk/client-s3';
 import { Upload } from '@aws-sdk/lib-storage';
-import { s3Client } from 'libs/s3Client';
+import { s3Client } from 'libs';
 import type { PassThrough } from 'stream';
-import type { CreateFolderFormdata, UploadParams } from 'types/apis';
+import type { CreateFolderBody, UploadParams } from 'types/apis';
 
 // object 업로드
 export async function uploadObjectCmd({ bucket, path, filename }: UploadParams, fileStream: PassThrough) {
@@ -23,7 +23,7 @@ export async function uploadObjectCmd({ bucket, path, filename }: UploadParams, 
 }
 
 // 새 폴더 만들기
-export async function createFolderCmd({ bucket, path, foldername }: CreateFolderFormdata) {
+export async function createFolderCmd({ bucket, path, foldername }: CreateFolderBody) {
   const isExist = Boolean((await s3Client.send(new ListObjectsCommand({
     Bucket: bucket,
     Prefix: `${path}${foldername}/`,

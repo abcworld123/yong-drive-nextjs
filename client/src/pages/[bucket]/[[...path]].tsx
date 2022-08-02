@@ -9,9 +9,8 @@ import { useCheckBoxStore, useHomeStore, useUploadStore } from 'hooks/stores';
 import Loader from 'svg/Loader';
 import { alertError } from 'utils/alerts';
 import type { NextPage } from 'next';
-import type { BucketParams, ResObjectList } from 'types/apis';
-import type { HomeProps } from 'types/props';
-import type { HomeServerSideContext } from 'types/services';
+import type { GetParams, ResObjectList } from 'types/apis';
+import type { HomeProps, HomeServerSideContext } from 'types/props';
 
 const Home: NextPage<HomeProps> = ({ bucket, path }) => {
   const router = useRouter();

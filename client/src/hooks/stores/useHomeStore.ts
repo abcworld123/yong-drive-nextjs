@@ -1,5 +1,5 @@
 import create from 'zustand';
-import type { ObjectInfo } from 'types/services';
+import type { ObjectInfo } from 'types/apis';
 
 interface HomeStoreState {
   bucket: string;
