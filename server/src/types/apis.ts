@@ -84,6 +84,10 @@ export interface ResDefault {
   data?: any;
 }
 
+export interface ResCheck {
+  success: boolean;
+}
+
 export interface ResLogin {
   success: boolean;
 }

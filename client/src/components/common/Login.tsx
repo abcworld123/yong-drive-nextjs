@@ -1,14 +1,11 @@
 import axios from 'axios';
-import { useRouter } from 'next/router';
 import { useEffect } from 'react';
 import Swal from 'sweetalert2';
+import { useSessionStore } from 'hooks/stores';
 import { shakeOutsideClick } from 'utils/alerts';
-import type { NextPage } from 'next';
 import type { ResLogin } from 'types/apis';
 
-const LoginPage: NextPage = () => {
-  const router = useRouter();
-
+export default function Login() {
   useEffect(() => {
     Swal.fire({
       icon: 'info',
@@ -25,12 +22,10 @@ const LoginPage: NextPage = () => {
         if (!pw) Swal.showValidationMessage('비밀번호를 입력해주세요.');
         const { data } = await axios.post<ResLogin>('/api/login', { pw });
         if (!data.success) Swal.showValidationMessage('비밀번호가 일치하지 않습니다.');
-        else router.back();
+        else useSessionStore.setState({ isLogin: true });
       },
     });
   }, []);
 
   return null;
-};
-
-export default LoginPage;
+}

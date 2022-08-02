@@ -5,6 +5,7 @@ export type {
   GetParams,
   ObjectInfo,
   ResBucketList,
+  ResCheck,
   ResDefault,
   ResLogin,
   ResObjectList,

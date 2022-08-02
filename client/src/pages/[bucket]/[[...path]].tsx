@@ -1,5 +1,5 @@
 import 'animate.css';
-import axios, { AxiosError } from 'axios';
+import axios from 'axios';
 import { useRouter } from 'next/router';
 import { useCallback, useEffect, useState } from 'react';
 import { Control } from 'components/controls';
@@ -46,14 +46,8 @@ const Home: NextPage<HomeProps> = ({ bucket, path }) => {
       useCheckBoxStore.setState({ chkAll: false });
       setIsLoading(false);
     } catch (err) {
-      if (err instanceof AxiosError) {
-        if (err.response.status === 401) {
-          router.push('/login');
-        }
-      } else {
-        await alertError(err.message);
-        history.back();
-      }
+      await alertError(err.message);
+      history.back();
     }
   }, [bucket, path]);
 
