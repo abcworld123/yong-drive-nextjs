@@ -11,9 +11,7 @@
   ],
   "plugins": ["only-warn"],
   "rules": {
-    "@typescript-eslint/no-unused-vars": "off",
     "react-hooks/exhaustive-deps": "off",
-
     "jsx-quotes": ["error", "prefer-double"],
     "react/jsx-tag-spacing": ["warn", { "beforeSelfClosing": "always" }]
   },

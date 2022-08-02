@@ -10,7 +10,6 @@
   ],
   "plugins": ["only-warn"],
   "rules": {
-    "@typescript-eslint/no-unused-vars": "off"
   },
   "settings": {
     "import/resolver": {
