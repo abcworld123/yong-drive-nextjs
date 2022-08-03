@@ -1,8 +1,8 @@
 import express from 'express';
-import { getController } from 'controllers/s3/bucket';
+import { bucketController } from 'controllers/s3';
 
 const router = express.Router();
 
-router.get('/get', getController);
+router.get('/get', bucketController.get);
 
 export default router;

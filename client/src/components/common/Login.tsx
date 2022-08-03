@@ -20,7 +20,7 @@ export default function Login() {
       preConfirm: async (pw: string) => {
         pw = pw.trim();
         if (!pw) Swal.showValidationMessage('비밀번호를 입력해주세요.');
-        const { data } = await axios.post<ResLogin>('/api/login', { pw });
+        const { data } = await axios.post<ResLogin>('/api/auth/login', { pw });
         if (!data.success) Swal.showValidationMessage('비밀번호가 일치하지 않습니다.');
         else useSessionStore.setState({ isLogin: true });
       },

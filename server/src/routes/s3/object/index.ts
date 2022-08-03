@@ -1,18 +1,12 @@
 import express from 'express';
-import {
-  createController,
-  deleteController,
-  downloadController,
-  getController,
-  uploadController,
-} from 'controllers/s3/object';
+import { objectController } from 'controllers/s3';
 
 const router = express.Router();
 
-router.get('/get', getController);
-router.post('/create', createController);
-router.post('/delete', deleteController);
-router.post('/download', downloadController);
-router.post('/upload', uploadController);
+router.get('/get', objectController.get);
+router.post('/create', objectController.create);
+router.post('/delete', objectController.delete);
+router.post('/download', objectController.download);
+router.post('/upload', objectController.upload);
 
 export default router;
