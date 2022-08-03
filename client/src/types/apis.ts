@@ -2,7 +2,7 @@ export type {
   CreateFolderBody,
   DeleteBody,
   DownloadBody,
-  GetParams,
+  GetBody,
   ObjectInfo,
   ResBucketList,
   ResCheck,

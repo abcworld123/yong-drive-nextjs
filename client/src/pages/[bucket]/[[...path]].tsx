@@ -9,7 +9,7 @@ import { useCheckBoxStore, useHomeStore, useUploadStore } from 'hooks/stores';
 import Loader from 'svg/Loader';
 import { alertError } from 'utils/alerts';
 import type { NextPage } from 'next';
-import type { GetParams, ResObjectList } from 'types/apis';
+import type { GetBody, ResObjectList } from 'types/apis';
 import type { HomeProps, HomeServerSideContext } from 'types/props';
 
 const Home: NextPage<HomeProps> = ({ bucket, path }) => {
@@ -38,9 +38,9 @@ const Home: NextPage<HomeProps> = ({ bucket, path }) => {
   const reload = useCallback(async () => {
     setIsLoading(true);
     setChkSet(new Set());
-    const params: GetParams = { bucket, path };
+    const body: GetBody = { bucket, path };
     try {
-      const { data } = await axios.get<ResObjectList>('/api/s3/object/get', { params });
+      const { data } = await axios.post<ResObjectList>('/api/s3/object/get', body);
       if (!data.success) throw new Error('서버 오류가 발생했습니다.');
       useHomeStore.setState({ bucket, path, objects: data.objects });
       useCheckBoxStore.setState({ chkAll: false });

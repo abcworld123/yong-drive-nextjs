@@ -13,7 +13,7 @@ function App({ Component, pageProps }: AppProps) {
   const [isLoading, setIsLoading] = useState(true);
 
   const check = useCallback(async () => {
-    const { data } = await axios.get<ResCheck>('/api/check');
+    const { data } = await axios.get<ResCheck>('/api/auth/check');
     useSessionStore.setState({ isLogin: data.success });
     setIsLoading(false);
   }, []);

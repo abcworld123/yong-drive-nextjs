@@ -5,7 +5,7 @@ export interface LoginBody {
   pw: string;
 }
 
-export interface GetParams {
+export interface GetBody {
   bucket: string;
   path: string;
 }
@@ -71,7 +71,7 @@ export interface ReqDownload {
 }
 
 export interface ReqGet {
-  query: GetParams;
+  body: GetBody;
 }
 
 export interface ReqUpload {

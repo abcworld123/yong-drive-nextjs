@@ -3,6 +3,6 @@ import { bucketController } from 'controllers/s3';
 
 const router = express.Router();
 
-router.get('/get', bucketController.get);
+router.post('/get', bucketController.get);
 
 export default router;
