@@ -1,3 +1,4 @@
+import { compareSync } from 'bcrypt';
 import config from 'config';
 import type { ReqLogin } from 'types/apis';
 
@@ -6,7 +7,7 @@ const whitelist = ['login', 'check'];  // todo 'share'
 // login page
 export function login(req: Request<ReqLogin>, res: Response, next: NextFunction) {
   const { pw } = req.body;
-  if (pw === config.auth.pw) {
+  if (compareSync(pw, config.auth.pw)) {
     req.session['isLogin'] = true;
     res.json({ success: true });
   } else {
