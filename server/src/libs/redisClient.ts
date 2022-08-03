@@ -3,7 +3,8 @@ import session from 'express-session';
 import { createClient } from 'redis';
 import config from 'config';
 
-const redisClient = createClient({ legacyMode: true });
+const client = createClient({ legacyMode: true });
+const redisClient = client as typeof client & { v4: Omit<typeof client, 'v4'> };
 
 function sessionStore() {
   const RedisStore = connectRedis(session);
