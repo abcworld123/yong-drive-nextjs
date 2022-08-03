@@ -1,5 +1,4 @@
 import 'animate.css';
-import axios from 'axios';
 import { useRouter } from 'next/router';
 import { useCallback, useEffect, useState } from 'react';
 import { Control } from 'components/controls';
@@ -8,11 +7,13 @@ import { Dnd } from 'components/utils';
 import { useCheckBoxStore, useHomeStore, useUploadStore } from 'hooks/stores';
 import Loader from 'svg/Loader';
 import { alertError } from 'utils/alerts';
+import api from 'utils/api';
 import type { NextPage } from 'next';
 import type { GetBody, ResObjectList } from 'types/apis';
 import type { HomeProps, HomeServerSideContext } from 'types/props';
 
 const Home: NextPage<HomeProps> = ({ bucket, path }) => {
+  console.log('home');
   const setChkSet = useCheckBoxStore(state => state.setChkSet);
   const uploadObject = useUploadStore(state => state.uploadObject);
   const [isLoading, setIsLoading] = useState(false);
@@ -40,7 +41,7 @@ const Home: NextPage<HomeProps> = ({ bucket, path }) => {
     setChkSet(new Set());
     const body: GetBody = { bucket, path };
     try {
-      const { data } = await axios.post<ResObjectList>('/api/s3/object/get', body);
+      const { data } = await api.post<ResObjectList>('/s3/object/get', body);
       if (!data.success) throw new Error('서버 오류가 발생했습니다.');
       useHomeStore.setState({ bucket, path, objects: data.objects });
       useCheckBoxStore.setState({ chkAll: false });

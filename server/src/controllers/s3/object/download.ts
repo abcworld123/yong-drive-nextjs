@@ -5,9 +5,12 @@ import type { DownloadBody, DownloadSingleParams, ReqDownload } from 'types/apis
 // download single file
 async function sendSingleFile(res: Response, params: DownloadSingleParams) {
   const { body, size } = await downloadFileCmd(params);
-  res.setHeader('Content-Disposition', `attachment; filename="${encodeURI(params.filename)}"`);
-  res.setHeader('Content-Length', size);
-  body.pipe(res);
+  if (!body) res.end();
+  else {
+    res.setHeader('Content-Disposition', `attachment; filename="${encodeURI(params.filename)}"`);
+    res.setHeader('Content-Length', size);
+    body.pipe(res);
+  }
 }
 
 // download single folder as zip

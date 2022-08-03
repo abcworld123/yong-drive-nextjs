@@ -1,4 +1,3 @@
-import axios from 'axios';
 import { useCallback } from 'react';
 import Swal from 'sweetalert2';
 import shallow from 'zustand/shallow';
@@ -6,6 +5,7 @@ import { MainButton as Button } from 'components/buttons';
 import { useHomeStore } from 'hooks/stores';
 import { CreateFolderIcon } from 'svg/icons';
 import { alertError } from 'utils/alerts';
+import api from 'utils/api';
 import { toastSuccess } from 'utils/toasts';
 import type { CreateFolderBody, ResWithErrMsg } from 'types/apis';
 
@@ -22,7 +22,7 @@ export default function CreateFolderButton() {
       foldername: value,
     };
     try {
-      const { data } = await axios.post<ResWithErrMsg>('/api/s3/object/create', body);
+      const { data } = await api.post<ResWithErrMsg>('/s3/object/create', body);
       if (!data.success) {
         if (data.errMsg) throw new Error(data.errMsg);
         else throw new Error('폴더 생성 오류');

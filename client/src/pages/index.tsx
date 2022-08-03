@@ -1,8 +1,8 @@
-import axios from 'axios';
 import { useRouter } from 'next/router';
 import { useCallback, useEffect, useState } from 'react';
 import { Bucket } from 'components/objects';
 import { alertError } from 'utils/alerts';
+import api from 'utils/api';
 import type { NextPage } from 'next';
 import type { ResBucketList } from 'types/apis';
 
@@ -15,7 +15,7 @@ const BucketSelectPage: NextPage = () => {
   }, [router]);
 
   const reload = useCallback(async () => {
-    const { data } = await axios.post<ResBucketList>('/api/s3/bucket/get');
+    const { data } = await api.post<ResBucketList>('/s3/bucket/get');
     if (data.success) {
       const arr: React.ReactElement[] = [];
       data.buckets.forEach(({ Name: name }) => {

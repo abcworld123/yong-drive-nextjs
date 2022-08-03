@@ -1,10 +1,10 @@
-import axios from 'axios';
 import { useCallback } from 'react';
 import shallow from 'zustand/shallow';
 import { MainButton as Button } from 'components/buttons';
 import { useCheckBoxStore, useHomeStore } from 'hooks/stores';
 import { DeleteIcon } from 'svg/icons';
 import { alertConfirm, alertError, alertWait } from 'utils/alerts';
+import api from 'utils/api';
 import { toastSuccess } from 'utils/toasts';
 import type { DeleteBody, ResDefault } from 'types/apis';
 
@@ -26,7 +26,7 @@ export default function DeleteButton() {
       objects: [...chkSet],
     };
     try {
-      const { data } = await axios.post<ResDefault>('/api/s3/object/delete', body);
+      const { data } = await api.post<ResDefault>('/s3/object/delete', body);
       if (!data.success) throw new Error('삭제 오류');
       toastSuccess('삭제 완료!');
       reload();

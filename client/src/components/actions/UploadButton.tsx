@@ -1,10 +1,10 @@
-import axios from 'axios';
 import { useCallback, useEffect, useMemo, useRef } from 'react';
 import shallow from 'zustand/shallow';
 import { Dropdown } from 'components/buttons';
 import { useHomeStore, useUploadStore } from 'hooks/stores';
 import { UploadIcon } from 'svg/icons';
 import { alertError } from 'utils/alerts';
+import api from 'utils/api';
 import { toastSuccess } from 'utils/toasts';
 import type { ResDefault, UploadParams } from 'types/apis';
 import type { DropdownItem } from 'types/props';
@@ -29,7 +29,7 @@ export default function UploadButton() {
           path: path,
           filename: filepath,
         };
-        const { data } = await axios.post<ResDefault>('/api/s3/object/upload', file, {
+        const { data } = await api.post<ResDefault>('/s3/object/upload', file, {
           params,
           headers: { 'Content-Type': 'multipart/form-data' },
           onUploadProgress: (progressEvent: ProgressEvent) => {
