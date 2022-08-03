@@ -116,6 +116,10 @@ export interface ResponseData {
 }
 
 // etc
+export interface Session {
+  isLogin: boolean;
+}
+
 export interface ObjectInfo {
   type: string;
   name: string;

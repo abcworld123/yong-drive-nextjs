@@ -1,4 +1,4 @@
-import type { RequestData, ResponseData } from './apis';
+import type { RequestData, ResponseData, Session } from './apis';
 import type {
   Request as ExpressRequest,
   Response as ExpressResponse,
@@ -16,7 +16,7 @@ declare global {
     }
   }
   // express
-  type Request<T extends RequestData = any> = ExpressRequest<T['params'], null, T['body'], T['query']>;
+  type Request<T extends RequestData = any> = ExpressRequest<T['params'], null, T['body'], T['query']> & { session: Session };
   type Response<T extends ResponseData = any> = ExpressResponse<T>;
   type NextFunction = ExpressNextFunction;
 }
