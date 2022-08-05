@@ -17,6 +17,7 @@ export default function UploadButton() {
 
   // upload
   const upload = useCallback(async (files: File[]) => {
+    if (!files.length) return;
     setIsUploading(true);
     const totalSize = files.reduce((a, b) => a + b.size, 0);
     let curSize = 0;
