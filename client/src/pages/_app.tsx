@@ -1,4 +1,5 @@
 import 'styles/globals.scss';
+import { SHA256 } from 'crypto-js';
 import Head from 'next/head';
 import { useCallback, useEffect } from 'react';
 import Swal from 'sweetalert2';
@@ -24,7 +25,7 @@ function App({ Component, pageProps }: AppProps) {
       showLoaderOnConfirm: true,
       allowOutsideClick: shakeOutsideClick,
       preConfirm: async (pw: string) => {
-        pw = pw.trim();
+        pw = SHA256(pw.trim()).toString();
         if (!pw) Swal.showValidationMessage('비밀번호를 입력해주세요.');
         const { data } = await api.post<ResLogin>('/auth/login', { pw });
         if (!data.success) Swal.showValidationMessage('비밀번호가 일치하지 않습니다.');
