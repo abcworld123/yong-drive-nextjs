@@ -13,7 +13,6 @@ import type { GetBody, ResObjectList } from 'types/apis';
 import type { HomeProps, HomeServerSideContext } from 'types/props';
 
 const Home: NextPage<HomeProps> = ({ bucket, path }) => {
-  console.log('home');
   const setChkSet = useCheckBoxStore(state => state.setChkSet);
   const uploadObject = useUploadStore(state => state.uploadObject);
   const [isLoading, setIsLoading] = useState(false);
