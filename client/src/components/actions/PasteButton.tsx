@@ -14,7 +14,7 @@ export default function PasteButton() {
     <>
       <Button
         className={clipboard ? '' : 'hidden'}
-        startIcon={<PasteIcon size={24} fill="#444" />}  // todo paste icon
+        startIcon={<PasteIcon size={24} fill="#444" />}
         onClick={paste}
       >
       붙여넣기

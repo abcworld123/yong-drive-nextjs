@@ -1,10 +1,9 @@
 import create from 'zustand';
-import type { ObjectInfo } from 'types/apis';
 
 interface ClipboardStoreState {
   bucket: string;
   path: string;
-  objects: ObjectInfo[];
+  objects: string[];
   mode: string;
 }
 

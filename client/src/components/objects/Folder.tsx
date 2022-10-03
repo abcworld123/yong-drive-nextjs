@@ -1,11 +1,12 @@
 import Checkbox from '@mui/material/Checkbox';
 import { useEffect, useState } from 'react';
+import shallow from 'zustand/shallow';
 import { useCheckBoxStore } from 'hooks/stores';
 import { FolderIcon } from 'svg/icons';
 import type { FolderProps } from 'types/props';
 
 export default function Folder({ name, click, dblClick }: FolderProps) {
-  const chkAll = useCheckBoxStore(state => state.chkAll);
+  const [chkAll, refresh] = useCheckBoxStore(state => [state.chkAll, state.refresh], shallow);
   const [checked, setChecked] = useState(false);
 
   useEffect(() => {
@@ -14,7 +15,7 @@ export default function Folder({ name, click, dblClick }: FolderProps) {
 
   useEffect(() => {
     setChecked(chkAll);
-  }, [chkAll]);
+  }, [chkAll, refresh]);
 
   return (
     <div>

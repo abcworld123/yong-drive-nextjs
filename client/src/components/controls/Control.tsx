@@ -10,19 +10,16 @@ import {
   UploadButton,
 } from 'components/actions';
 import { ProgressCircle } from 'components/layouts';
-import { useClipboardStore } from 'hooks/stores';
 
 function Control() {
-  const clipboard = useClipboardStore(state => state.mode);
-
   return (
     <div className="flex gap-5">
       <AllCheckBox />
       <UploadButton />
       <CreateFolderButton />
+      <PasteButton />
       <CutButton />
       <CopyButton />
-      <PasteButton />
       <DownloadButton />
       <DeleteButton />
       <ProgressCircle />

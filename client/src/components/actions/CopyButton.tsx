@@ -1,22 +1,28 @@
 import { useCallback } from 'react';
 import { MainButton as Button } from 'components/buttons';
-import { useCheckBoxStore, useClipboardStore } from 'hooks/stores';
+import { useCheckBoxStore, useClipboardStore, useHomeStore } from 'hooks/stores';
 import { CopyIcon } from 'svg/icons';
 
-export default function CutButton() {
+export default function CopyButton() {
   const chkSet = useCheckBoxStore(state => state.chkSet);
-  const clipboard = useClipboardStore(state => state.mode);
 
-  const paste = useCallback(() => {
-
-  }, []);
+  const copy = useCallback(() => {
+    const { bucket, path } = useHomeStore.getState();
+    useCheckBoxStore.setState({ chkAll: false, refresh: {} });
+    useClipboardStore.setState({
+      bucket,
+      path,
+      objects: [...chkSet],
+      mode: 'copy',
+    });
+  }, [chkSet]);
 
   return (
     <>
       <Button
         className={chkSet.size ? '' : 'hidden'}
-        startIcon={<CopyIcon size={24} fill="#444" />}  // todo paste icon
-        onClick={paste}
+        startIcon={<CopyIcon size={24} fill="#444" />}
+        onClick={copy}
       >
       복사
       </Button>

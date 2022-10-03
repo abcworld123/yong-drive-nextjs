@@ -1,11 +1,12 @@
 import Checkbox from '@mui/material/Checkbox';
 import { useEffect, useState } from 'react';
+import shallow from 'zustand/shallow';
 import { useCheckBoxStore } from 'hooks/stores';
 import { FIleIcon } from 'svg/icons';
 import type { FileProps } from 'types/props';
 
 export default function File({ name, size, click }: FileProps) {
-  const chkAll = useCheckBoxStore(state => state.chkAll);
+  const [chkAll, refresh] = useCheckBoxStore(state => [state.chkAll, state.refresh], shallow);
   const [checked, setChecked] = useState(false);
 
   useEffect(() => {
@@ -14,7 +15,7 @@ export default function File({ name, size, click }: FileProps) {
 
   useEffect(() => {
     setChecked(chkAll);
-  }, [chkAll]);
+  }, [chkAll, refresh]);
 
   return (
     <div>
