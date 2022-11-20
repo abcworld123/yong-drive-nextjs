@@ -9,7 +9,7 @@ export async function pasteObjectCmd({ bucket, mode, objects, pathFrom, pathTo }
     for (const key of objects) {
       const params: CopyObjectCommandInput = {
         Bucket: bucket,
-        CopySource: `/${bucket}/${pathFrom}${key}`,
+        CopySource: encodeURI(`/${bucket}/${pathFrom}${key}`),
         Key: `${pathTo}${key}`,
       };
       console.log(params);
