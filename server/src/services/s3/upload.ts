@@ -37,7 +37,7 @@ export async function createFolderCmd({ bucket, path, foldername }: CreateFolder
     Body: null,
   };
   try {
-    const data = await s3Client.send(new PutObjectCommand(params));
+    await s3Client.send(new PutObjectCommand(params));
     return { success: true };
   } catch (err) {
     console.error('\n---\x1B[34m newFolderCmd Error \x1B[0m---\n');

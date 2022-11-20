@@ -19,9 +19,10 @@ const Home: NextPage<HomeProps> = ({ bucket, path }) => {
   const router = useRouter();
 
   const dblClick = useCallback((folder: string) => {
+    const { bucket, path } = useHomeStore.getState();
     const nxtPath = `/${bucket}/${path}${folder}`;
     router.push(nxtPath);
-  }, [path, bucket, router]);
+  }, []);
 
   const checkHandler = useCallback((name: string, isChecked: boolean) => {
     const curChkSet = useCheckBoxStore.getState().chkSet;
@@ -36,6 +37,7 @@ const Home: NextPage<HomeProps> = ({ bucket, path }) => {
   }, []);
 
   const reload = useCallback(async () => {
+    const { bucket, path } = useHomeStore.getState();
     setIsLoading(true);
     setChkSet(new Set());
     const body: GetBody = { bucket, path };
@@ -49,12 +51,16 @@ const Home: NextPage<HomeProps> = ({ bucket, path }) => {
       await alertError(err.message);
       history.back();
     }
+  }, []);
+
+  useEffect(() => {
+    useHomeStore.setState({ bucket, path });
+    reload();
   }, [bucket, path]);
 
   useEffect(() => {
-    reload();
     useHomeStore.setState({ reload });
-  }, [reload]);
+  }, []);
 
   return (
     <main>

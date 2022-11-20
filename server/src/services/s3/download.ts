@@ -1,7 +1,7 @@
 import { GetObjectCommand, PutObjectCommandInput } from '@aws-sdk/client-s3';
 import { s3Client } from 'libs';
 import { getObjectListCmd } from './get';
-import type { IncomingMessage } from 'http';
+import type { Readable } from 'stream';
 import type { DownloadRecursiveParams, DownloadSingleParams } from 'types/apis';
 
 // single file 다운로드
@@ -12,7 +12,7 @@ export async function downloadFileCmd({ bucket, path, filename }: DownloadSingle
   };
   try {
     const data = await s3Client.send(new GetObjectCommand(params));
-    const body = data.Body as IncomingMessage;
+    const body = data.Body as Readable;  // type: IncomingMessage
     const size = data.ContentLength;
     return { success: true, body, size };
   } catch (err) {

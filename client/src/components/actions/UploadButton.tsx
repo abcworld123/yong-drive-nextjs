@@ -6,6 +6,7 @@ import { UploadIcon } from 'svg/icons';
 import { alertError } from 'utils/alerts';
 import api from 'utils/api';
 import { toastSuccess } from 'utils/toasts';
+import type { AxiosProgressEvent } from 'axios';
 import type { ResDefault, UploadParams } from 'types/apis';
 import type { DropdownItem } from 'types/props';
 
@@ -33,7 +34,7 @@ export default function UploadButton() {
         const { data } = await api.post<ResDefault>('/s3/object/upload', file, {
           params,
           headers: { 'Content-Type': 'multipart/form-data' },
-          onUploadProgress: (progressEvent: ProgressEvent) => {
+          onUploadProgress: (progressEvent: AxiosProgressEvent) => {
             setProgVal(Math.ceil(((curSize + progressEvent.loaded) * 100 / totalSize)));
           },
         });

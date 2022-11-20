@@ -10,7 +10,7 @@ export async function deleteObjectCmd({ bucket, path, objects }: DeleteBody) {
     Delete: { Objects: objects.map((name) => ({ Key: `${path}${name}` })) },
   };
   try {
-    const data = await s3Client.send(new DeleteObjectsCommand(params));
+    await s3Client.send(new DeleteObjectsCommand(params));
     return { success: true };
   } catch (err) {
     console.error('\n---\x1B[34m deleteObjectCmd Error \x1B[0m---\n');
