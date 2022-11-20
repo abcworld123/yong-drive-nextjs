@@ -3,6 +3,7 @@ import { s3Client } from 'libs';
 import { getObjectListCmd } from './get';
 import type { Readable } from 'stream';
 import type { DownloadRecursiveParams, DownloadSingleParams } from 'types/apis';
+import { logError } from 'utils/logger';
 
 // single file 다운로드
 export async function downloadFileCmd({ bucket, path, filename }: DownloadSingleParams) {
@@ -16,8 +17,7 @@ export async function downloadFileCmd({ bucket, path, filename }: DownloadSingle
     const size = data.ContentLength;
     return { success: true, body, size };
   } catch (err) {
-    console.error('\n---\x1B[34m downloadObjectCmd Error \x1B[0m---\n');
-    console.error(err);
+    logError('downloadObjectCmd', err);
     return { success: false };
   }
 }

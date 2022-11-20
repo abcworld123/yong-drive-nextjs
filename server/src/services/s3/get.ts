@@ -1,5 +1,6 @@
 import { ListBucketsCommand, ListObjectsCommand, ListObjectsCommandInput } from '@aws-sdk/client-s3';
 import { s3Client } from 'libs';
+import { logError } from 'utils/logger';
 import type { GetBody, ObjectInfo } from 'types/apis';
 
 // bucket 리스트 가져오기
@@ -9,8 +10,7 @@ export async function getBucketListCmd() {
     const buckets = data.Buckets;
     return { success: true, buckets: buckets || [] };
   } catch (err) {
-    console.error('\n---\x1B[34m getBucketListCmd Error \x1B[0m---\n');
-    console.error(err);
+    logError('getBucketListCmd', err);
     return { success: false };
   }
 }
@@ -36,8 +36,7 @@ export async function getObjectListCmd({ bucket, path }: GetBody) {
     });
     return { success: true, objects };
   } catch (err) {
-    console.error('\n---\x1B[34m getObjectListCmd Error \x1B[0m---\n');
-    console.error(err);
+    logError('getObjectListCmd', err);
     return { success: false };
   }
 }

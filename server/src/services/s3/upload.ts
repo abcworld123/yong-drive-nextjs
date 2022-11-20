@@ -1,6 +1,7 @@
 import { ListObjectsCommand, PutObjectCommand, PutObjectCommandInput } from '@aws-sdk/client-s3';
 import { Upload } from '@aws-sdk/lib-storage';
 import { s3Client } from 'libs';
+import { logError } from 'utils/logger';
 import type { PassThrough } from 'stream';
 import type { CreateFolderBody, UploadParams } from 'types/apis';
 
@@ -16,8 +17,7 @@ export async function uploadObjectCmd({ bucket, path, filename }: UploadParams, 
     await upload.done();
     return { success: true };
   } catch (err) {
-    console.error('\n---\x1B[34m uploadCmd Error \x1B[0m---\n');
-    console.error(err);
+    logError('uploadCmd', err);
     return { success: false };
   }
 }
@@ -40,8 +40,7 @@ export async function createFolderCmd({ bucket, path, foldername }: CreateFolder
     await s3Client.send(new PutObjectCommand(params));
     return { success: true };
   } catch (err) {
-    console.error('\n---\x1B[34m newFolderCmd Error \x1B[0m---\n');
-    console.error(err);
+    logError('newFolderCmd', err);
     return { success: false };
   }
 }

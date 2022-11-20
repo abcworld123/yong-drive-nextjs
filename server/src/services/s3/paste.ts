@@ -1,5 +1,6 @@
 import { CopyObjectCommand, CopyObjectCommandInput } from '@aws-sdk/client-s3';
 import { s3Client } from 'libs';
+import { logError } from 'utils/logger';
 import { deleteObjectCmd } from './delete';
 import type { PasteBody } from 'types/apis';
 
@@ -20,8 +21,7 @@ export async function pasteObjectCmd({ bucket, mode, objects, pathFrom, pathTo }
     }
     return { success: true };
   } catch (err) {
-    console.error('\n---\x1B[34m pasteObjectCmd Error \x1B[0m---\n');
-    console.error(err);
+    logError('pasteObjectCmd', err);
     return { success: false };
   }
 

@@ -1,5 +1,6 @@
 import { DeleteObjectsCommand, DeleteObjectsCommandInput } from '@aws-sdk/client-s3';
 import { s3Client } from 'libs';
+import { logError } from 'utils/logger';
 import { getObjectListCmd } from './get';
 import type { DeleteBody } from 'types/apis';
 
@@ -13,8 +14,7 @@ export async function deleteObjectCmd({ bucket, path, objects }: DeleteBody) {
     await s3Client.send(new DeleteObjectsCommand(params));
     return { success: true };
   } catch (err) {
-    console.error('\n---\x1B[34m deleteObjectCmd Error \x1B[0m---\n');
-    console.error(err);
+    logError('deleteObjectCmd', err);
     return { success: false };
   }
 }
