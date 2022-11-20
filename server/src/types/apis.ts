@@ -53,6 +53,14 @@ export interface DownloadRecursiveParams {
   filenames: string[];
 }
 
+export interface PasteBody {
+  bucket: string;
+  pathFrom: string;
+  pathTo: string;
+  objects: string[];
+  mode: string;
+}
+
 // request types
 export interface ReqLogin {
   body: LoginBody;
@@ -72,6 +80,10 @@ export interface ReqDownload {
 
 export interface ReqGet {
   body: GetBody;
+}
+
+export interface ReqPaste {
+  body: PasteBody;
 }
 
 export interface ReqUpload {

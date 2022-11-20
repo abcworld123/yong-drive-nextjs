@@ -2,14 +2,14 @@ import create from 'zustand';
 
 interface ClipboardStoreState {
   bucket: string;
-  path: string;
+  pathFrom: string;
   objects: string[];
   mode: string;
 }
 
 const useClipboardStore = create<ClipboardStoreState>((set) => ({
   bucket: '',
-  path: '',
+  pathFrom: '',
   objects: [],
   mode: null,
 }));

@@ -4,7 +4,7 @@ import { getObjectListCmd } from './get';
 import type { DeleteBody } from 'types/apis';
 
 // object 삭제
-async function deleteObjectCmd({ bucket, path, objects }: DeleteBody) {
+export async function deleteObjectCmd({ bucket, path, objects }: DeleteBody) {
   const params: DeleteObjectsCommandInput = {
     Bucket: bucket,
     Delete: { Objects: objects.map((name) => ({ Key: `${path}${name}` })) },

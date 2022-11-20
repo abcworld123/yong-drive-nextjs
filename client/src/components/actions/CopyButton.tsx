@@ -11,7 +11,7 @@ export default function CopyButton() {
     useCheckBoxStore.setState({ chkAll: false, refresh: {} });
     useClipboardStore.setState({
       bucket,
-      path,
+      pathFrom: path,
       objects: [...chkSet],
       mode: 'copy',
     });
