@@ -40,7 +40,6 @@ export default function CreateFolderButton() {
     <Button
       startIcon={<CreateFolderIcon />}
       onClick={createFolder}
-      className="w-1"
     >
       <span className={styles.buttonText}>새 폴더</span>
     </Button>
