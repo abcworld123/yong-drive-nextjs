@@ -21,8 +21,10 @@ export default function File({ name, size, click }: FileProps) {
   return (
     <div>
       <div className={`${styles.objectIcon} ${checked ? styles.checkedObjectIcon : ''}`}>
-        <Checkbox className="-translate-x-14 -translate-y-14" sx={{ position: 'absolute' }} checked={checked} onClick={() => setChecked(!checked)} />
-        <FIleIcon />
+        <Checkbox className="absolute" checked={checked} onClick={() => setChecked(!checked)} />
+        <div className="grid place-items-center">
+          <FIleIcon />
+        </div>
       </div>
       <div title={name} className={`${styles.objectName} mt-5`}>
         {name}

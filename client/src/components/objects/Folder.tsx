@@ -21,8 +21,10 @@ export default function Folder({ name, click, dblClick }: FolderProps) {
   return (
     <div>
       <div className={`${styles.objectIcon} ${checked ? styles.checkedObjectIcon : ''}`} onDoubleClick={() => dblClick(name)}>
-        <Checkbox className="-translate-x-14 -translate-y-14" sx={{ position: 'absolute' }} checked={checked} onClick={() => setChecked(!checked)} />
-        <FolderIcon />
+        <Checkbox className="absolute" checked={checked} onClick={() => setChecked(!checked)} />
+        <div className="grid place-items-center">
+          <FolderIcon />
+        </div>
       </div>
       <div title={name.slice(0, -1)} className={`${styles.objectName} mt-5`}>
         {name.slice(0, -1)}
