@@ -6,12 +6,12 @@ export default function Bucket({ name, dblClick }: BucketProps) {
   return (
     <div>
       <div className={styles.objectIcon} onDoubleClick={() => dblClick(name)}>
-        <BucketIcon />
-      </div>
-      <div className="text-sm">
-        <div className="text-center mt-5">
-          {name}
+        <div className="grid place-items-center">
+          <BucketIcon />
         </div>
+      </div>
+      <div title={name} className={`${styles.objectName} mt-5`}>
+        {name}
       </div>
     </div>
   );
