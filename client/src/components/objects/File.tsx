@@ -24,13 +24,11 @@ export default function File({ name, size, click }: FileProps) {
         <Checkbox className="-translate-x-14 -translate-y-14" sx={{ position: 'absolute' }} checked={checked} onClick={() => setChecked(!checked)} />
         <FIleIcon />
       </div>
-      <div className="text-sm">
-        <div className="text-center mt-5">
-          {name}
-        </div>
-        <div className="text-center mt-2 text-neutral-400">
-          {size}
-        </div>
+      <div title={name} className={`${styles.objectName} mt-5`}>
+        {name}
+      </div>
+      <div title={size} className={`${styles.objectName} mt-2 text-neutral-400`}>
+        {size}
       </div>
     </div>
   );

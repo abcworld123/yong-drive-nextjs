@@ -24,10 +24,8 @@ export default function Folder({ name, click, dblClick }: FolderProps) {
         <Checkbox className="-translate-x-14 -translate-y-14" sx={{ position: 'absolute' }} checked={checked} onClick={() => setChecked(!checked)} />
         <FolderIcon />
       </div>
-      <div className="text-sm">
-        <div className="text-center mt-5">
-          {name.slice(0, -1)}
-        </div>
+      <div title={name.slice(0, -1)} className={`${styles.objectName} mt-5`}>
+        {name.slice(0, -1)}
       </div>
     </div>
   );

@@ -17,8 +17,8 @@
   display: grid;
   place-items: center;
   user-select: none;
-  width: 10rem;
-  height: 10rem;
+  width: 160px;
+  height: 160px;
   border: 1px solid #d1d5db;
   border-radius: 8px;
 
@@ -36,4 +36,14 @@
     background-color: #c0e3ff;
     border-color: #86c8ff;
   }
+}
+
+.objectName {
+  width: 160px;
+  padding: 0 10px;
+  font-size: 14px;
+  text-align: center;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
 }
