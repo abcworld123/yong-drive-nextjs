@@ -21,7 +21,7 @@ export default function CopyButton() {
     <>
       <Button
         className={chkSet.size ? '' : 'hidden'}
-        startIcon={<CopyIcon size={24} fill="#444" />}
+        startIcon={<CopyIcon />}
         onClick={copy}
       >
       복사

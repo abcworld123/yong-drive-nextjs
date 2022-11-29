@@ -39,7 +39,7 @@ export default function DeleteButton() {
   return (
     <Button
       className={chkSet.size ? '' : 'hidden'}
-      startIcon={<DeleteIcon size={24} fill="#444" />}
+      startIcon={<DeleteIcon />}
       onClick={deleteObject}
     >
         삭제

@@ -37,7 +37,7 @@ export default function CreateFolderButton() {
 
   return (
     <Button
-      startIcon={<CreateFolderIcon size={24} fill="#444" />}
+      startIcon={<CreateFolderIcon />}
       onClick={createFolder}
     >
       새 폴더

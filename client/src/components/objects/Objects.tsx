@@ -1,5 +1,6 @@
 import { memo } from 'react';
 import { useHomeStore } from 'hooks/stores';
+import styles from 'styles/Layouts.module.scss';
 import { convUnit } from 'utils/tools';
 import { File, Folder } from '.';
 import type { ObjectProps } from 'types/props';
@@ -16,7 +17,7 @@ function Objects({ click, dblClick }: ObjectProps) {
     }
   });
   return (
-    <div className="object-container">
+    <div className={styles.objectContainer}>
       {arr}
     </div>
   );

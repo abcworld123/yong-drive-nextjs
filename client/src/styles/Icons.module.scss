@@ -1,0 +1,32 @@
+.bucket {
+  width: 128px;
+  height: 128px;
+}
+
+.folder {
+  width: 88px;
+  height: 88px;
+  fill: #f9cd52;
+}
+
+.file {
+  width: 88px;
+  height: 88px;
+  fill: #707070;
+}
+
+.button {
+  width: 24px;
+  height: 24px;
+  fill: #444;
+}
+
+.loader {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 150px;
+  height: 150px;
+  margin-left: -75px;
+  margin-top: -75px;
+}

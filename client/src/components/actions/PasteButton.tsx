@@ -40,7 +40,7 @@ export default function PasteButton() {
     <>
       <Button
         className={mode ? '' : 'hidden'}
-        startIcon={<PasteIcon size={24} fill="#444" />}
+        startIcon={<PasteIcon />}
         onClick={paste}
       >
       붙여넣기

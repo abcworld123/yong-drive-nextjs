@@ -61,7 +61,7 @@ function App({ Component, pageProps }: AppProps) {
       {
         isLogin === true
           ? <Component {...pageProps} />
-          : <Loader size={150} />
+          : <Loader />
       }
     </>
   );

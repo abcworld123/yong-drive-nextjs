@@ -32,7 +32,7 @@ export default function DownloadButton() {
     <>
       <Button
         className={chkSet.size ? '' : 'hidden'}
-        startIcon={<DownloadIcon size={24} fill="#444" />}
+        startIcon={<DownloadIcon />}
         onClick={downloadObject}
       >
       다운로드

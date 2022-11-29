@@ -5,6 +5,7 @@ import { Control } from 'components/controls';
 import { Objects } from 'components/objects';
 import { Dnd } from 'components/utils';
 import { useCheckBoxStore, useHomeStore, useUploadStore } from 'hooks/stores';
+import styles from 'styles/Layouts.module.scss';
 import Loader from 'svg/Loader';
 import { alertError } from 'utils/alerts';
 import api from 'utils/api';
@@ -65,10 +66,10 @@ const Home: NextPage<HomeProps> = ({ bucket, path }) => {
   return (
     <main>
       <Dnd onDrop={uploadObject}>
-        <div className="main-container">
+        <div className={styles.mainContainer}>
           <Control />
           { isLoading
-            ? <Loader size={150} />
+            ? <Loader />
             : <Objects click={checkHandler} dblClick={dblClick} /> }
         </div>
       </Dnd>

@@ -64,7 +64,7 @@ export default function UploadButton() {
   return (
     <>
       <Dropdown
-        startIcon={<UploadIcon size={24} fill="#444" />}
+        startIcon={<UploadIcon />}
         buttonName="올리기"
         items={menuItems}
       />

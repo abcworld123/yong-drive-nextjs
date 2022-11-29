@@ -2,6 +2,7 @@ import Checkbox from '@mui/material/Checkbox';
 import { useEffect, useState } from 'react';
 import shallow from 'zustand/shallow';
 import { useCheckBoxStore } from 'hooks/stores';
+import styles from 'styles/Layouts.module.scss';
 import { FIleIcon } from 'svg/icons';
 import type { FileProps } from 'types/props';
 
@@ -19,9 +20,9 @@ export default function File({ name, size, click }: FileProps) {
 
   return (
     <div>
-      <div className={`object-icon ${checked ? 'object-icon-checked' : ''}`}>
+      <div className={`${styles.objectIcon} ${checked ? styles.checkedObjectIcon : ''}`}>
         <Checkbox className="-translate-x-14 -translate-y-14" sx={{ position: 'absolute' }} checked={checked} onClick={() => setChecked(!checked)} />
-        <FIleIcon size={88} fill="#707070" />
+        <FIleIcon />
       </div>
       <div className="text-sm">
         <div className="text-center mt-5">

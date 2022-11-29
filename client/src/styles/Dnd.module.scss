@@ -1,0 +1,28 @@
+.outer {
+  position: fixed;
+  width: 100vw;
+  height: 100vh;
+  left: 0;
+  top: 0;
+  padding: 20px;
+  background-color: #0008;
+  pointer-events: none;
+  @apply transition-opacity duration-300;
+}
+
+.inner {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+  height: 100%;
+  color: white;
+  font-size: 24px;
+  border: 4px dashed #d6d3d1;
+  border-radius: 24px;
+}
+
+.hide {
+  opacity: 0;
+}

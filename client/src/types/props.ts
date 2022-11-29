@@ -35,11 +35,6 @@ export interface DownloaderProps {
   body: DownloadBody;
 }
 
-export interface SvgProps {
-  size?: number;
-  fill?: string;
-}
-
 export interface DropdownItem {
   name: string;
   action: () => void;

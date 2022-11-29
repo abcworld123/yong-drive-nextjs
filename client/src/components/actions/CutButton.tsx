@@ -21,7 +21,7 @@ export default function CutButton() {
     <>
       <Button
         className={chkSet.size ? '' : 'hidden'}
-        startIcon={<CutIcon size={24} fill="#444" />}
+        startIcon={<CutIcon />}
         onClick={cut}
       >
       잘라내기

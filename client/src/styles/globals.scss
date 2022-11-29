@@ -2,43 +2,10 @@
 @tailwind components;
 @tailwind utilities;
 
+// overwrite tailwind preflight
 @layer base {
   button, [type='button'], [type='reset'], [type='submit'] {
     @apply bg-[#e0e0ea];
-  }
-}
-
-.main-container {
-  @apply flex flex-col gap-y-10 mx-auto py-20 w-2/3;
-}
-
-.object-container {
-  @apply container flex gap-x-8 gap-y-10 flex-wrap;
-}
-
-.object-icon {
-  @apply border-[1px] border-gray-300 rounded-lg w-40 h-40 grid place-items-center select-none;
-
-  &:hover {
-    @apply bg-[#e5f3ff] border-[#c6e3fd];
-  }
-
-  &-checked {
-    @apply bg-[#cce8ff] border-[#94cfff];
-
-    &:hover {
-      @apply bg-[#c0e3ff] border-[#86c8ff];
-    }
-  }
-}
-
-.dnd {
-  &-outer {
-    @apply fixed h-screen w-screen left-0 top-0 p-5 bg-[#0008] transition-opacity duration-300 pointer-events-none;     
-  }
-
-  &-inner {
-    @apply flex flex-col justify-center items-center gap-10 h-full border-4 border-separate border-stone-300 border-dashed rounded-3xl text-white text-2xl;
   }
 }
 

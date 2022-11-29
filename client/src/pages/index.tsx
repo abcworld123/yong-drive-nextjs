@@ -1,6 +1,7 @@
 import { useRouter } from 'next/router';
 import { useCallback, useEffect, useState } from 'react';
 import { Bucket } from 'components/objects';
+import styles from 'styles/Layouts.module.scss';
 import { alertError } from 'utils/alerts';
 import api from 'utils/api';
 import type { NextPage } from 'next';
@@ -34,8 +35,8 @@ const BucketSelectPage: NextPage = () => {
 
   return (
     <main>
-      <div className="main-container">
-        <div className="object-container">
+      <div className={styles.mainContainer}>
+        <div className={styles.objectContainer}>
           {objects}
         </div>
       </div>

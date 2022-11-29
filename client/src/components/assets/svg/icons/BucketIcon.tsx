@@ -1,9 +1,9 @@
 import { memo } from 'react';
-import type { SvgProps } from 'types/props';
+import styles from 'styles/Icons.module.scss';
 
-function BucketIcon({ size }: SvgProps) {
+function BucketIcon() {
   return (
-    <svg xmlns="http://www.w3.org/2000/svg" width={size} height={size} viewBox="0 0 100 100">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" className={styles.bucket}>
       <path
         d="M22.812 35.714a1.726 1.726 0 0 1-.17-.715l.17.715zM77.188 35.714l.17-.715c0 .24-.058.479-.17.715z"
         fill="#8C3323"

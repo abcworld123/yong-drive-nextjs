@@ -2,6 +2,7 @@ import Checkbox from '@mui/material/Checkbox';
 import { useEffect, useState } from 'react';
 import shallow from 'zustand/shallow';
 import { useCheckBoxStore } from 'hooks/stores';
+import styles from 'styles/Layouts.module.scss';
 import { FolderIcon } from 'svg/icons';
 import type { FolderProps } from 'types/props';
 
@@ -19,9 +20,9 @@ export default function Folder({ name, click, dblClick }: FolderProps) {
 
   return (
     <div>
-      <div className={`object-icon ${checked ? 'object-icon-checked' : ''}`} onDoubleClick={() => dblClick(name)}>
+      <div className={`${styles.objectIcon} ${checked ? styles.checkedObjectIcon : ''}`} onDoubleClick={() => dblClick(name)}>
         <Checkbox className="-translate-x-14 -translate-y-14" sx={{ position: 'absolute' }} checked={checked} onClick={() => setChecked(!checked)} />
-        <FolderIcon size={88} fill="#f9cd52" />
+        <FolderIcon />
       </div>
       <div className="text-sm">
         <div className="text-center mt-5">
