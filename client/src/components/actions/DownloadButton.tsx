@@ -3,6 +3,7 @@ import shallow from 'zustand/shallow';
 import { MainButton as Button } from 'components/buttons';
 import { Downloader } from 'components/utils';
 import { useCheckBoxStore, useHomeStore } from 'hooks/stores';
+import styles from 'styles/Layouts.module.scss';
 import { DownloadIcon } from 'svg/icons';
 import type { DownloadBody } from 'types/apis';
 
@@ -35,7 +36,7 @@ export default function DownloadButton() {
         startIcon={<DownloadIcon />}
         onClick={downloadObject}
       >
-      다운로드
+        <span className={styles.buttonText}>다운로드</span>
       </Button>
       <Downloader body={downloadBody} />
     </>

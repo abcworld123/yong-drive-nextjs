@@ -4,13 +4,19 @@
   gap: 40px 0;
   margin: 0 auto;
   padding: 80px 0;
-  width: 70%;
+  width: 80%;
+}
+
+.controlContainer {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
 }
 
 .objectContainer {
-  display: flex;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, 160px);
   gap: 40px 32px;
-  flex-wrap: wrap;
 }
 
 .objectIcon {
@@ -37,6 +43,10 @@
   }
 }
 
+.checkbox {
+  position: absolute !important;
+}
+
 .objectName {
   width: 160px;
   padding: 0 10px;
@@ -45,4 +55,39 @@
   text-overflow: ellipsis;
   overflow: hidden;
   white-space: nowrap;
+}
+
+// mobile
+@media (max-width: 480px) {
+  .mainContainer {
+    gap: 50px 0;
+    padding: 60px 0;
+    width: 90%;
+  }
+
+  .controlContainer {
+    justify-content: center;
+  }
+
+  .objectContainer {
+    grid-template-columns: repeat(auto-fill, 100px);
+    justify-content: center;
+  }
+
+  .objectIcon {
+    width: 100px;
+    height: 100px;
+  }
+
+  .checkbox {
+    display: none !important;
+  }
+
+  .objectName {
+    width: 100px;
+    padding: 0 5px;
+  }
+  .buttonText {
+    display: none;
+  }
 }

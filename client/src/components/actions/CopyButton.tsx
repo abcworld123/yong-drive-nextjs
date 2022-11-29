@@ -1,6 +1,7 @@
 import { useCallback } from 'react';
 import { MainButton as Button } from 'components/buttons';
 import { useCheckBoxStore, useClipboardStore, useHomeStore } from 'hooks/stores';
+import styles from 'styles/Layouts.module.scss';
 import { CopyIcon } from 'svg/icons';
 
 export default function CopyButton() {
@@ -24,7 +25,7 @@ export default function CopyButton() {
         startIcon={<CopyIcon />}
         onClick={copy}
       >
-      복사
+        <span className={styles.buttonText}>복사</span>
       </Button>
     </>
   );

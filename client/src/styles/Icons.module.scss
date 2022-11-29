@@ -30,3 +30,21 @@
   margin-left: -75px;
   margin-top: -75px;
 }
+
+// mobile
+@media (max-width: 480px) {
+  .bucket {
+    width: 100px;
+    height: 100px;
+  }
+
+  .folder {
+    width: 70px;
+    height: 70px;
+  }
+
+  .file {
+    width: 70px;
+    height: 70px;
+  }
+}

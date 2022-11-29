@@ -1,6 +1,7 @@
 import { useCallback } from 'react';
 import { MainButton as Button } from 'components/buttons';
 import { useClipboardStore, useHomeStore } from 'hooks/stores';
+import styles from 'styles/Layouts.module.scss';
 import { PasteIcon } from 'svg/icons';
 import { alertError } from 'utils/alerts';
 import api from 'utils/api';
@@ -43,7 +44,7 @@ export default function PasteButton() {
         startIcon={<PasteIcon />}
         onClick={paste}
       >
-      붙여넣기
+        <span className={styles.buttonText}>붙여넣기</span>
       </Button>
     </>
   );

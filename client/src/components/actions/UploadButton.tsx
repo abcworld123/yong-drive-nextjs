@@ -65,7 +65,7 @@ export default function UploadButton() {
     <>
       <Dropdown
         startIcon={<UploadIcon />}
-        buttonName="올리기"
+        buttonName={window.innerWidth > 480 ? '올리기' : ''}
         items={menuItems}
       />
       <input

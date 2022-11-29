@@ -3,6 +3,7 @@ import Swal from 'sweetalert2';
 import shallow from 'zustand/shallow';
 import { MainButton as Button } from 'components/buttons';
 import { useHomeStore } from 'hooks/stores';
+import styles from 'styles/Layouts.module.scss';
 import { CreateFolderIcon } from 'svg/icons';
 import { alertError } from 'utils/alerts';
 import api from 'utils/api';
@@ -39,8 +40,9 @@ export default function CreateFolderButton() {
     <Button
       startIcon={<CreateFolderIcon />}
       onClick={createFolder}
+      className="w-1"
     >
-      새 폴더
+      <span className={styles.buttonText}>새 폴더</span>
     </Button>
   );
 }

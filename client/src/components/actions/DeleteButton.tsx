@@ -2,6 +2,7 @@ import { useCallback } from 'react';
 import shallow from 'zustand/shallow';
 import { MainButton as Button } from 'components/buttons';
 import { useCheckBoxStore, useHomeStore } from 'hooks/stores';
+import styles from 'styles/Layouts.module.scss';
 import { DeleteIcon } from 'svg/icons';
 import { alertConfirm, alertError, alertWait } from 'utils/alerts';
 import api from 'utils/api';
@@ -42,7 +43,7 @@ export default function DeleteButton() {
       startIcon={<DeleteIcon />}
       onClick={deleteObject}
     >
-        삭제
+      <span className={styles.buttonText}>삭제</span>
     </Button>
   );
 }
