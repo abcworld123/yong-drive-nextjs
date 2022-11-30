@@ -13,7 +13,6 @@ export async function pasteObjectCmd({ bucket, mode, objects, pathFrom, pathTo }
         CopySource: encodeURI(`/${bucket}/${pathFrom}${key}`),
         Key: `${pathTo}${key}`,
       };
-      console.log(params);
       await s3Client.send(new CopyObjectCommand(params));
     }
     if (mode === 'cut') {

@@ -17,7 +17,7 @@ async function sendSingleFile(res: Response, params: DownloadSingleParams) {
 async function sendSingleFolder(res: Response, params: DownloadSingleParams, zipName: string) {
   const { bucket, path, filename } = params;
   const { success, objects } = await getObjectListCmd({ bucket, path: path + filename });
-  if (!success) res.status(500).send(null);
+  if (!success) res.status(500).end();
   else {
     const filenamesInFoler = objects.map((object) => object.name);
     sendZip(res, { bucket, path: path + filename, filenames: filenamesInFoler }, zipName);
