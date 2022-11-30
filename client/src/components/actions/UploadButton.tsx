@@ -52,10 +52,16 @@ export default function UploadButton() {
     }
   }, [bucket, reload, path]);
 
-  const menuItems: DropdownItem[] = useMemo(() => [
-    { name: '파일 업로드', action: () => inputFile.current.click() },
-    { name: '폴더 업로드', action: () => inputFolder.current.click() },
-  ], []);
+  const isMobile = useMemo(() => {
+    return 'ontouchstart' in document.documentElement;
+  }, []);
+
+  const menuItems: DropdownItem[] = useMemo(() => {
+    const fileUpload = { name: '파일 업로드', action: () => inputFile.current.click() };
+    const folderUpload = { name: '폴더 업로드', action: () => inputFolder.current.click() };
+    if (!isMobile) return [fileUpload, folderUpload];
+    else return [fileUpload];
+  }, []);
 
   useEffect(() => {
     useUploadStore.setState({ uploadObject: upload });
