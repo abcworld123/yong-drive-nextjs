@@ -11,18 +11,18 @@ export interface HomeProps {
 
 export interface BucketProps {
   name: string;
-  dblClick: (bucketName: string) => void;
+  intoBucket: (bucket: string) => void;
 }
 
 export interface ObjectProps {
   click: checkHandler;
-  dblClick: (folder: string) => void;
+  intoFolder: (folder: string) => void;
 }
 
 export interface FolderProps {
   name: string;
   click: checkHandler;
-  dblClick: (name: string) => void;
+  intoFolder: (name: string) => void;
 }
 
 export interface FileProps {

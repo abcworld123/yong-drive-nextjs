@@ -19,7 +19,7 @@ const Home: NextPage<HomeProps> = ({ bucket, path }) => {
   const [isLoading, setIsLoading] = useState(false);
   const router = useRouter();
 
-  const dblClick = useCallback((folder: string) => {
+  const intoFolder = useCallback((folder: string) => {
     const { bucket, path } = useHomeStore.getState();
     const nxtPath = `/${bucket}/${path}${folder}`;
     router.push(nxtPath);
@@ -70,7 +70,7 @@ const Home: NextPage<HomeProps> = ({ bucket, path }) => {
           <Control />
           { isLoading
             ? <Loader />
-            : <Objects click={checkHandler} dblClick={dblClick} /> }
+            : <Objects click={checkHandler} intoFolder={intoFolder} /> }
         </div>
       </Dnd>
     </main>

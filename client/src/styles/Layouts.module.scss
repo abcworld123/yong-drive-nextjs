@@ -26,21 +26,11 @@
   height: 160px;
   border: 1px solid #d1d5db;
   border-radius: 8px;
-
-  &:hover {
-    background-color: #e5f3ff;
-    border-color: #c6e3fd;
-  }
 }
 
 .checkedObjectIcon {
   background-color: #cce8ff;
   border-color: #94cfff;
-
-  &:hover {
-    background-color: #c0e3ff;
-    border-color: #86c8ff;
-  }
 }
 
 .checkbox {
@@ -89,5 +79,18 @@
   }
   .buttonText {
     display: none;
+  }
+}
+
+// not mobile
+@media (min-width: 481px) {
+  .objectIcon:hover {
+    background-color: #e5f3ff;
+    border-color: #c6e3fd;
+  }
+
+  .checkedObjectIcon:hover {
+    background-color: #c0e3ff;
+    border-color: #86c8ff;
   }
 }

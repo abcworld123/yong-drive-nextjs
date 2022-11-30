@@ -24,6 +24,7 @@
     "react-dropzone": "^14.2.3",
     "sharp": "^0.31.2",
     "sweetalert2": "^11.6.10",
+    "use-long-press": "^2.0.2",
     "zustand": "^4.1.4"
   },
   "devDependencies": {

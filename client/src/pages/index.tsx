@@ -11,7 +11,7 @@ const BucketSelectPage: NextPage = () => {
   const router = useRouter();
   const [objects, setObjects] = useState<React.ReactElement[]>([]);
 
-  const dblClick = useCallback((bucket: string) => {
+  const intoBucket = useCallback((bucket: string) => {
     router.push(`/${bucket}`);
   }, [router]);
 
@@ -20,14 +20,14 @@ const BucketSelectPage: NextPage = () => {
     if (data.success) {
       const arr: React.ReactElement[] = [];
       data.buckets.forEach(({ Name: name }) => {
-        arr.push(<Bucket key={name} name={name} dblClick={dblClick} />);
+        arr.push(<Bucket key={name} name={name} intoBucket={intoBucket} />);
       });
       setObjects(arr);
     } else {
       await alertError('데이터를 가져오는 중 오류가 발생했습니다.');
       history.back();
     }
-  }, [dblClick]);
+  }, [intoBucket]);
 
   useEffect(() => {
     reload();
