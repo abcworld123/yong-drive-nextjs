@@ -7,7 +7,7 @@ interface ClipboardStoreState {
   mode: string;
 }
 
-const useClipboardStore = create<ClipboardStoreState>((set) => ({
+const useClipboardStore = create<ClipboardStoreState>()((set) => ({
   bucket: '',
   pathFrom: '',
   objects: [],

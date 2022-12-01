@@ -5,7 +5,7 @@ interface CheckBoxStoreState {
   chkAll: boolean;
 }
 
-const useCheckBoxStore = create<CheckBoxStoreState>((set) => ({
+const useCheckBoxStore = create<CheckBoxStoreState>()((set) => ({
   chkSet: new Set<string>(),
   chkAll: false,
 }));

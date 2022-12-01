@@ -8,7 +8,7 @@ interface UploadStoreState {
   setProgVal: (newState: number) => void;
 }
 
-const useUploadStore = create<UploadStoreState>((set) => ({
+const useUploadStore = create<UploadStoreState>()((set) => ({
   isUploading: false,
   progVal: 0,
   uploadObject: null,

@@ -8,7 +8,7 @@ interface HomeStoreState {
   reload: () => void;
 }
 
-const useHomeStore = create<HomeStoreState>((set) => ({
+const useHomeStore = create<HomeStoreState>()((set) => ({
   bucket: '',
   path: '',
   objects: [],
