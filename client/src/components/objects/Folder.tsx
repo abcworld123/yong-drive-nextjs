@@ -1,52 +1,35 @@
 import Checkbox from '@mui/material/Checkbox';
-import { useCallback, useEffect, useState } from 'react';
-import { useLongPress, LongPressDetectEvents } from 'use-long-press';
-import shallow from 'zustand/shallow';
-import { useCheckBoxStore } from 'hooks/stores';
+import { memo, useCallback } from 'react';
+import { LongPressDetectEvents, useLongPress } from 'use-long-press';
 import styles from 'styles/Layouts.module.scss';
 import { FolderIcon } from 'svg/icons';
 import type { FolderProps } from 'types/props';
 
-export default function Folder({ name, click, intoFolder }: FolderProps) {
-  const [chkSet, chkAll, refresh] = useCheckBoxStore(state => [state.chkSet, state.chkAll, state.refresh], shallow);
-  const [checked, setChecked] = useState(false);
-
-  useEffect(() => {
-    click(name, checked);
-  }, [name, checked]);  // eslint-disable-line react-hooks/exhaustive-deps
-
-  useEffect(() => {
-    setChecked(chkAll);
-  }, [chkAll, refresh]);
-
-  const toggleCheckBox = useCallback(() => {
-    setChecked(checked => !checked);
+function Folder({ name, check, checked, checkMode, intoFolder }: FolderProps) {
+  const toggleCheck = useCallback(() => {
+    check(name);
   }, []);
 
-  const longPress = useCallback(() => {
-    toggleCheckBox();
-  }, []);
-
-  const longPressBind = useLongPress(!chkSet.size ? longPress : null, {
+  const longPressBind = useLongPress(!checkMode ? toggleCheck : null, {
     threshold: 400,
     captureEvent: true,
     cancelOnMovement: false,
     detect: LongPressDetectEvents.TOUCH,
   });
 
-  const onclick = useCallback((e: React.MouseEvent<HTMLDivElement, MouseEvent>, name: string) => {
-    if (e.target instanceof HTMLInputElement) return;  // isCheckBox
-    if (!chkSet.size) {
+  const clickFolder = useCallback((target: EventTarget, name: string) => {
+    if (target instanceof HTMLInputElement) return;  // isCheckBox
+    if (!checkMode) {
       intoFolder(name);
     } else {
-      toggleCheckBox();
+      toggleCheck();
     }
-  }, [chkSet]);
+  }, [checkMode]);
 
   return (
     <div>
-      <div className={`${styles.objectIcon} ${checked ? styles.checkedObjectIcon : ''} cursor-pointer`} onClick={e => onclick(e, name)}>
-        <Checkbox className={styles.checkbox} checked={checked} onClick={toggleCheckBox} />
+      <div className={`${styles.objectIcon} ${checked ? styles.checkedObjectIcon : ''} cursor-pointer`} onClick={e => clickFolder(e.target, name)}>
+        <Checkbox className={styles.checkbox} checked={checked} onClick={toggleCheck} />
         <div {...longPressBind()} className="grid place-items-center">
           <FolderIcon />
         </div>
@@ -57,3 +40,5 @@ export default function Folder({ name, click, intoFolder }: FolderProps) {
     </div>
   );
 }
+
+export default memo(Folder);

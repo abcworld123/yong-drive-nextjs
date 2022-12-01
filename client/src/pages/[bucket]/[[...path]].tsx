@@ -14,7 +14,7 @@ import type { GetBody, ResObjectList } from 'types/apis';
 import type { HomeProps, HomeServerSideContext } from 'types/props';
 
 const Home: NextPage<HomeProps> = ({ bucket, path }) => {
-  const setChkSet = useCheckBoxStore(state => state.setChkSet);
+  const chkAll = useCheckBoxStore(state => state.chkAll);
   const uploadObject = useUploadStore(state => state.uploadObject);
   const [isLoading, setIsLoading] = useState(false);
   const router = useRouter();
@@ -25,22 +25,18 @@ const Home: NextPage<HomeProps> = ({ bucket, path }) => {
     router.push(nxtPath);
   }, []);
 
-  const checkHandler = useCallback((name: string, isChecked: boolean) => {
-    const curChkSet = useCheckBoxStore.getState().chkSet;
-    const has = curChkSet.has(name);
-    if (!has && isChecked) {
-      curChkSet.add(name);
-      setChkSet(new Set(curChkSet));
-    } else if (has && !isChecked) {
-      curChkSet.delete(name);
-      setChkSet(new Set(curChkSet));
-    }
+  const checkHandler = useCallback((name: string) => {
+    const chkSet = useCheckBoxStore.getState().chkSet;
+    const has = chkSet.has(name);
+    if (!has) chkSet.add(name);
+    else chkSet.delete(name);
+    useCheckBoxStore.setState({ chkSet: new Set(chkSet) });
   }, []);
 
   const reload = useCallback(async () => {
     const { bucket, path } = useHomeStore.getState();
     setIsLoading(true);
-    setChkSet(new Set());
+    useCheckBoxStore.setState({ chkSet: new Set() });
     const body: GetBody = { bucket, path };
     try {
       const { data } = await api.post<ResObjectList>('/s3/object/get', body);
@@ -63,6 +59,11 @@ const Home: NextPage<HomeProps> = ({ bucket, path }) => {
     useHomeStore.setState({ reload });
   }, []);
 
+  useEffect(() => {
+    const names = useHomeStore.getState().objects.map(x => x.name);
+    useCheckBoxStore.setState({ chkSet: new Set(chkAll ? names : null) });
+  }, [chkAll]);
+
   return (
     <main>
       <Dnd onDrop={uploadObject}>
@@ -70,7 +71,7 @@ const Home: NextPage<HomeProps> = ({ bucket, path }) => {
           <Control />
           { isLoading
             ? <Loader />
-            : <Objects click={checkHandler} intoFolder={intoFolder} /> }
+            : <Objects check={checkHandler} intoFolder={intoFolder} /> }
         </div>
       </Dnd>
     </main>

@@ -2,7 +2,7 @@ import type { DownloadBody } from './apis';
 import type { GetServerSidePropsContext } from 'next';
 import type { DropzoneOptions } from 'react-dropzone';
 
-type checkHandler = (name: string, isChecked: boolean) => void;
+type checkHandler = (name: string) => void;
 
 export interface HomeProps {
   bucket: string;
@@ -15,20 +15,24 @@ export interface BucketProps {
 }
 
 export interface ObjectProps {
-  click: checkHandler;
+  check: checkHandler;
   intoFolder: (folder: string) => void;
 }
 
 export interface FolderProps {
   name: string;
-  click: checkHandler;
+  check: checkHandler;
+  checked: boolean;
+  checkMode: boolean;
   intoFolder: (name: string) => void;
 }
 
 export interface FileProps {
   name: string;
+  check: checkHandler;
+  checked: boolean;
+  checkMode: boolean;
   size: string;
-  click: checkHandler;
 }
 
 export interface DownloaderProps {
