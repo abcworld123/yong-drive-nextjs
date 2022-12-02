@@ -1,15 +1,22 @@
 import { Checkbox } from '@mui/material';
-import { useCallback } from 'react';
+import { useCallback, useEffect } from 'react';
+import shallow from 'zustand/shallow';
 import { MainButton as Button } from 'components/buttons';
 import { useCheckBoxStore, useHomeStore } from 'hooks/stores';
 
 export default function AllCheckBox() {
   const objects = useHomeStore(state => state.objects);
-  const chkAll = useCheckBoxStore(state => state.chkAll);
+  const [chkSet, chkAll] = useCheckBoxStore(state => [state.chkSet, state.chkAll], shallow);
 
   const toggleChkAll = useCallback(() => {
     useCheckBoxStore.setState(state => ({ chkAll: !state.chkAll }));
   }, []);
+
+  useEffect(() => {
+    if (chkSet.size === 0) {
+      useCheckBoxStore.setState({ chkAll: false });
+    }
+  }, [chkSet]);
 
   return (
     <Button onClick={toggleChkAll}>
