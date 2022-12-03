@@ -4,7 +4,7 @@ import styles from 'styles/Icons.module.scss';
 function DeleteIcon() {
   return (
     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48" className={styles.button}>
-      <path d="M19.75 33.35 24 29.1 28.25 33.35 30.35 31.25 26.1 27 30.35 22.75 28.25 20.65 24 24.9 19.75 20.65 17.65 22.75 21.9 27 17.65 31.25ZM10.5 11V8H17.2L19.2 6H28.8L30.8 8H37.5V11ZM15 42Q13.8 42 12.9 41.1Q12 40.2 12 39V12H36V39Q36 40.2 35.1 41.1Q34.2 42 33 42Z" />
+      <path d="M13.05 42q-1.25 0-2.125-.875T10.05 39V10.5H8v-3h9.4V6h13.2v1.5H40v3h-2.05V39q0 1.2-.9 2.1-.9.9-2.1.9Zm21.9-31.5h-21.9V39h21.9Zm-16.6 24.2h3V14.75h-3Zm8.3 0h3V14.75h-3Zm-13.6-24.2V39Z" />
     </svg>
   );
 }
