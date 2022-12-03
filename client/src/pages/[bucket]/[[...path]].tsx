@@ -1,6 +1,7 @@
 import 'animate.css';
 import { useRouter } from 'next/router';
 import { useCallback, useEffect, useState } from 'react';
+import shallow from 'zustand/shallow';
 import { Control } from 'components/controls';
 import { Objects } from 'components/objects';
 import { Dnd } from 'components/utils';
@@ -14,7 +15,7 @@ import type { GetBody, ResObjectList } from 'types/apis';
 import type { HomeProps, HomeServerSideContext } from 'types/props';
 
 const Home: NextPage<HomeProps> = ({ bucket, path }) => {
-  const chkAll = useCheckBoxStore(state => state.chkAll);
+  const [chkSet, chkAll] = useCheckBoxStore(state => [state.chkSet, state.chkAll], shallow);
   const uploadObject = useUploadStore(state => state.uploadObject);
   const [isLoading, setIsLoading] = useState(false);
   const router = useRouter();
@@ -68,7 +69,7 @@ const Home: NextPage<HomeProps> = ({ bucket, path }) => {
     <main>
       <Dnd onDrop={uploadObject}>
         <div className={styles.mainContainer}>
-          <Control />
+          <Control checkMode={chkSet.size > 0} />
           { isLoading
             ? <Loader />
             : <Objects check={checkHandler} intoFolder={intoFolder} /> }

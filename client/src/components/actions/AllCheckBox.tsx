@@ -1,12 +1,12 @@
 import { useCallback, useEffect } from 'react';
-import shallow from 'zustand/shallow';
 import { Button, CheckBox } from 'components/buttons';
 import { useCheckBoxStore, useHomeStore } from 'hooks/stores';
 import styles from 'styles/Layouts.module.scss';
+import type { ClipboardButtonProps } from 'types/props';
 
-export default function AllCheckBox() {
+export default function AllCheckBox({ checkMode }: ClipboardButtonProps) {
   const objects = useHomeStore(state => state.objects);
-  const [chkSet, chkAll] = useCheckBoxStore(state => [state.chkSet, state.chkAll], shallow);
+  const chkAll = useCheckBoxStore(state => state.chkAll);
 
   const toggleChkAll = useCallback((target: EventTarget) => {
     console.log(target.constructor.name);
@@ -15,10 +15,10 @@ export default function AllCheckBox() {
   }, []);
 
   useEffect(() => {
-    if (chkSet.size === 0) {
+    if (!checkMode) {
       useCheckBoxStore.setState({ chkAll: false });
     }
-  }, [chkSet]);
+  }, [checkMode]);
 
   return (
     <Button

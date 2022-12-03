@@ -7,13 +7,14 @@ import { alertConfirm, alertError, alertWait } from 'utils/alerts';
 import api from 'utils/api';
 import { toastSuccess } from 'utils/toasts';
 import type { DeleteBody, ResDefault } from 'types/apis';
+import type { ClipboardButtonProps } from 'types/props';
 
-export default function DeleteButton() {
+export default function DeleteButton({ checkMode }: ClipboardButtonProps) {
   const [bucket, path, reload] = useHomeStore(state => [state.bucket, state.path, state.reload], shallow);
-  const chkSet = useCheckBoxStore(state => state.chkSet);
 
   // delete
   const deleteObject = useCallback(async () => {
+    const { chkSet } = useCheckBoxStore.getState();
     const isConfirmed = (await alertConfirm(
       '정말 삭제하시겠습니까?',
       '삭제된 항목은 복구할 수 없습니다.',
@@ -34,13 +35,13 @@ export default function DeleteButton() {
       alertError(err.message);
       console.error(err);
     }
-  }, [bucket, chkSet, path, reload]);
+  }, [bucket, path, reload]);
 
   return (
     <Button
       icon={<DeleteIcon />}
       text="삭제"
-      className={chkSet.size ? '' : 'hidden'}
+      className={checkMode ? '' : 'hidden'}
       onClick={deleteObject}
       responsive
     />

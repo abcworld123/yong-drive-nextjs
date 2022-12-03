@@ -5,15 +5,15 @@ import { Downloader } from 'components/utils';
 import { useCheckBoxStore, useHomeStore } from 'hooks/stores';
 import { DownloadIcon } from 'svg/icons';
 import type { DownloadBody } from 'types/apis';
+import type { ClipboardButtonProps } from 'types/props';
 
-export default function DownloadButton() {
+export default function DownloadButton({ checkMode }: ClipboardButtonProps) {
   const [bucket, path] = useHomeStore(state => [state.bucket, state.path], shallow);
-  const chkSet = useCheckBoxStore(state => state.chkSet);
-
   const [downloadBody, setDownloadBody] = useState<DownloadBody>(null);
 
   // download
   const downloadObject = useCallback(async () => {
+    const { chkSet } = useCheckBoxStore.getState();
     const filenames = [...chkSet];
     const body: DownloadBody = {
       bucket: bucket,
@@ -26,14 +26,14 @@ export default function DownloadButton() {
     } catch (err) {
       console.error(err);
     }
-  }, [bucket, chkSet, path]);
+  }, [bucket, path]);
 
   return (
     <>
       <Button
         icon={<DownloadIcon />}
         text="다운로드"
-        className={chkSet.size ? '' : 'hidden'}
+        className={checkMode ? '' : 'hidden'}
         onClick={downloadObject}
         responsive
       />

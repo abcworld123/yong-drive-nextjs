@@ -2,12 +2,12 @@ import { useCallback } from 'react';
 import { Button } from 'components/buttons';
 import { useCheckBoxStore, useClipboardStore, useHomeStore } from 'hooks/stores';
 import { CopyIcon } from 'svg/icons';
+import type { ClipboardButtonProps } from 'types/props';
 
-export default function CopyButton() {
-  const chkSet = useCheckBoxStore(state => state.chkSet);
-
+export default function CopyButton({ checkMode }: ClipboardButtonProps) {
   const copy = useCallback(() => {
     const { bucket, path } = useHomeStore.getState();
+    const { chkSet } = useCheckBoxStore.getState();
     useCheckBoxStore.setState({ chkAll: false, chkSet: new Set() });
     useClipboardStore.setState({
       bucket,
@@ -15,13 +15,13 @@ export default function CopyButton() {
       objects: [...chkSet],
       mode: 'copy',
     });
-  }, [chkSet]);
+  }, []);
 
   return (
     <Button
       icon={<CopyIcon />}
       text="복사"
-      className={chkSet.size ? '' : 'hidden'}
+      className={checkMode ? '' : 'hidden'}
       onClick={copy}
       responsive
     />

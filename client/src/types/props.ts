@@ -19,6 +19,10 @@ export interface ObjectProps {
   intoFolder: (folder: string) => void;
 }
 
+export interface ControlProps {
+  checkMode: boolean;
+}
+
 export interface FolderProps {
   name: string;
   check: checkHandler;
@@ -67,6 +71,10 @@ export interface DropdownProps {
   className?: string;
   disabled?: boolean;
   responsive?: boolean;
+}
+
+export interface ClipboardButtonProps {
+  checkMode: boolean;
 }
 
 export interface DndWrapperProps {
