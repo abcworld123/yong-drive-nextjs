@@ -1,55 +1,30 @@
-import { Button, ButtonProps } from '@mui/material';
-import ClickAwayListener from '@mui/material/ClickAwayListener';
-import Grow from '@mui/material/Grow';
-import MenuItem from '@mui/material/MenuItem';
-import MenuList from '@mui/material/MenuList';
-import Paper from '@mui/material/Paper';
-import Popper from '@mui/material/Popper';
-import { useCallback, useRef, useState } from 'react';
+import { memo } from 'react';
+import shallow from 'zustand/shallow';
+import { Button } from 'components/buttons';
+import { useLayoutStore } from 'hooks/stores';
+import styles from 'styles/Layouts.module.scss';
 import type { DropdownProps } from 'types/props';
 
-const buttonStyle = {
-  backgroundColor: '#e0e0ea',
-  fontSize: '1.1em',
-  color: '#222',
-  '&:hover': {
-    backgroundColor: '#c0c0ca',
-  },
-};
-
-export default function Dropdown<C extends React.ElementType>({ buttonName, items, ...props }: ButtonProps<C, { component?: C }> & DropdownProps) {
-  const [open, setOpen] = useState(false);
-  const anchorRef = useRef<HTMLButtonElement>(null);
-
-  const handleMenuItemClick = useCallback((action: () => void) => {
-    action();
-    setOpen(false);
-  }, []);
-
-  const handleToggle = useCallback(() => {
-    setOpen(open => !open);
-  }, []);
+function Dropdown({ id, icon, text, items, className, disabled, responsive }: DropdownProps) {
+  const [opened, dropdownClick] = useLayoutStore(state => [state.dropdown, state.dropdownClick], shallow);
 
   return (
-    <>
-      <Button variant="contained" size="small" sx={buttonStyle} ref={anchorRef} onClick={handleToggle} {...props}>
-        {buttonName}
-      </Button>
-      <Popper open={open} anchorEl={anchorRef.current} transition>
-        {({ TransitionProps }) => (
-          <Grow style={{ transformOrigin: 'left top' }} {...TransitionProps}>
-            <Paper>
-              <ClickAwayListener onClickAway={() => setOpen(false)}>
-                <MenuList>
-                  { items.map(({ name, action }) => (
-                    <MenuItem key={name} onClick={() => handleMenuItemClick(action)}>{name}</MenuItem>
-                  )) }
-                </MenuList>
-              </ClickAwayListener>
-            </Paper>
-          </Grow>
-        )}
-      </Popper>
-    </>
+    <div>
+      <Button
+        icon={icon}
+        text={text}
+        className={`btn-dropdown ${className}`}
+        onClick={() => dropdownClick(id)}
+        disabled={disabled}
+        responsive={responsive}
+      />
+      <div className={`${styles.dropdownContainer} ${opened === id ? '' : 'opacity-0 pointer-events-none'}`}>
+        <ul className={styles.dropdownMenu}>
+          {items.map(item => <li key={item.name} className={styles.dropdownItem} onClick={item.action}>{item.name}</li>)}
+        </ul>
+      </div>
+    </div>
   );
 }
+
+export default memo(Dropdown);

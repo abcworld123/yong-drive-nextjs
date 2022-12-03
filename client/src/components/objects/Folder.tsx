@@ -1,6 +1,6 @@
-import Checkbox from '@mui/material/Checkbox';
 import { memo, useCallback } from 'react';
 import { LongPressDetectEvents, useLongPress } from 'use-long-press';
+import { CheckBox } from 'components/buttons';
 import styles from 'styles/Layouts.module.scss';
 import { FolderIcon } from 'svg/icons';
 import type { FolderProps } from 'types/props';
@@ -18,7 +18,7 @@ function Folder({ name, check, checked, checkMode, intoFolder }: FolderProps) {
   });
 
   const clickFolder = useCallback((target: EventTarget, name: string) => {
-    if (target instanceof HTMLInputElement) return;  // isCheckBox
+    if (target instanceof HTMLLabelElement || target instanceof HTMLInputElement) return;  // isCheckBox
     if (!checkMode) {
       intoFolder(name);
     } else {
@@ -29,7 +29,7 @@ function Folder({ name, check, checked, checkMode, intoFolder }: FolderProps) {
   return (
     <div>
       <div className={`${styles.objectIcon} ${checked ? styles.checkedObjectIcon : ''} cursor-pointer`} onClick={e => clickFolder(e.target, name)}>
-        <Checkbox className={styles.checkbox} checked={checked} onClick={toggleCheck} />
+        <CheckBox checked={checked} toggleCheck={toggleCheck} />
         <div {...longPressBind()} className="grid place-items-center">
           <FolderIcon />
         </div>

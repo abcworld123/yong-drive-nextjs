@@ -1,7 +1,6 @@
 import { useCallback } from 'react';
-import { MainButton as Button } from 'components/buttons';
+import { Button } from 'components/buttons';
 import { useCheckBoxStore, useClipboardStore, useHomeStore } from 'hooks/stores';
-import styles from 'styles/Layouts.module.scss';
 import { CopyIcon } from 'svg/icons';
 
 export default function CopyButton() {
@@ -19,14 +18,12 @@ export default function CopyButton() {
   }, [chkSet]);
 
   return (
-    <>
-      <Button
-        className={chkSet.size ? '' : 'hidden'}
-        startIcon={<CopyIcon />}
-        onClick={copy}
-      >
-        <span className={styles.buttonText}>복사</span>
-      </Button>
-    </>
+    <Button
+      icon={<CopyIcon />}
+      text="복사"
+      className={chkSet.size ? '' : 'hidden'}
+      onClick={copy}
+      responsive
+    />
   );
 }

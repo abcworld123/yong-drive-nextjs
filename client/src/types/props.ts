@@ -39,14 +39,34 @@ export interface DownloaderProps {
   body: DownloadBody;
 }
 
+export interface ButtonProps {
+  onClick: (e: React.MouseEvent<HTMLDivElement, MouseEvent>) => void;
+  icon?: string | React.ReactElement;
+  text?: string | React.ReactElement;
+  className?: string;
+  disabled?: boolean;
+  responsive?: boolean;
+}
+
+export interface CheckBoxProps {
+  checked: boolean;
+  toggleCheck?: () => void;
+  disabled?: boolean;
+}
+
 export interface DropdownItem {
   name: string;
   action: () => void;
 }
 
 export interface DropdownProps {
-  buttonName: string;
+  id: string;
   items: DropdownItem[];
+  icon?: string | React.ReactElement;
+  text?: string | React.ReactElement;
+  className?: string;
+  disabled?: boolean;
+  responsive?: boolean;
 }
 
 export interface DndWrapperProps {

@@ -1,7 +1,6 @@
 import { useCallback } from 'react';
-import { MainButton as Button } from 'components/buttons';
+import { Button } from 'components/buttons';
 import { useCheckBoxStore, useClipboardStore, useHomeStore } from 'hooks/stores';
-import styles from 'styles/Layouts.module.scss';
 import { CutIcon } from 'svg/icons';
 
 export default function CutButton() {
@@ -19,14 +18,12 @@ export default function CutButton() {
   }, [chkSet]);
 
   return (
-    <>
-      <Button
-        className={chkSet.size ? '' : 'hidden'}
-        startIcon={<CutIcon />}
-        onClick={cut}
-      >
-        <span className={styles.buttonText}>잘라내기</span>
-      </Button>
-    </>
+    <Button
+      icon={<CutIcon />}
+      text="잘라내기"
+      className={chkSet.size ? '' : 'hidden'}
+      onClick={cut}
+      responsive
+    />
   );
 }

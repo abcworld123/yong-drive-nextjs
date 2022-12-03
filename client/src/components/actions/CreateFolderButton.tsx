@@ -1,9 +1,8 @@
 import { useCallback } from 'react';
 import Swal from 'sweetalert2';
 import shallow from 'zustand/shallow';
-import { MainButton as Button } from 'components/buttons';
+import { Button } from 'components/buttons';
 import { useHomeStore } from 'hooks/stores';
-import styles from 'styles/Layouts.module.scss';
 import { CreateFolderIcon } from 'svg/icons';
 import { alertError } from 'utils/alerts';
 import api from 'utils/api';
@@ -38,11 +37,11 @@ export default function CreateFolderButton() {
 
   return (
     <Button
-      startIcon={<CreateFolderIcon />}
+      icon={<CreateFolderIcon />}
+      text="새 폴더"
       onClick={createFolder}
-    >
-      <span className={styles.buttonText}>새 폴더</span>
-    </Button>
+      responsive
+    />
   );
 }
 

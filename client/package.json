@@ -10,9 +10,6 @@
     "test": "jest"
   },
   "dependencies": {
-    "@emotion/react": "^11.10.5",
-    "@emotion/styled": "^11.10.5",
-    "@mui/material": "^5.10.16",
     "animate.css": "^4.1.1",
     "axios": "^1.2.0",
     "convert-units": "^2.3.4",

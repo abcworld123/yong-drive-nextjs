@@ -1,6 +1,6 @@
-import Checkbox from '@mui/material/Checkbox';
 import { memo, useCallback } from 'react';
 import { useLongPress, LongPressDetectEvents } from 'use-long-press';
+import { CheckBox } from 'components/buttons';
 import styles from 'styles/Layouts.module.scss';
 import { FIleIcon } from 'svg/icons';
 import type { FileProps } from 'types/props';
@@ -18,7 +18,7 @@ function File({ name, check, checked, checkMode, size }: FileProps) {
   });
 
   const clickFile = useCallback((target: EventTarget) => {
-    if (target instanceof HTMLInputElement) return;  // isCheckBox
+    if (target instanceof HTMLLabelElement || target instanceof HTMLInputElement) return;  // isCheckBox
     if (checkMode) {
       toggleCheck();
     }
@@ -27,7 +27,7 @@ function File({ name, check, checked, checkMode, size }: FileProps) {
   return (
     <div>
       <div className={`${styles.objectIcon} ${checked ? styles.checkedObjectIcon : ''} cursor-pointer`} onClick={e => clickFile(e.target)}>
-        <Checkbox className={styles.checkbox} checked={checked} onClick={toggleCheck} />
+        <CheckBox checked={checked} toggleCheck={toggleCheck} />
         <div {...longPressBind()} className="grid place-items-center">
           <FIleIcon />
         </div>

@@ -1,8 +1,7 @@
 import { useCallback } from 'react';
 import shallow from 'zustand/shallow';
-import { MainButton as Button } from 'components/buttons';
+import { Button } from 'components/buttons';
 import { useCheckBoxStore, useHomeStore } from 'hooks/stores';
-import styles from 'styles/Layouts.module.scss';
 import { DeleteIcon } from 'svg/icons';
 import { alertConfirm, alertError, alertWait } from 'utils/alerts';
 import api from 'utils/api';
@@ -39,11 +38,11 @@ export default function DeleteButton() {
 
   return (
     <Button
+      icon={<DeleteIcon />}
+      text="삭제"
       className={chkSet.size ? '' : 'hidden'}
-      startIcon={<DeleteIcon />}
       onClick={deleteObject}
-    >
-      <span className={styles.buttonText}>삭제</span>
-    </Button>
+      responsive
+    />
   );
 }

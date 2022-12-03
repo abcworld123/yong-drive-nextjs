@@ -3,7 +3,7 @@ import { SHA256 } from 'crypto-js';
 import Head from 'next/head';
 import { useCallback, useEffect } from 'react';
 import Swal from 'sweetalert2';
-import { useSessionStore } from 'hooks/stores';
+import { useLayoutStore, useSessionStore } from 'hooks/stores';
 import Loader from 'svg/Loader';
 import { alertError, shakeOutsideClick } from 'utils/alerts';
 import api from 'utils/api';
@@ -12,6 +12,7 @@ import type { ResCheck, ResLogin } from 'types/apis';
 
 function App({ Component, pageProps }: AppProps) {
   const isLogin = useSessionStore(state => state.isLogin);
+  const dropdownClick = useLayoutStore(state => state.dropdownClick);
 
   const login = useCallback(() => {
     Swal.fire({
@@ -52,6 +53,14 @@ function App({ Component, pageProps }: AppProps) {
       login();
     }
   }, [isLogin]);
+
+  useEffect(() => {
+    document.addEventListener('click', ({ target }: MouseEvent) => {
+      if (target instanceof HTMLElement && !target.classList.contains('btn-dropdown')) {
+        dropdownClick(null);
+      }
+    });
+  }, []);
 
   return (
     <>

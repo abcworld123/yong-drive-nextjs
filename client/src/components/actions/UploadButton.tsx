@@ -70,9 +70,11 @@ export default function UploadButton() {
   return (
     <>
       <Dropdown
-        startIcon={<UploadIcon />}
-        buttonName={window.innerWidth > 480 ? '올리기' : ''}
+        id="upload"
         items={menuItems}
+        icon={<UploadIcon />}
+        text="올리기"
+        responsive
       />
       <input
         type="file"
