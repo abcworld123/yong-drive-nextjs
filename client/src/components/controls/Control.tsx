@@ -1,6 +1,7 @@
 import { memo } from 'react';
 import {
   AllCheckBox,
+  CancelButton,
   CopyButton,
   CreateFolderButton,
   CutButton,
@@ -23,6 +24,7 @@ function Control() {
       <CopyButton />
       <DownloadButton />
       <DeleteButton />
+      <CancelButton />
       <ProgressCircle />
     </div>
   );

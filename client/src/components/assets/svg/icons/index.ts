@@ -1,4 +1,5 @@
 export { default as BucketIcon } from './BucketIcon';
+export { default as CancelIcon } from './CancelIcon';
 export { default as CopyIcon } from './CopyIcon';
 export { default as CutIcon } from './CutIcon';
 export { default as CreateFolderIcon } from './CreateFolderIcon';

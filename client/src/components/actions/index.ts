@@ -1,4 +1,5 @@
 export { default as AllCheckBox } from './AllCheckBox';
+export { default as CancelButton } from './CancelButton';
 export { default as CopyButton } from './CopyButton';
 export { default as CreateFolderButton } from './CreateFolderButton';
 export { default as CutButton } from './CutButton';
