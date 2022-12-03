@@ -9,7 +9,7 @@ export default function CutButton() {
 
   const cut = useCallback(() => {
     const { bucket, path } = useHomeStore.getState();
-    useCheckBoxStore.setState({ chkAll: false });
+    useCheckBoxStore.setState({ chkAll: false, chkSet: new Set() });
     useClipboardStore.setState({
       bucket,
       pathFrom: path,
