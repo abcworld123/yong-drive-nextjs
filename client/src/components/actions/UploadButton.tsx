@@ -1,5 +1,5 @@
 import { useCallback, useEffect, useMemo, useRef } from 'react';
-import shallow from 'zustand/shallow';
+import { shallow } from 'zustand/shallow';
 import { Dropdown } from 'components/buttons';
 import { useHomeStore, useUploadStore } from 'hooks/stores';
 import { UploadIcon } from 'svg/icons';

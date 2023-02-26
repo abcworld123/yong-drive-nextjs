@@ -1,5 +1,5 @@
 import { memo } from 'react';
-import shallow from 'zustand/shallow';
+import { shallow } from 'zustand/shallow';
 import { Button } from 'components/buttons';
 import { useLayoutStore } from 'hooks/stores';
 import styles from 'styles/Layouts.module.scss';

@@ -1,7 +1,7 @@
 import 'animate.css';
 import { useRouter } from 'next/router';
 import { useCallback, useEffect, useState } from 'react';
-import shallow from 'zustand/shallow';
+import { shallow } from 'zustand/shallow';
 import { Control } from 'components/controls';
 import { Objects } from 'components/objects';
 import { Dnd } from 'components/utils';

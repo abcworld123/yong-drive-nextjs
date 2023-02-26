@@ -1,5 +1,5 @@
 import { useCallback, useState } from 'react';
-import shallow from 'zustand/shallow';
+import { shallow } from 'zustand/shallow';
 import { Button } from 'components/buttons';
 import { Downloader } from 'components/utils';
 import { useCheckBoxStore, useHomeStore } from 'hooks/stores';

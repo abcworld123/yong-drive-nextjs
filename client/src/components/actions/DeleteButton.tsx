@@ -1,5 +1,5 @@
 import { useCallback } from 'react';
-import shallow from 'zustand/shallow';
+import { shallow } from 'zustand/shallow';
 import { Button } from 'components/buttons';
 import { useCheckBoxStore, useHomeStore } from 'hooks/stores';
 import { DeleteIcon } from 'svg/icons';

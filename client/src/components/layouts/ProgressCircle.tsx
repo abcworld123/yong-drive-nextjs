@@ -1,5 +1,5 @@
 import { Circle } from 'rc-progress';
-import shallow from 'zustand/shallow';
+import { shallow } from 'zustand/shallow';
 import { useUploadStore } from 'hooks/stores';
 
 export default function ProgressCircle() {

@@ -1,6 +1,6 @@
 import { useCallback } from 'react';
 import Swal from 'sweetalert2';
-import shallow from 'zustand/shallow';
+import { shallow } from 'zustand/shallow';
 import { Button } from 'components/buttons';
 import { useHomeStore } from 'hooks/stores';
 import { CreateFolderIcon } from 'svg/icons';
