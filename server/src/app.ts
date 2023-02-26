@@ -1,5 +1,6 @@
 import http from 'http';
 import compression from 'compression';
+import cookieParser from 'cookie-parser';
 import express from 'express';
 import { sessionStore } from 'libs';
 import router from 'routes';
@@ -11,6 +12,7 @@ app.use(compression());
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 app.use(sessionStore());
+app.use(cookieParser());
 
 app.use('/', router);
 
