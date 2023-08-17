@@ -1,4 +1,4 @@
-import { DeleteObjectsCommand, DeleteObjectsCommandInput } from '@aws-sdk/client-s3';
+import { DeleteObjectsCommand, type DeleteObjectsCommandInput } from '@aws-sdk/client-s3';
 import { s3Client } from 'libs';
 import { logError } from 'utils/logger';
 import { getObjectListCmd } from './get';

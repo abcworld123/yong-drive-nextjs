@@ -1,5 +1,5 @@
 import { memo, useCallback } from 'react';
-import { LongPressDetectEvents, useLongPress } from 'use-long-press';
+import { LongPressEventType, useLongPress } from 'use-long-press';
 import { CheckBox } from 'components/buttons';
 import styles from 'styles/Layouts.module.scss';
 import { FolderIcon } from 'svg/icons';
@@ -14,7 +14,7 @@ function Folder({ name, check, checked, checkMode, intoFolder }: FolderProps) {
     threshold: 400,
     captureEvent: true,
     cancelOnMovement: false,
-    detect: LongPressDetectEvents.TOUCH,
+    detect: LongPressEventType.Touch,
   });
 
   const clickFolder = useCallback((target: EventTarget, name: string) => {

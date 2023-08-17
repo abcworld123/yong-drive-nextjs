@@ -1,5 +1,5 @@
 import { memo, useCallback } from 'react';
-import { useLongPress, LongPressDetectEvents } from 'use-long-press';
+import { LongPressEventType, useLongPress } from 'use-long-press';
 import { CheckBox } from 'components/buttons';
 import styles from 'styles/Layouts.module.scss';
 import { FIleIcon } from 'svg/icons';
@@ -14,7 +14,7 @@ function File({ name, check, checked, checkMode, size }: FileProps) {
     threshold: 400,
     captureEvent: true,
     cancelOnMovement: false,
-    detect: LongPressDetectEvents.TOUCH,
+    detect: LongPressEventType.Touch,
   });
 
   const clickFile = useCallback((target: EventTarget) => {

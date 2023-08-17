@@ -1,4 +1,4 @@
-import { ListBucketsCommand, ListObjectsCommand, ListObjectsCommandInput } from '@aws-sdk/client-s3';
+import { ListBucketsCommand, ListObjectsCommand, type ListObjectsCommandInput } from '@aws-sdk/client-s3';
 import { s3Client } from 'libs';
 import { logError } from 'utils/logger';
 import type { GetBody, ObjectInfo } from 'types/apis';

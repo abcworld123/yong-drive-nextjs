@@ -1,4 +1,4 @@
-import { CopyObjectCommand, CopyObjectCommandInput } from '@aws-sdk/client-s3';
+import { CopyObjectCommand, type CopyObjectCommandInput } from '@aws-sdk/client-s3';
 import { s3Client } from 'libs';
 import { logError } from 'utils/logger';
 import { deleteObjectCmd } from './delete';

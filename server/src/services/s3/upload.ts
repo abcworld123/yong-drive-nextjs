@@ -1,4 +1,4 @@
-import { ListObjectsCommand, PutObjectCommand, PutObjectCommandInput } from '@aws-sdk/client-s3';
+import { ListObjectsCommand, PutObjectCommand, type PutObjectCommandInput } from '@aws-sdk/client-s3';
 import { Upload } from '@aws-sdk/lib-storage';
 import { s3Client } from 'libs';
 import { logError } from 'utils/logger';

@@ -1,4 +1,4 @@
-import { Html, Head, Main, NextScript, DocumentProps } from 'next/document';
+import { Html, Head, Main, NextScript, type DocumentProps } from 'next/document';
 
 export default function Document(docProps: DocumentProps) {
   return (
